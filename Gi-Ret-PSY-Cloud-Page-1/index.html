@@ -4,25 +4,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Login.css">
+    <link rel="stylesheet" href="./css/Login.css">
     <title>Gi-Ret 2.0</title>
 </head>
+<style> 
+    body {
+        background-image: url("./img/bg1.jpg");
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+    </style>
 <body>
     <div class="main">
         <div class="container">
-            <div class="container-pic"><img src="nataliya-melnychuk-3U-LoTdvVu8-unsplash.jpg" alt="" width="300" height="auto">
+            <div class="container-pic"><img src="./img/nataliya-melnychuk-3U-LoTdvVu8-unsplash.jpg" alt="" width="300" height="auto">
             </div>
             <div class="center">
                 <h1 class="head">Gi-Ret 2.0</h1>
-
                 <div class="center-data">
-                    <label class=" data user" for="uname"><b>ID</b></label>
+                    <form action="auth.php" method="post">
+                    <label class=" data user" for="username"><b>ID</b></label>
                     <br>
-                    <input class="box" type="text"name="uname" required>
+                    <input class="box" type="text"name="username" required>
                     <br>
-                    <label class="data pass" for="psw"><b>Password</b></label>
+                    <label class="data pass" for="password"><b>Password</b></label>
                     <br>
-                    <input class="box" type="password" name="psw" required>
+                    <input class="box" type="password" name="password" required>
                     <br>
                     <br>
                     <button class="btn" type="submit">Login</button>
@@ -30,6 +39,7 @@
                     <input class="check"  type="checkbox" checked="checked" name="remember"> Remember me>
                     </label>
                     <p id="salah">*Pass / ID salah</p>
+                </form>
               </div>
             </div>
         </div>

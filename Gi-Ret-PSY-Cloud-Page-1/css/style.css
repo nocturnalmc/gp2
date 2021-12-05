@@ -1,0 +1,554 @@
+/* PLEASE USE THESE VARIABLES INSTEAD OF HARD CODED COLOUR/PROPERTIES IN CSS */
+:root {
+    --background-global: #424242;
+    --background-main: #424250;
+    --background-header-and-form: #373740;
+    --upper-border-header: #6FD5F0;
+    --white-text: #FFFFFF;
+    --icon-text-border: #C53D6D;
+    --border-selected-icon: #6FD4F0;
+    --save-btn: #37DFB1;
+    --find-btn: #D0E64F;
+    --modify-btn: #D05E4D;
+    --clear-btn: #D07784;
+    --delete-btn: #D0224D;
+    --upload-btn: #9358E0;
+    --download-btn: #4A85DD;
+    --btn-tiada : #D0224D;
+    --btn-ada : #37DFB1;
+    font-family: Bahnschrift;
+    font-size: 16px;
+    --transition: all 0.3s linear;
+    --radius: 0.25rem;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--background-global);
+}
+
+.main {
+    width: 95%;
+    display: block;
+    background-color: var(--background-main);
+    margin: auto;
+}
+
+/* ----------------------------username---------------------------------- */
+.username {
+    width: auto;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    margin-left: 1rem;
+    color: var(--white-text);
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.id-kp {
+    margin-left: 1.2rem;
+    margin-top: auto;
+    margin-bottom: auto;
+    line-height: .8rem;
+}
+
+/* ----------------------------inside-container-------------------------- */
+.inside-container {
+    display: flex;
+}
+
+/* ---------------------------category-selector-------------------------- */
+.category-selector {
+    margin-left: 1.5rem;
+    margin-right: 1rem;
+    width: 5rem;
+    padding-top: 1rem;
+}
+
+.btn-category {
+    display: block;
+    background-color: transparent;
+    border-color: transparent;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: .8rem;
+    width: 5rem;
+    transition: var(--transition);
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .25);
+    border-radius: var(--radius);
+    color: var(--icon-text-border);
+}
+
+.img-category {
+    height: 3rem;
+}
+
+.btn-category:hover {
+    background-color: var(--border-selected-icon);
+}
+
+/* when the button-category is selected */
+/* USE THIS IN JAVASCRIPT */
+.btn-active {
+    outline-style: solid;
+    outline-width: .15rem;
+    outline-color: var(--border-selected-icon);
+}
+/* when the button-category is selected */
+
+/* ------------------------------center-data------------------------------ */
+.center-data {
+    flex-grow: 10;
+    margin: 1rem;
+    margin-bottom: 2rem;
+    outline-style: solid ;
+    border-radius: var(--radius);
+    outline-color: var(--icon-text-border);
+    outline-width: .3rem;
+    color: var(--white-text);
+    font-weight: 1;
+    text-indent: 2%;
+}
+
+/* ----------------------------side-btn----------------------------------- */
+.side-btn {
+    flex-grow: 1;
+    margin-right: 1rem;
+}
+
+.btn-operation {
+    text-transform: uppercase;
+    display: block;
+    background-color: transparent;
+    border-style: solid;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
+    padding: .5rem;
+    width: 6rem;
+    transition: var(--transition);
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+    border-radius: var(--radius);
+}
+
+.save {
+    color: var(--save-btn);
+    border-color: var(--save-btn);
+}
+
+.find {
+    color: var(--find-btn);
+    border-color: var(--find-btn);
+}
+
+.modify {
+    color: var(--modify-btn);
+    border-color: var(--modify-btn);
+}
+
+.clear {
+    color: var(--clear-btn);
+    border-color: var(--clear-btn);
+}
+
+.delete{
+    color: var(--delete-btn);
+    border-color: var(--delete-btn);
+}
+
+.upload {
+    color: var(--upload-btn);
+    margin-top: 25rem;
+    border-color: var(--upload-btn);
+}
+
+.download {
+    color: var(--download-btn);
+    border-color: var(--download-btn);
+    margin-bottom: 2rem;
+}
+
+.btn-operation:hover {
+    background-color: white;
+}
+
+/* -----------------------global form selector---------------------------- */
+legend {
+    width: 10rem;
+}
+
+label {
+    cursor: pointer;
+    line-height: 2rem;
+}
+
+input[type=text] {
+    width: 100%;
+}
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+/* ---------------------content form for tadika--------------------------- */
+/* pendaftaran header tadika */
+.pendaftaran-header-tadika {
+    background-color: var(--background-header-and-form);
+    color: var(--white-text);
+    padding: 0.5rem;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    border-top: var(--upper-border-header) solid;
+    width: 100%;
+    max-width: 95%;
+    margin: auto;
+    text-align: left;
+    display: none;
+}
+
+.form-pendaftaran-tadika {
+    padding: 20px;
+    background-color: var(--background-header-and-form);
+    display: flex;
+    width: 100%;
+    max-width: 95%;
+    margin: auto;
+    padding: 0.5rem;
+    height: 24rem; /* IMPORTANT TO CHANGE HEIGHT FOR EACH FORM */
+    padding-bottom: 0.7rem;
+    transition: var(--transition);
+    margin-bottom: 0.3rem;
+    overflow-y: auto;
+}
+
+#kelas-pendaftaran-tadika, #ulangan-pendaftaran-tadika {
+    width: 2rem;
+}
+
+.input-grp-left-pendaftaran-tadika {
+    margin: auto;
+    width: 95%;
+    padding: 1rem;
+}
+
+.input-grp-right-pendaftaran-tadika {
+    margin: auto;
+    width: 95%;
+    padding: 1rem;
+}
+
+/* pemeriksaan awal header tadika */
+.pemeriksaan-awal-header-tadika {
+    background-color: var(--background-header-and-form);
+    color: var(--white-text);
+    padding: 0.5rem;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    border-top: var(--upper-border-header) solid;
+    width: 100%;
+    max-width: 95%;
+    margin: auto;
+    text-align: left;
+    display: none;
+}
+
+.form-pemeriksaan-awal-tadika {
+    padding: 20px;
+    background-color: var(--background-header-and-form);
+    display: flex;
+    width: 100%;
+    max-width: 95%;
+    margin: auto;
+    padding: 0.5rem;
+    height: 48rem; /* IMPORTANT TO CHANGE HEIGHT FOR EACH FORM */
+    padding-bottom: 0.7rem;
+    transition: var(--transition);
+    margin-bottom: 0.3rem;
+    overflow-y: auto;
+}
+
+.input-grp-left-pemeriksaan-awal-tadika {
+    margin: auto;
+    width: 95%;
+    padding: 1rem;
+}
+
+.input-grp-right-pemeriksaan-awal-tadika {
+    margin: auto;
+    width: 95%;
+    padding: 1rem;
+}
+
+.number-input-pemeriksaan-awal-tadika {
+    width: 3rem;
+}
+
+.btn-status-gigi-desidus.tiada {
+    background-color: var(--btn-tiada);
+    border-color: black;
+    border-style: solid;
+    border-width: 0.1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+    cursor: pointer;
+    border-radius: var(--radius);
+    transition: var(--transition);
+    padding: 0.2rem;
+    width: 3rem;
+}
+
+.btn-status-gigi-desidus.ada {
+    background-color: var(--btn-ada);
+    border-color: black;
+    border-style: solid;
+    border-width: 0.1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+    cursor: pointer;
+    border-radius: var(--radius);
+    transition: var(--transition);
+    padding: 0.2rem;
+    width: 3rem;
+}
+
+.btn-status-gigi-kekal.tiada {
+    background-color: var(--btn-tiada);
+    border-color: black;
+    border-style: solid;
+    border-width: 0.1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+    cursor: pointer;
+    border-radius: var(--radius);
+    transition: var(--transition);
+    padding: 0.2rem;
+    width: 3rem;
+}
+
+.btn-status-gigi-kekal.ada {
+    background-color: var(--btn-ada);
+    border-color: black;
+    border-style: solid;
+    border-width: 0.1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+    cursor: pointer;
+    border-radius: var(--radius);
+    transition: var(--transition);
+    padding: 0.2rem;
+    width: 3rem;
+}
+
+.btn-status-gigi-desidus:hover, .btn-status-gigi-kekal:hover {
+    background-color: white;
+}
+
+.rendah-tinggi-pemeriksaan-awal-tadika {
+    background-color: var(--btn-ada);
+    width: max-content;
+    padding: 0.5rem;
+    border-style: solid;
+    border-color: black;
+    border-width: 0.1rem;
+    color: black;
+    margin-left: 1rem;
+}
+
+/* perlu dibuat header tadika */
+.perlu-dibuat-header-tadika {
+    background-color: var(--background-header-and-form);
+    color: var(--white-text);
+    padding: 0.5rem;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    border-top: var(--upper-border-header) solid;
+    width: 100%;
+    max-width: 95%;
+    margin: auto;
+    text-align: left;
+    display: none;
+}
+
+/* penyata akhir 1 header tadika */
+.penyata-akhir-1-header-tadika {
+    background-color: var(--background-header-and-form);
+    color: var(--white-text);
+    padding: 0.5rem;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    border-top: var(--upper-border-header) solid;
+    width: 100%;
+    max-width: 95%;
+    margin: auto;
+    text-align: left;
+    display: none;
+    margin-top: 1.5rem; /* to be removed once form added */
+}
+
+/* penyata akhir 2 header tadika */
+.penyata-akhir-2-header-tadika {
+    background-color: var(--background-header-and-form);
+    color: var(--white-text);
+    padding: 0.5rem;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    border-top: var(--upper-border-header) solid;
+    width: 100%;
+    max-width: 95%;
+    margin: auto;
+    text-align: left;
+    display: none;
+    margin-top: 1.5rem; /* to be removed once form added */
+}
+/* ------------------end of content form for tadika----------------------- */
+
+/* --------------------content form for sekolah--------------------------- */
+/* pendaftaran header sekolah */
+.pendaftaran-header-sekolah {
+    background-color: var(--background-header-and-form);
+    color: var(--white-text);
+    padding: 0.5rem;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    border-top: var(--upper-border-header) solid;
+    width: 100%;
+    max-width: 95%;
+    margin: auto;
+    text-align: left;
+    display: none;
+}
+
+.form-pendaftaran-sekolah {
+    padding: 20px;
+    background-color: var(--background-header-and-form);
+    display: flex;
+    width: 100%;
+    max-width: 95%;
+    margin: auto;
+    padding: 0.5rem;
+    height: 34rem; /* IMPORTANT TO CHANGE HEIGHT FOR EACH FORM */
+    padding-bottom: 0.7rem;
+    transition: var(--transition);
+    margin-bottom: 0.3rem;
+    overflow-y: auto;
+}
+
+#umur-sekolah, #kelas-sekolah, #ulangan-sekolah {
+    width: 2rem;
+}
+
+.input-grp-left-sekolah {
+    margin: auto;
+    width: 95%;
+    padding: 1rem;
+}
+
+.input-grp-right-sekolah {
+    margin: auto;
+    width: 95%;
+    padding: 1rem;
+}
+
+/* pemeriksaan awal header sekolah */
+.pemeriksaan-awal-header-sekolah {
+    background-color: var(--background-header-and-form);
+    color: var(--white-text);
+    padding: 0.5rem;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    border-top: var(--upper-border-header) solid;
+    width: 100%;
+    max-width: 95%;
+    margin: auto;
+    text-align: left;
+    display: none;
+}
+
+/* perlu dibuat header sekolah */
+.perlu-dibuat-header-sekolah {
+    background-color: var(--background-header-and-form);
+    color: var(--white-text);
+    padding: 0.5rem;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    border-top: var(--upper-border-header) solid;
+    width: 100%;
+    max-width: 95%;
+    margin: auto;
+    text-align: left;
+    display: none;
+    margin-top: 1.5rem; /* to be removed once form added */
+}
+
+/* penyata akhir 1 header sekolah */
+.penyata-akhir-1-header-sekolah {
+    background-color: var(--background-header-and-form);
+    color: var(--white-text);
+    padding: 0.5rem;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    border-top: var(--upper-border-header) solid;
+    width: 100%;
+    max-width: 95%;
+    margin: auto;
+    text-align: left;
+    display: none;
+    margin-top: 1.5rem; /* to be removed once form added */
+}
+
+/* penyata akhir 2 header sekolah */
+.penyata-akhir-2-header-sekolah {
+    background-color: var(--background-header-and-form);
+    color: var(--white-text);
+    padding: 0.5rem;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    border-top: var(--upper-border-header) solid;
+    width: 100%;
+    max-width: 95%;
+    margin: auto;
+    text-align: left;
+    display: none;
+    margin-top: 1.5rem; /* to be removed once form added */
+}
+
+/* kotak header sekolah */
+.kotak-header-sekolah {
+    background-color: var(--background-header-and-form);
+    color: var(--white-text);
+    padding: 0.5rem;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    border-top: var(--upper-border-header) solid;
+    width: 100%;
+    max-width: 95%;
+    margin: auto;
+    text-align: left;
+    display: none;
+    margin-top: 1.5rem; /* to be removed once form added */
+}
+/* ------------------end of content form for sekolah------------------------ */
+
+/* apply this class on .form-*-* to toggle open and close form */
+/* example : "form-pendaftaran-tadika close" */
+/* USE THIS IN JAVASCRIPT */
+/* PLEASE LEAVE THIS CLASS SELECTOR AT THE BOTTOM OF CSS */
+.close {
+    height: 0rem;
+    overflow: hidden;
+    background-color: var(--background-main);
+}
+/* apply this class on .form-*-* to toggle open and close form */

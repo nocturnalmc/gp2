@@ -27,7 +27,6 @@ body {
     height: 43.5rem;
     align-items: center;
     justify-content: center;
-    background-color: var(--background-main);
     margin: auto;
 }
 
@@ -81,6 +80,7 @@ body {
 #user{
     margin: 1rem;
 }
+
 #pass{
     margin:1rem;
 }
@@ -91,12 +91,11 @@ body {
 }
 
 .check{
-    height;
     background-color: turquoise;
 }
 
 #salah{
     color: #F40F0F;
-    text-align: right;]
+    text-align: right;
 }
 
