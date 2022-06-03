@@ -4,9 +4,14 @@ import { FaBars } from 'react-icons/fa';
 
 function UserNavbar() {
   const [showLinks, setShowLinks] = useState(false);
+  const [showSubMenu, setshowSubMenu] = useState(false);
 
   const toggleLinks = () => {
     setShowLinks(!showLinks);
+  };
+
+  const toggleSubMenu = () => {
+    setshowSubMenu(!showSubMenu);
   };
 
   return (
@@ -24,29 +29,48 @@ function UserNavbar() {
           >
             DASHBOARD
           </NavLink>
+          <div >
+            <div className='bg-user3 rounded-md shadow-xl p-3 m-1 hover:bg-user1 transition-all'
+              onClick={toggleSubMenu}
+            >
+              <span>
+                RETEN KLINIK PERGIGIAN
+              </span>
+            </div>
+            <div className={`transition-all ${showSubMenu ? 'block' : 'hidden'}`}>
+              <div className='bg-user5 rounded-md shadow-xl p-3 m-1 hover:bg-user6 transition-all'>
+                <NavLink
+                to='taska'
+                >
+                  KLINIK PERGIGIAN
+                </NavLink>
+              </div>
+              <div className='bg-user5 rounded-md shadow-xl p-3 m-1 hover:bg-user6 transition-all'>
+                <NavLink
+                to='sekolah'
+                >
+                  SEKOLAH
+                </NavLink>
+              </div>
+            </div>
+          </div>
           <NavLink
             to='taska'
             className='bg-user3 rounded-md shadow-xl p-3 m-1 hover:bg-user1 transition-all'
           >
-            TASKA
-          </NavLink>
-          <NavLink
-            to='sekolah'
-            className='bg-user3 rounded-md shadow-xl p-3 m-1 hover:bg-user1 transition-all'
-          >
-            SEKOLAH
+            STATUS HARIAN
           </NavLink>
           <NavLink
             to='/user/institusi'
             className='bg-user3 rounded-md shadow-xl p-3 m-1 hover:bg-user1 transition-all'
           >
-            INSTITUSI
+            GENERATE RETEN
           </NavLink>
           <NavLink
             to='/user/generate'
             className='bg-user3 rounded-md shadow-xl p-3 m-1 hover:bg-user1 transition-all'
           >
-            GENERATE RETEN
+            CARIAN
           </NavLink>
         </div>
       </nav>

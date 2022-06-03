@@ -34,9 +34,9 @@ function App() {
             <Route
               path='/user/*'
               element={
-                <UserProtectedRoute>
+                //<UserProtectedRoute>
                   <UserAfterLogin />
-                </UserProtectedRoute>
+                //</UserProtectedRoute>
               }
             />
             <Route path='*' element={<UserNotFound />} />
