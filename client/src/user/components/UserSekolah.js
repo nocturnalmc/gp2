@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { FaPlus, FaMinus } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 function UserSekolah() {
   return (
@@ -25,7 +26,7 @@ function UserSekolah() {
         </div>
         <div>
         <table className='m-auto mb-5 w-11/12 outline outline-1 outline-userBlack'>
-            <tr className='bg-user3'>
+            <tr className='bg-user3 p-2'>
               <th className='outline outline-1 outline-userBlack'>BIL</th>
               <th className='outline outline-1 outline-userBlack px-20'>NAMA</th>
               <th className='outline outline-1 outline-userBlack'>JANTINA</th>
@@ -43,7 +44,11 @@ function UserSekolah() {
               <td className='outline outline-1 outline-userBlack'>DR RONALDO</td>
               <td className='outline outline-1 outline-userBlack'>BELUM MULA</td>
               <td className='outline outline-1 outline-userBlack'>BELUM MULA</td>
-              <td className='outline outline-1 outline-userBlack'></td>
+              <td className='outline outline-1 outline-userBlack p-2'>
+                <Link to='/user/form-sekolah' className='bg-user3 userWhite rounded-md shadow-xl p-1 m-1 hover:bg-user1 transition-all'>
+                  Action
+                </Link>
+              </td>
             </tr>
             <tr>
               <td className='outline outline-1 outline-userBlack'>2</td>
@@ -51,8 +56,8 @@ function UserSekolah() {
               <td className='outline outline-1 outline-userBlack'>PEREMPUAN</td>
               <td className='outline outline-1 outline-userBlack'>DR BARRACK OBAMA</td>
               <td className='outline outline-1 outline-userBlack'>BELUM MULA</td>
-              <td className='outline outline-1 outline-userBlack'>BELUM MULA</td>
-              <td className='outline outline-1 outline-userBlack'></td>
+              <td className='outline outline-1 outline-userBlack p-2'>BELUM MULA</td>
+              <td className='outline outline-1 outline-userBlack p-2'></td>
             </tr>
           </table>
         </div>

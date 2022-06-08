@@ -8,6 +8,7 @@ import UserHeaderLoggedIn from '../components/UserHeaderLoggedIn';
 import UserDashboard from '../components/UserDashboard';
 import UserTaska from '../components/UserTaska';
 import UserSekolah from '../components/UserSekolah';
+import UserFormSekolah from '../components/UserFormSekolah';
 
 import UserLoggedInNotFound from './UserLoggedInNotFound';
 
@@ -25,6 +26,7 @@ function UserAfterLogin() {
           <Route index element={<UserDashboard />} />
           <Route path='taska' element={<UserTaska />} />
           <Route path='sekolah' element={<UserSekolah />} />
+          <Route path='form-sekolah' element={<UserFormSekolah />} />
           {/* <Route path='/institusi' element={<UserInstitusi />} /> */}
 
           <Route path='*' element={<UserLoggedInNotFound />} />
