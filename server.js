@@ -1,10 +1,9 @@
 // CORE ----------------------------------------------------
-require("dotenv").config();
-require("express-async-errors");
-const express = require("express");
-const cookieParser = require("cookie-parser");
-const cors = require("cors");
+require('dotenv').config();
+require('express-async-errors');
+const express = require('express');
 const app = express();
+const path = require('path');
 
 // IMPORT ROUTER -------------------------------------------
 // user import
@@ -27,6 +26,26 @@ const authCheck = require("./middlewares/authCheck");
 const errorHandler = require("./middlewares/errorHandler");
 const notFound = require("./middlewares/notFound");
 const genAuth = require("./middlewares/genAuth").verifyToken;
+
+const authLogin = require('./routes/authLogin');
+// const pilihOperatorFasiliti = require('./routes/pilihOperatorFasiliti');
+const identity = require('./routes/identity');
+// const tadika = require('./routes/tadika');
+// const sekolah = require('./routes/sekolah');
+// const allQueryRoute = require('./routes/allQueryRoute');
+// admin import
+// const adminAuthLogin = require('./routes/adminAuthLogin');
+// const adminTadika = require('./routes/adminTadika');
+// generate import
+// const genRouter = require('./routes/generateRouter');
+// const adminRouter = require('./routes/adminRouter');
+
+// IMPORT MIDDLEWARES --------------------------------------
+const authCheck = require('./middlewares/authCheck');
+const errorHandler = require('./middlewares/errorHandler');
+const notFound = require('./middlewares/notFound');
+// const genAuth = require('./middlewares/genAuth').verifyToken;
+
 
 // DATABASE ------------------------------------------------
 const connectDB = require("./database/connect");
@@ -59,21 +78,34 @@ app.use("/api/v1/admin/tadika", authCheck, adminTadika);
 app.use("/api/v1/generate", genRouter);
 app.use("/admin", adminRouter);
 app.use("/api/v1/superadmin", adminAPI);
-//test
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
+
+const root = path.join(__dirname, 'client', 'build');
+app.use(express.static(root));
+app.use(express.json());
+
+// user route
+app.use('/api/v1/auth', authLogin);
+// app.use('/api/v1/pilih', authCheck, pilihOperatorFasiliti);
+app.use('/api/v1/identity', authCheck, identity);
+// app.use('/api/v1/tadika', authCheck, tadika);
+// app.use('/api/v1/sekolah', authCheck, sekolah);
+// app.use('/api/v1/query', authCheck, allQueryRoute);
+// admin route
+// app.use('/api/v1/admin/auth', adminAuthLogin);
+// app.use('/api/v1/admin/tadika', authCheck, adminTadika);
+// generate route
+// app.use('/api/v1/generate', genRouter);
+// app.use('/admin', adminRouter);
+
+// for use in deployment
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
 });
+
 // error handler & not found
 app.use(errorHandler);
 app.use(notFound);
-// use pug
-app.set("views", "./views");
-app.set("view engine", "pug");
+
 
 // SERVER --------------------------------------------------
 const port = process.env.PORT || 5000;

@@ -6,17 +6,17 @@ import { useGlobalUserAppContext } from '../context/userAppContext';
 import UserForgotPassword from './UserForgotPassword';
 
 function UserLoginForm() {
-  const [idPengguna, setIdPengguna] = useState('');
-  const [kataLaluan, setKataLaluan] = useState('');
-  const [isForgotPassword, setIsForgotPassword] = useState(false);
+  const { loginErrorMessage, isLoginError, loginUser } =
+    useGlobalUserAppContext();
 
-  const { setUserName } = useGlobalUserAppContext();
-  const navigate = useNavigate();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setUserName(idPengguna);
-    navigate('/user');
+    loginUser({ username, password });
   };
 
   if (isForgotPassword === true) {
@@ -31,8 +31,8 @@ function UserLoginForm() {
           className='mt-5 appearance-none leading-7 px-3 py-1 ring-2 focus:ring-2 focus:ring-user1 focus:outline-none rounded-md shadow-xl'
           type='text'
           placeholder='ID Pengguna'
-          value={idPengguna}
-          onChange={(e) => setIdPengguna(e.target.value)}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           required
         />
         <br />
@@ -40,13 +40,18 @@ function UserLoginForm() {
           className='mt-5 appearance-none leading-7 px-3 py-1 ring-2 focus:ring-2 focus:ring-user1 focus:outline-none rounded-md shadow-xl'
           type='password'
           placeholder='Kata Laluan'
-          value={kataLaluan}
-          onChange={(e) => setKataLaluan(e.target.value)}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           required
         />
         <br />
+        {isLoginError && (
+          <p className='max-w-max mx-auto mt-5 text-sm text-user6'>
+            {loginErrorMessage}
+          </p>
+        )}
         <p
-          className='max-w-max mx-auto mt-10 mb-3 text-xs text-user6 underline hover:cursor-pointer'
+          className='max-w-max mx-auto mt-5 mb-3 text-xs text-user6 underline hover:cursor-pointer'
           onClick={() => setIsForgotPassword(true)}
         >
           lupa kata laluan
