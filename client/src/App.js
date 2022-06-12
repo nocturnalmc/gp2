@@ -1,74 +1,56 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-// admin import
+import { UserAppProvider } from './user/context/userAppContext';
 
-import { AdminAppProvider } from "./admin/context/adminAppContext";
-import AdminLoginForm from "./admin/components/public/LoginForm";
-import AdminProtectedRoute from "./admin/pages/AdminProtectedRoute";
-import AdminAfterLogin from "./admin/pages/AdminAfterLogin";
-// import { useToken } from "./admin/controllers/Tokenizer";
+import UserLogin from './user/pages/UserLogin';
 
-// user
+import UserProtectedRoute from './user/pages/UserProtectedRoute';
+import UserAfterLogin from './user/pages/UserAfterLogin';
 
-import { UserAppProvider } from "./user/context/userAppContext";
-import UserLogin from "./user/pages/UserLogin";
-import UserProtectedRoute from "./user/pages/UserProtectedRoute";
-import UserAfterLogin from "./user/pages/UserAfterLogin";
+import UserNotFound from './user/pages/UserNotFound';
 
-import UserNotFound from "./user/pages/UserNotFound";
+// admin import ------------------------------------------
 
-const App = () => {
+import { AdminAppProvider } from './admin/context/adminAppContext';
+
+import AdminLogin from './admin/pages/AdminLogin';
+
+import AdminAfterLogin from './admin/pages/AdminAfterLogin';
+
+// import './admin/admin.css';
+// import AdminHeader from './admin/components/AdminHeader';
+// import AdminNavbar from './admin/components/AdminNavbar';
+// import AdminLoginForm from './admin/components/AdminLoginForm';
+// import AdminSelamatDatang from './admin/components/AdminSelamatDatang';
+// import AdminFooter from './admin/components/AdminFooter';
+
+function App() {
   return (
-    // <BrowserRouter>
-    //   <Routes>
-    //     <Route path="/" element={<Layout />}>
-    //       {/* <Route index element={<AdminPage />} /> */}
-    //       {/* <Route path="loggedin" element={<LoggedIn />} /> */}
-    //       <Route index element={<LoggedIn />} />
-    //       <Route path="kp" element={<Klinik />} />
-    //       <Route path="pp" element={<PP />} />
-    //       <Route path="jp" element={<JP />} />
-    //       <Route path="taska" element={<Taska />} />
-    //       <Route path="tadika" element={<Tadika />} />
-    //       <Route path="sr" element={<SR />} />
-    //       <Route path="sm" element={<SM />} />
-    //       <Route path="ins" element={<Institusi />} />
-    //       <Route path="*" element={<Fourohfour />} />
-    //     </Route>
-    //   </Routes>
-    // </BrowserRouter>
     <>
       <BrowserRouter>
         <UserAppProvider>
           <Routes>
-            <Route path="/" element={<UserLogin />} />
+            <Route path='/' element={<UserLogin />} />
             <Route
-              path="/user/*"
+              path='/user/*'
               element={
                 <UserProtectedRoute>
                   <UserAfterLogin />
                 </UserProtectedRoute>
               }
             />
-            <Route path="*" element={<UserNotFound />} />
+            <Route path='*' element={<UserNotFound />} />
           </Routes>
         </UserAppProvider>
         <AdminAppProvider>
           <Routes>
-            <Route path="/admin" element={<AdminLoginForm />} />
-            <Route
-              path="/admin/landing/*"
-              element={
-                <AdminProtectedRoute>
-                  <AdminAfterLogin />
-                </AdminProtectedRoute>
-              }
-            />
+            <Route path='/admin' element={<AdminLogin />} />
+            <Route path='/admin/landing/*' element={<AdminAfterLogin />} />
           </Routes>
         </AdminAppProvider>
       </BrowserRouter>
     </>
   );
-};
+}
 
 export default App;
