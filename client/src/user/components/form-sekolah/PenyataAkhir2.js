@@ -119,23 +119,17 @@ export default function PenyataAkhir2(props) {
                 </div>
                 <div className='flex flex-row items-center pl-5'>
                   <input
-                    type='checkbox'
+                    type='number'
                     name='penskaleran-penyata-akhir-2'
                     id='penskaleran-penyata-akhir-2'
-                    checked={props.penskaleranPenyataAkhir2}
-                    onChange={() => {
-                      props.setPenskaleranPenyataAkhir2(
-                        !props.penskaleranPenyataAkhir2
-                      );
+                    value={props.penskaleranPenyataAkhir2}
+                    onChange={(e) => {
+                      props.setPenskaleranPenyataAkhir2(e.target.value);
                     }}
-                    className='w-4 h-4 text-red-600 bg-gray-100 rounded border-gray-300 focus:ring-red-500'
+                    className='outline outline-1 outline-userBlack w-10 m-3 text-sm font-m'
+                    min='0'
                   />
-                  <label
-                    htmlFor='penskaleran-penyata-akhir-2'
-                    className='mx-2 text-sm font-m'
-                  >
-                    Penskaleran
-                  </label>
+                  <p className='mx-2 text-sm font-m'>Penskaleran</p>
                 </div>
               </article>
               <article className='grid grid-cols-1gap-2 border border-userBlack pl-3 p-2 rounded-md'>
@@ -160,7 +154,11 @@ export default function PenyataAkhir2(props) {
                     kes selesai
                   </label>
                 </div>
-                <div className='flex flex-row items-center pl-5 m-2'>
+                <div
+                  className={`${
+                    !props.kesSelesaiPenyataAkhir2 && 'hidden'
+                  } flex flex-row items-center pl-5 m-2`}
+                >
                   <input
                     type='checkbox'
                     name='kes-selesai-icdas-penyata-akhir-2'
@@ -171,7 +169,7 @@ export default function PenyataAkhir2(props) {
                         !props.kesSelesaiIcdasPenyataAkhir2
                       );
                     }}
-                    className='w-4 h-4 text-red-600 bg-gray-100 rounded border-gray-300 focus:ring-red-500'
+                    className='ml-7 w-4 h-4 text-red-600 bg-gray-100 rounded border-gray-300 focus:ring-red-500'
                   />
                   <label
                     htmlFor='kes-selesai-icdas-penyata-akhir-2'

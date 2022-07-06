@@ -10,12 +10,36 @@ export default function Pendaftaran(props) {
           <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mt-3 mb-3 w-full col-span-2'>
             <article className='grid grid-cols-2 gap-2 border border-userBlack pl-3 p-2 rounded-md'>
               <h4 className='font-bold flex flex-row pl-5 col-span-2'>
-                Penyampaian Perkhidmatan
+                Penyampaian Perkhidmatan Sekolah
               </h4>
-              <div className='flex flex-row items-center pl-5'>
+              <div className='flex flex-row items-center pl-5 col-span-2'>
+                <select
+                  required
+                  name='statik-bergerak'
+                  id='statik-bergerak'
+                  value={props.statikBergerak}
+                  onChange={(e) => {
+                    props.setStatikBergerak(e.target.value);
+                  }}
+                >
+                  <option value=''>Sila pilih</option>
+                  <option value='klinik-pergigian-statik'>
+                    Klinik Pergigian Statik
+                  </option>
+                  <option value='pasukan-pergigian-bergerak'>
+                    Pasukan Pergigian Bergerak
+                  </option>
+                </select>
+                <span className='text-user6'>*</span>
+              </div>
+              <div
+                className={`${
+                  props.statikBergerak === 'pasukan-pergigian-bergerak'
+                    ? 'visible'
+                    : 'hidden'
+                } flex flex-row items-center pl-5`}
+              >
                 <input
-                  disabled={props.pasukanPergigianBergerak ? true : false}
-                  required={!props.pasukanPergigianBergerak ? true : false}
                   type='checkbox'
                   name='kp-bergerak'
                   id='kp-bergerak'
@@ -27,32 +51,6 @@ export default function Pendaftaran(props) {
                 />
                 <label htmlFor='kp-bergerak' className='ml-2 text-sm font-m'>
                   KP Bergerak
-                  <span className='text-user6'>
-                    {!props.pasukanPergigianBergerak && '*'}
-                  </span>
-                </label>
-              </div>
-              <div className='flex flex-row items-center pl-5 col-span-2'>
-                <input
-                  disabled={props.kpBergerak ? true : false}
-                  required={!props.kpBergerak ? true : false}
-                  type='checkbox'
-                  name='pasukan-pergigian-bergerak'
-                  id='pasukan-pergigian-bergerak'
-                  checked={props.pasukanPergigianBergerak}
-                  onChange={() => {
-                    props.setPasukanPergigianBergerak(
-                      !props.pasukanPergigianBergerak
-                    );
-                  }}
-                  className='w-4 h-4 text-red-600 bg-gray-100 rounded border-gray-300 focus:ring-red-500 focus:ring-2 '
-                />
-                <label
-                  htmlFor='pasukan-pergigian-bergerak'
-                  className='ml-2 text-sm font-m '
-                >
-                  Pasukan Pergigian Bergerak
-                  <span className='text-user6'>{!props.kpBergerak && '*'}</span>
                 </label>
               </div>
               <div
@@ -61,7 +59,7 @@ export default function Pendaftaran(props) {
                 } flex flex-row items-center pl-5`}
               >
                 <select
-                  required={props.kpBergerak ? true : false}
+                  required={props.kpBergerak && true}
                   name='plate-no'
                   id='plate-no'
                   value={props.plateNo}
@@ -73,7 +71,7 @@ export default function Pendaftaran(props) {
                   <option value=''>Plate No</option>
                   <option value='1'>1</option>
                 </select>
-                <span className='text-user6'>*</span>
+                {props.kpBergerak && <span className='text-user6'>*</span>}
               </div>
             </article>
             <article className='grid grid-cols-2 border border-userBlack pl-3 p-2 rounded-md'>

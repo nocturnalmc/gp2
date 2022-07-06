@@ -26,13 +26,12 @@ function UserFormSekolah() {
   masterForm.createdByUsername = username;
   let statusRawatan = '';
   // pendaftaran
+  const [statikBergerak, setStatikBergerak] = useState('');
+  masterForm.statikBergerak = statikBergerak;
+  masterForm.setStatikBergerak = setStatikBergerak;
   const [kpBergerak, setKpBergerak] = useState(false);
   masterForm.kpBergerak = kpBergerak;
   masterForm.setKpBergerak = setKpBergerak;
-  const [pasukanPergigianBergerak, setPasukanPergigianBergerak] =
-    useState(false);
-  masterForm.pasukanPergigianBergerak = pasukanPergigianBergerak;
-  masterForm.setPasukanPergigianBergerak = setPasukanPergigianBergerak;
   const [plateNo, setPlateNo] = useState('');
   masterForm.plateNo = plateNo;
   masterForm.setPlateNo = setPlateNo;
@@ -77,17 +76,11 @@ function UserFormSekolah() {
     useState('');
   masterForm.yaTidakSediaAdaStatusDenture = yaTidakSediaAdaStatusDenture;
   masterForm.setYaTidakSediaAdaStatusDenture = setYaTidakSediaAdaStatusDenture;
-  const [atasSediaAdaDenture, setAtasSediaAdaDenture] = useState(false);
-  masterForm.atasSediaAdaDenture = atasSediaAdaDenture;
-  masterForm.setAtasSediaAdaDenture = setAtasSediaAdaDenture;
   const [separaPenuhAtasSediaAdaDenture, setSeparaPenuhAtasSediaAdaDenture] =
     useState('');
   masterForm.separaPenuhAtasSediaAdaDenture = separaPenuhAtasSediaAdaDenture;
   masterForm.setSeparaPenuhAtasSediaAdaDenture =
     setSeparaPenuhAtasSediaAdaDenture;
-  const [bawahSediaAdaDenture, setBawahSediaAdaDenture] = useState(false);
-  masterForm.bawahSediaAdaDenture = bawahSediaAdaDenture;
-  masterForm.setBawahSediaAdaDenture = setBawahSediaAdaDenture;
   const [separaPenuhBawahSediaAdaDenture, setSeparaPenuhBawahSediaAdaDenture] =
     useState('');
   masterForm.separaPenuhBawahSediaAdaDenture = separaPenuhBawahSediaAdaDenture;
@@ -97,16 +90,10 @@ function UserFormSekolah() {
     useState('');
   masterForm.yaTidakPerluStatusDenture = yaTidakPerluStatusDenture;
   masterForm.setYaTidakPerluStatusDenture = setYaTidakPerluStatusDenture;
-  const [atasPerluDenture, setAtasPerluDenture] = useState(false);
-  masterForm.atasPerluDenture = atasPerluDenture;
-  masterForm.setAtasPerluDenture = setAtasPerluDenture;
   const [separaPenuhAtasPerluDenture, setSeparaPenuhAtasPerluDenture] =
     useState('');
   masterForm.separaPenuhAtasPerluDenture = separaPenuhAtasPerluDenture;
   masterForm.setSeparaPenuhAtasPerluDenture = setSeparaPenuhAtasPerluDenture;
-  const [bawahPerluDenture, setBawahPerluDenture] = useState(false);
-  masterForm.bawahPerluDenture = bawahPerluDenture;
-  masterForm.setBawahPerluDenture = setBawahPerluDenture;
   const [separaPenuhBawahPerluDenture, setSeparaPenuhBawahPerluDenture] =
     useState('');
   masterForm.separaPenuhBawahPerluDenture = separaPenuhBawahPerluDenture;
@@ -149,12 +136,11 @@ function UserFormSekolah() {
   const [fAdaGigiDesidus, setFAdaGigiDesidus] = useState('');
   masterForm.fAdaGigiDesidus = fAdaGigiDesidus;
   masterForm.setFAdaGigiDesidus = setFAdaGigiDesidus;
-  const [eAdaGigiDesidus, setEAdaGigiDesidus] = useState('');
-  masterForm.eAdaGigiDesidus = eAdaGigiDesidus;
-  masterForm.setEAdaGigiDesidus = setEAdaGigiDesidus;
   const [xAdaGigiDesidus, setXAdaGigiDesidus] = useState('');
   masterForm.xAdaGigiDesidus = xAdaGigiDesidus;
   masterForm.setXAdaGigiDesidus = setXAdaGigiDesidus;
+  const [sumDMFXDesidus, setSumDMFXDesidus] = useState(0);
+  masterForm.sumDMFXDesidus = sumDMFXDesidus;
   const [dAdaGigiKekal, setDAdaGigiKekal] = useState('');
   masterForm.dAdaGigiKekal = dAdaGigiKekal;
   masterForm.setDAdaGigiKekal = setDAdaGigiKekal;
@@ -170,6 +156,8 @@ function UserFormSekolah() {
   const [xAdaGigiKekal, setXAdaGigiKekal] = useState('');
   masterForm.xAdaGigiKekal = xAdaGigiKekal;
   masterForm.setXAdaGigiKekal = setXAdaGigiKekal;
+  const [sumDMFXKekal, setSumDMFXKekal] = useState(0);
+  masterForm.sumDMFXKekal = sumDMFXKekal;
   const [jumlahFaktorRisiko, setJumlahFaktorRisiko] = useState('');
   masterForm.jumlahFaktorRisiko = jumlahFaktorRisiko;
   masterForm.setJumlahFaktorRisiko = setJumlahFaktorRisiko;
@@ -241,12 +229,16 @@ function UserFormSekolah() {
   const [classIID, setClassIID] = useState('');
   masterForm.classIID = classIID;
   masterForm.setClassIID = setClassIID;
+  const [sumClassD, setSumClassD] = useState(0);
+  masterForm.sumClassD = sumClassD;
   const [classIF, setClassIF] = useState('');
   masterForm.classIF = classIF;
   masterForm.setClassIF = setClassIF;
   const [classIIF, setClassIIF] = useState('');
   masterForm.classIIF = classIIF;
   masterForm.setClassIIF = setClassIIF;
+  const [sumClassF, setSumClassF] = useState(0);
+  masterForm.sumClassF = sumClassF;
   //perlu dibuat
   const [baruJumlahGigiKekalPerluFs, setBaruJumlahGigiKekalPerluFs] =
     useState('');
@@ -256,6 +248,8 @@ function UserFormSekolah() {
     useState('');
   masterForm.semulaJumlahGigiKekalPerluFs = semulaJumlahGigiKekalPerluFs;
   masterForm.setSemulaJumlahGigiKekalPerluFs = setSemulaJumlahGigiKekalPerluFs;
+  const [sumPerluFs, setSumPerluFs] = useState(0);
+  masterForm.sumPerluFs = sumPerluFs;
   const [jumlahGigiFsGagal, setJumlahGigiFsGagal] = useState('');
   masterForm.jumlahGigiFsGagal = jumlahGigiFsGagal;
   masterForm.setJumlahGigiFsGagal = setJumlahGigiFsGagal;
@@ -267,6 +261,8 @@ function UserFormSekolah() {
     useState('');
   masterForm.semulaJumlahGigiKekalPerluFv = semulaJumlahGigiKekalPerluFv;
   masterForm.setSemulaJumlahGigiKekalPerluFv = setSemulaJumlahGigiKekalPerluFv;
+  const [sumPerluFv, setSumPerluFv] = useState(0);
+  masterForm.sumPerluFv = sumPerluFv;
   const [
     baruJumlahGigiKekalPerluPrrJenis1,
     setBaruJumlahGigiKekalPerluPrrJenis1,
@@ -283,6 +279,8 @@ function UserFormSekolah() {
     semulaJumlahGigiKekalPerluPrrJenis1;
   masterForm.setSemulaJumlahGigiKekalPerluPrrJenis1 =
     setSemulaJumlahGigiKekalPerluPrrJenis1;
+  const [sumPerluPrr, setSumPerluPrr] = useState(0);
+  masterForm.sumPerluPrr = sumPerluPrr;
   const [
     yaTidakSilverDiamineFluoridePerluSapuan,
     setYaTidakSilverDiamineFluoridePerluSapuan,
@@ -397,6 +395,8 @@ function UserFormSekolah() {
   masterForm.semulaJumlahGigiKekalDibuatFs = semulaJumlahGigiKekalDibuatFs;
   masterForm.setSemulaJumlahGigiKekalDibuatFs =
     setSemulaJumlahGigiKekalDibuatFs;
+  const [sumDibuatFs, setSumDibuatFs] = useState(0);
+  masterForm.sumDibuatFs = sumDibuatFs;
   const [baruJumlahGigiKekalDiberiFv, setBaruJumlahGigiKekalDiberiFv] =
     useState('');
   masterForm.baruJumlahGigiKekalDiberiFv = baruJumlahGigiKekalDiberiFv;
@@ -406,6 +406,8 @@ function UserFormSekolah() {
   masterForm.semulaJumlahGigiKekalDiberiFv = semulaJumlahGigiKekalDiberiFv;
   masterForm.setSemulaJumlahGigiKekalDiberiFv =
     setSemulaJumlahGigiKekalDiberiFv;
+  const [sumDiberiFv, setSumDiberiFv] = useState(0);
+  masterForm.sumDiberiFv = sumDiberiFv;
   const [
     baruJumlahGigiKekalDiberiPrrJenis1,
     setBaruJumlahGigiKekalDiberiPrrJenis1,
@@ -422,6 +424,8 @@ function UserFormSekolah() {
     semulaJumlahGigiKekalDiberiPrrJenis1;
   masterForm.setSemulaJumlahGigiKekalDiberiPrrJenis1 =
     setSemulaJumlahGigiKekalDiberiPrrJenis1;
+  const [sumDiberiPrr, setSumDiberiPrr] = useState(0);
+  masterForm.sumDiberiPrr = sumDiberiPrr;
   const [baruJumlahGigiYangDiberiSdf, setBaruJumlahGigiYangDiberiSdf] =
     useState('');
   masterForm.baruJumlahGigiYangDiberiSdf = baruJumlahGigiYangDiberiSdf;
@@ -552,8 +556,7 @@ function UserFormSekolah() {
   const [absesPenyataAkhir2, setAbsesPenyataAkhir2] = useState('');
   masterForm.absesPenyataAkhir2 = absesPenyataAkhir2;
   masterForm.setAbsesPenyataAkhir2 = setAbsesPenyataAkhir2;
-  const [penskaleranPenyataAkhir2, setPenskaleranPenyataAkhir2] =
-    useState(false);
+  const [penskaleranPenyataAkhir2, setPenskaleranPenyataAkhir2] = useState('');
   masterForm.penskaleranPenyataAkhir2 = penskaleranPenyataAkhir2;
   masterForm.setPenskaleranPenyataAkhir2 = setPenskaleranPenyataAkhir2;
   const [kesSelesaiPenyataAkhir2, setKesSelesaiPenyataAkhir2] = useState(false);
@@ -656,10 +659,8 @@ function UserFormSekolah() {
         });
         setSinglePersonSekolah(data.singlePersonSekolah);
         // map pendaftaran
+        setStatikBergerak(data.singlePersonSekolah.statikBergerak);
         setKpBergerak(data.singlePersonSekolah.kpBergerak);
-        setPasukanPergigianBergerak(
-          data.singlePersonSekolah.pasukanPergigianBergerak
-        );
         setPlateNo(data.singlePersonSekolah.plateNo);
         setBaruUlanganKedatanganPendaftaran(
           data.singlePersonSekolah.baruUlanganKedatanganPendaftaran
@@ -682,22 +683,18 @@ function UserFormSekolah() {
         setYaTidakSediaAdaStatusDenture(
           data.singlePersonSekolah.yaTidakSediaAdaStatusDenture
         );
-        setAtasSediaAdaDenture(data.singlePersonSekolah.atasSediaAdaDenture);
         setSeparaPenuhAtasSediaAdaDenture(
           data.singlePersonSekolah.separaPenuhAtasSediaAdaDenture
         );
-        setBawahSediaAdaDenture(data.singlePersonSekolah.bawahSediaAdaDenture);
         setSeparaPenuhBawahSediaAdaDenture(
           data.singlePersonSekolah.separaPenuhBawahSediaAdaDenture
         );
         setYaTidakPerluStatusDenture(
           data.singlePersonSekolah.yaTidakPerluStatusDenture
         );
-        setAtasPerluDenture(data.singlePersonSekolah.atasPerluDenture);
         setSeparaPenuhAtasPerluDenture(
           data.singlePersonSekolah.separaPenuhAtasPerluDenture
         );
-        setBawahPerluDenture(data.singlePersonSekolah.bawahPerluDenture);
         setSeparaPenuhBawahPerluDenture(
           data.singlePersonSekolah.separaPenuhBawahPerluDenture
         );
@@ -723,7 +720,6 @@ function UserFormSekolah() {
         setDAdaGigiDesidus(data.singlePersonSekolah.dAdaGigiDesidus);
         setMAdaGigiDesidus(data.singlePersonSekolah.mAdaGigiDesidus);
         setFAdaGigiDesidus(data.singlePersonSekolah.fAdaGigiDesidus);
-        setEAdaGigiDesidus(data.singlePersonSekolah.eAdaGigiDesidus);
         setXAdaGigiDesidus(data.singlePersonSekolah.xAdaGigiDesidus);
         setDAdaGigiKekal(data.singlePersonSekolah.dAdaGigiKekal);
         setMAdaGigiKekal(data.singlePersonSekolah.mAdaGigiKekal);
@@ -963,6 +959,87 @@ function UserFormSekolah() {
     fetchSinglePersonSekolah();
   }, []);
 
+  // calculate total dmfx desidus
+  useEffect(() => {
+    setSumDMFXDesidus(
+      parseInt(dAdaGigiDesidus) +
+        parseInt(mAdaGigiDesidus) +
+        parseInt(fAdaGigiDesidus) +
+        parseInt(xAdaGigiDesidus)
+    );
+  }, [dAdaGigiDesidus, mAdaGigiDesidus, fAdaGigiDesidus, xAdaGigiDesidus]);
+
+  // calculate total DMFX kekal
+  useEffect(() => {
+    setSumDMFXKekal(
+      parseInt(dAdaGigiKekal) +
+        parseInt(mAdaGigiKekal) +
+        parseInt(fAdaGigiKekal) +
+        parseInt(xAdaGigiKekal)
+    );
+  }, [dAdaGigiKekal, mAdaGigiKekal, fAdaGigiKekal, xAdaGigiKekal]);
+
+  // calculate total D class I & II
+  useEffect(() => {
+    setSumClassD(parseInt(classID) + parseInt(classIID));
+  }, [classID, classIID]);
+
+  // calculate total F class I & II
+  useEffect(() => {
+    setSumClassF(parseInt(classIF) + parseInt(classIIF));
+  }, [classIF, classIIF]);
+
+  // calculate total perlu FS
+  useEffect(() => {
+    setSumPerluFs(
+      parseInt(baruJumlahGigiKekalPerluFs) +
+        parseInt(semulaJumlahGigiKekalPerluFs)
+    );
+  }, [baruJumlahGigiKekalPerluFs, semulaJumlahGigiKekalPerluFs]);
+
+  // calculate total perlu FV
+  useEffect(() => {
+    setSumPerluFv(
+      parseInt(baruJumlahGigiKekalPerluFv) +
+        parseInt(semulaJumlahGigiKekalPerluFv)
+    );
+  }, [baruJumlahGigiKekalPerluFv, semulaJumlahGigiKekalPerluFv]);
+
+  // calculate total perlu PRR
+  useEffect(() => {
+    setSumPerluPrr(
+      parseInt(baruJumlahGigiKekalPerluPrrJenis1) +
+        parseInt(semulaJumlahGigiKekalPerluPrrJenis1)
+    );
+  }, [baruJumlahGigiKekalPerluPrrJenis1, semulaJumlahGigiKekalPerluPrrJenis1]);
+
+  // calculate total dibuat FS
+  useEffect(() => {
+    setSumDibuatFs(
+      parseInt(baruJumlahGigiKekalDibuatFs) +
+        parseInt(semulaJumlahGigiKekalDibuatFs)
+    );
+  }, [baruJumlahGigiKekalDibuatFs, semulaJumlahGigiKekalDibuatFs]);
+
+  // calculate total diberi FV
+  useEffect(() => {
+    setSumDiberiFv(
+      parseInt(baruJumlahGigiKekalDiberiFv) +
+        parseInt(semulaJumlahGigiKekalDiberiFv)
+    );
+  }, [baruJumlahGigiKekalDiberiFv, semulaJumlahGigiKekalDiberiFv]);
+
+  // calculate total diberi PRR
+  useEffect(() => {
+    setSumDiberiPrr(
+      parseInt(baruJumlahGigiKekalDiberiPrrJenis1) +
+        parseInt(semulaJumlahGigiKekalDiberiPrrJenis1)
+    );
+  }, [
+    baruJumlahGigiKekalDiberiPrrJenis1,
+    semulaJumlahGigiKekalDiberiPrrJenis1,
+  ]);
+
   // idea dapat masa angkat takbir subhanAllah..
   // useEffect(() => {
   //   setTimeout(async () => {
@@ -974,133 +1051,6 @@ function UserFormSekolah() {
   //         {
   //           createdByUsername: masterForm.createdByUsername,
   //           statusRawatan,
-  //           // pendaftaran
-  //           kpBergerak,
-  //           pasukanPergigianBergerak,
-  //           plateNo,
-  //           baruUlanganKedatanganPendaftaran,
-  //           engganKedatanganPendaftaran,
-  //           tidakHadirKedatanganPendaftaran,
-  //           adaTiadaPemeriksaanPendaftaran,
-  //           tinggiRendahRisikoSekolahPendaftaran,
-  //           // pemeriksaan awal div 1
-  //           adaCleftLip,
-  //           rujukCleftLip,
-  //           yaTidakSediaAdaStatusDenture,
-  //           atasSediaAdaDenture,
-  //           separaPenuhAtasSediaAdaDenture,
-  //           bawahSediaAdaDenture,
-  //           separaPenuhBawahSediaAdaDenture,
-  //           yaTidakPerluStatusDenture,
-  //           atasPerluDenture,
-  //           separaPenuhAtasPerluDenture,
-  //           bawahPerluDenture,
-  //           separaPenuhBawahPerluDenture,
-  //           toothSurfaceLossTrauma,
-  //           kecederaanGigiAnteriorTrauma,
-  //           tisuLembutTrauma,
-  //           tisuKerasTrauma,
-  //           // pemeriksaan awal div 2
-  //           kebersihanMulutOralHygiene,
-  //           skorBpeOralHygiene,
-  //           saringanKanserMulutOralHygiene,
-  //           skorGisMulutOralHygiene,
-  //           dAdaGigiDesidus,
-  //           mAdaGigiDesidus,
-  //           fAdaGigiDesidus,
-  //           eAdaGigiDesidus,
-  //           xAdaGigiDesidus,
-  //           dAdaGigiKekal,
-  //           mAdaGigiKekal,
-  //           fAdaGigiKekal,
-  //           eAdaGigiKekal,
-  //           xAdaGigiKekal,
-  //           jumlahFaktorRisiko,
-  //           // pemeriksaan awal div 3
-  //           gicBilanganFsDibuat3TahunLepas,
-  //           resinBilanganFsDibuat3TahunLepas,
-  //           lainLainBilanganFsDibuat3TahunLepas,
-  //           dBilanganFsDibuat3TahunLepasTerjadi,
-  //           mBilanganFsDibuat3TahunLepasTerjadi,
-  //           fBilanganFsDibuat3TahunLepasTerjadi,
-  //           eBilanganFsDibuat3TahunLepasTerjadi,
-  //           xBilanganFsDibuat3TahunLepasTerjadi,
-  //           classID,
-  //           classIID,
-  //           classIF,
-  //           classIIF,
-  //           // perlu dibuat
-  //           baruJumlahGigiKekalPerluFs,
-  //           semulaJumlahGigiKekalPerluFs,
-  //           jumlahGigiFsGagal,
-  //           baruJumlahGigiKekalPerluFv,
-  //           semulaJumlahGigiKekalPerluFv,
-  //           baruJumlahGigiKekalPerluPrrJenis1,
-  //           semulaJumlahGigiKekalPerluPrrJenis1,
-  //           yaTidakSilverDiamineFluoridePerluSapuan,
-  //           baruGDAnteriorSewarnaJumlahTampalanDiperlukan,
-  //           semulaGDAnteriorSewarnaJumlahTampalanDiperlukan,
-  //           baruGKAnteriorSewarnaJumlahTampalanDiperlukan,
-  //           semulaGKAnteriorSewarnaJumlahTampalanDiperlukan,
-  //           baruGDPosteriorSewarnaJumlahTampalanDiperlukan,
-  //           semulaGDPosteriorSewarnaJumlahTampalanDiperlukan,
-  //           baruGKPosteriorSewarnaJumlahTampalanDiperlukan,
-  //           semulaGKPosteriorSewarnaJumlahTampalanDiperlukan,
-  //           baruGDPosteriorAmalgamJumlahTampalanDiperlukan,
-  //           semulaGDPosteriorAmalgamJumlahTampalanDiperlukan,
-  //           baruGKPosteriorAmalgamJumlahTampalanDiperlukan,
-  //           semulaGKPosteriorAmalgamJumlahTampalanDiperlukan,
-  //           // penyata akhir 1
-  //           baruJumlahGigiKekalDibuatFs,
-  //           semulaJumlahGigiKekalDibuatFs,
-  //           baruJumlahGigiKekalDiberiFv,
-  //           semulaJumlahGigiKekalDiberiFv,
-  //           baruJumlahGigiKekalDiberiPrrJenis1,
-  //           semulaJumlahGigiKekalDiberiPrrJenis1,
-  //           baruJumlahGigiYangDiberiSdf,
-  //           semulaJumlahGigiYangDiberiSdf,
-  //           gdBaruAnteriorSewarnaJumlahTampalanDibuat,
-  //           gdSemulaAnteriorSewarnaJumlahTampalanDibuat,
-  //           gkBaruAnteriorSewarnaJumlahTampalanDibuat,
-  //           gkSemulaAnteriorSewarnaJumlahTampalanDibuat,
-  //           gdBaruPosteriorSewarnaJumlahTampalanDibuat,
-  //           gdSemulaPosteriorSewarnaJumlahTampalanDibuat,
-  //           gkBaruPosteriorSewarnaJumlahTampalanDibuat,
-  //           gkSemulaPosteriorSewarnaJumlahTampalanDibuat,
-  //           gdBaruPosteriorAmalgamJumlahTampalanDibuat,
-  //           gdSemulaPosteriorAmalgamJumlahTampalanDibuat,
-  //           gkBaruPosteriorAmalgamJumlahTampalanDibuat,
-  //           gkSemulaPosteriorAmalgamJumlahTampalanDibuat,
-  //           // penyata akhir 2
-  //           cabutDesidusPenyataAkhir2,
-  //           cabutKekalPenyataAkhir2,
-  //           jumlahTampalanSementaraPenyataAkhir2,
-  //           pulpotomiPenyataAkhir2,
-  //           endodontikPenyataAkhir2,
-  //           absesPenyataAkhir2,
-  //           penskaleranPenyataAkhir2,
-  //           kesSelesaiPenyataAkhir2,
-  //           kesSelesaiIcdasPenyataAkhir2,
-  //           rujukPenyataAkhir2,
-  //           ceramahPromosiPenyataAkhir2,
-  //           lmgPromosiPenyataAkhir2,
-  //           yaTidakMelaksanakanAktivitiBeginPromosiPenyataAkhir2,
-  //           plakGigiNasihatPergigianIndividuPromosiPenyataAkhir2,
-  //           dietPemakananNasihatPergigianIndividuPromosiPenyataAkhir2,
-  //           penjagaanKesihatanMulutNasihatPergigianIndividuPromosiPenyataAkhir2,
-  //           kanserMulutNasihatPergigianIndividuPromosiPenyataAkhir2,
-  //           // kotak
-  //           statusM,
-  //           jenisR,
-  //           tarikh1,
-  //           tarikh2,
-  //           tarikh3,
-  //           tarikh4,
-  //           adaQ,
-  //           tiadaQ,
-  //           rujukG,
-  //           tarikhQ,
-  //           statusSelepas6Bulan,
   //         },
   //         { headers: { Authorization: `Bearer ${userToken}` } }
   //       );
@@ -1114,6 +1064,46 @@ function UserFormSekolah() {
 
   const saveDraft = async (e) => {
     e.preventDefault();
+    if (sumDMFXDesidus > 20) {
+      alert('Jumlah dmfx tidak boleh melebihi 20 !!!!!!!');
+      return;
+    }
+    if (sumDMFXKekal > 32) {
+      alert('Jumlah DMFX tidak boleh melebihi 32 !!!!!!!');
+      return;
+    }
+    if (sumClassD > dAdaGigiKekal) {
+      alert('Jumlah Class I + Class II D tidak boleh melebihi D !!!!!!!');
+      return;
+    }
+    if (sumClassF > fAdaGigiKekal) {
+      alert('Jumlah Class I + Class II F tidak boleh melebihi F !!!!!!!');
+      return;
+    }
+    if (sumPerluFs > 16) {
+      alert('Jumlah baru & semula FS tidak boleh melebihi 16 !!!!!!!');
+      return;
+    }
+    if (sumPerluFv > 16) {
+      alert('Jumlah baru & semula FV tidak boleh melebihi 16 !!!!!!!');
+      return;
+    }
+    if (sumPerluPrr > 16) {
+      alert('Jumlah baru & semula PRR tidak boleh melebihi 16 !!!!!!!');
+      return;
+    }
+    if (sumDibuatFs > 16) {
+      alert('Jumlah baru & semula FS tidak boleh melebihi 16 !!!!!!!');
+      return;
+    }
+    if (sumDiberiFv > 16) {
+      alert('Jumlah baru & semula FV tidak boleh melebihi 16 !!!!!!!');
+      return;
+    }
+    if (sumDiberiPrr > 16) {
+      alert('Jumlah baru & semula PRR tidak boleh melebihi 16 !!!!!!!');
+      return;
+    }
     statusRawatan = 'belum selesai';
     try {
       await axios.patch(
@@ -1122,8 +1112,8 @@ function UserFormSekolah() {
           createdByUsername: masterForm.createdByUsername,
           statusRawatan,
           // pendaftaran
+          statikBergerak,
           kpBergerak,
-          pasukanPergigianBergerak,
           plateNo,
           baruUlanganKedatanganPendaftaran,
           engganKedatanganPendaftaran,
@@ -1134,14 +1124,10 @@ function UserFormSekolah() {
           adaCleftLip,
           rujukCleftLip,
           yaTidakSediaAdaStatusDenture,
-          atasSediaAdaDenture,
           separaPenuhAtasSediaAdaDenture,
-          bawahSediaAdaDenture,
           separaPenuhBawahSediaAdaDenture,
           yaTidakPerluStatusDenture,
-          atasPerluDenture,
           separaPenuhAtasPerluDenture,
-          bawahPerluDenture,
           separaPenuhBawahPerluDenture,
           toothSurfaceLossTrauma,
           kecederaanGigiAnteriorTrauma,
@@ -1155,7 +1141,6 @@ function UserFormSekolah() {
           dAdaGigiDesidus,
           mAdaGigiDesidus,
           fAdaGigiDesidus,
-          eAdaGigiDesidus,
           xAdaGigiDesidus,
           dAdaGigiKekal,
           mAdaGigiKekal,
@@ -1261,6 +1246,46 @@ function UserFormSekolah() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (sumDMFXDesidus > 20) {
+      alert('Jumlah dmfx tidak boleh melebihi 20 !!!!!!!');
+      return;
+    }
+    if (sumDMFXKekal > 32) {
+      alert('Jumlah DMFX tidak boleh melebihi 32 !!!!!!!');
+      return;
+    }
+    if (sumClassD > dAdaGigiKekal) {
+      alert('Jumlah Class I + Class II D tidak boleh melebihi D !!!!!!!');
+      return;
+    }
+    if (sumClassF > fAdaGigiKekal) {
+      alert('Jumlah Class I + Class II F tidak boleh melebihi F !!!!!!!');
+      return;
+    }
+    if (sumPerluFs > 16) {
+      alert('Jumlah baru & semula FS tidak boleh melebihi 16 !!!!!!!');
+      return;
+    }
+    if (sumPerluFv > 16) {
+      alert('Jumlah baru & semula FV tidak boleh melebihi 16 !!!!!!!');
+      return;
+    }
+    if (sumPerluPrr > 16) {
+      alert('Jumlah baru & semula PRR tidak boleh melebihi 16 !!!!!!!');
+      return;
+    }
+    if (sumDibuatFs > 16) {
+      alert('Jumlah baru & semula FS tidak boleh melebihi 16 !!!!!!!');
+      return;
+    }
+    if (sumDiberiFv > 16) {
+      alert('Jumlah baru & semula FV tidak boleh melebihi 16 !!!!!!!');
+      return;
+    }
+    if (sumDiberiPrr > 16) {
+      alert('Jumlah baru & semula PRR tidak boleh melebihi 16 !!!!!!!');
+      return;
+    }
     statusRawatan = 'selesai';
     try {
       await axios.patch(
@@ -1269,8 +1294,8 @@ function UserFormSekolah() {
           createdByUsername: masterForm.createdByUsername,
           statusRawatan,
           // pendaftaran
+          statikBergerak,
           kpBergerak,
-          pasukanPergigianBergerak,
           plateNo,
           baruUlanganKedatanganPendaftaran,
           engganKedatanganPendaftaran,
@@ -1281,14 +1306,10 @@ function UserFormSekolah() {
           adaCleftLip,
           rujukCleftLip,
           yaTidakSediaAdaStatusDenture,
-          atasSediaAdaDenture,
           separaPenuhAtasSediaAdaDenture,
-          bawahSediaAdaDenture,
           separaPenuhBawahSediaAdaDenture,
           yaTidakPerluStatusDenture,
-          atasPerluDenture,
           separaPenuhAtasPerluDenture,
-          bawahPerluDenture,
           separaPenuhBawahPerluDenture,
           toothSurfaceLossTrauma,
           kecederaanGigiAnteriorTrauma,
@@ -1302,7 +1323,6 @@ function UserFormSekolah() {
           dAdaGigiDesidus,
           mAdaGigiDesidus,
           fAdaGigiDesidus,
-          eAdaGigiDesidus,
           xAdaGigiDesidus,
           dAdaGigiKekal,
           mAdaGigiKekal,

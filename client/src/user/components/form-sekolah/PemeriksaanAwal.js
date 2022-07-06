@@ -118,18 +118,6 @@ export default function PemeriksaanAwal(props) {
                         >
                           Atas
                         </label>
-                        <input
-                          type='checkbox'
-                          name='atas-sedia-ada-denture'
-                          id='atas-sedia-ada-denture'
-                          checked={props.atasSediaAdaDenture}
-                          onChange={() => {
-                            props.setAtasSediaAdaDenture(
-                              !props.atasSediaAdaDenture
-                            );
-                          }}
-                          className='w-4 h-4 text-red-600 bg-gray-100 rounded border-gray-300 focus:ring-red-500 focus:ring-2 '
-                        />
                       </div>
                     )}
                     {props.yaTidakSediaAdaStatusDenture ===
@@ -198,18 +186,6 @@ export default function PemeriksaanAwal(props) {
                         >
                           Bawah
                         </label>
-                        <input
-                          type='checkbox'
-                          name='bawah-sedia-ada-denture'
-                          id='bawah-sedia-ada-denture'
-                          checked={props.bawahSediaAdaDenture}
-                          onChange={() => {
-                            props.setBawahSediaAdaDenture(
-                              !props.bawahSediaAdaDenture
-                            );
-                          }}
-                          className='w-4 h-4 text-red-600 bg-gray-100 rounded border-gray-300 focus:ring-red-500 focus:ring-2 '
-                        />
                       </div>
                     )}
                     {props.yaTidakSediaAdaStatusDenture ===
@@ -331,16 +307,6 @@ export default function PemeriksaanAwal(props) {
                         >
                           Atas
                         </label>
-                        <input
-                          type='checkbox'
-                          name='atas-perlu-denture'
-                          id='atas-perlu-denture'
-                          checked={props.atasPerluDenture}
-                          onChange={() => {
-                            props.setAtasPerluDenture(!props.atasPerluDenture);
-                          }}
-                          className='w-4 h-4 text-red-600 bg-gray-100 rounded border-gray-300 focus:ring-red-500 focus:ring-2 '
-                        />
                       </div>
                     )}
                     {props.yaTidakPerluStatusDenture ===
@@ -409,18 +375,6 @@ export default function PemeriksaanAwal(props) {
                         >
                           Bawah
                         </label>
-                        <input
-                          type='checkbox'
-                          name='bawah-perlu-denture'
-                          id='bawah-perlu-denture'
-                          checked={props.bawahPerluDenture}
-                          onChange={() => {
-                            props.setBawahPerluDenture(
-                              !props.bawahPerluDenture
-                            );
-                          }}
-                          className='w-4 h-4 text-red-600 bg-gray-100 rounded border-gray-300 focus:ring-red-500 focus:ring-2 '
-                        />
                       </div>
                     )}
                     {props.yaTidakPerluStatusDenture ===
@@ -681,7 +635,7 @@ export default function PemeriksaanAwal(props) {
                       <input
                         required
                         min='0'
-                        max='32'
+                        max='20'
                         type='number'
                         name='d-ada-status-gigi-desidus'
                         id='d-ada-status-gigi-desidus'
@@ -698,7 +652,7 @@ export default function PemeriksaanAwal(props) {
                       <input
                         required
                         min='0'
-                        max='32'
+                        max='20'
                         type='number'
                         name='m-ada-status-gigi-desidus'
                         id='m-ada-status-gigi-desidus'
@@ -715,7 +669,7 @@ export default function PemeriksaanAwal(props) {
                       <input
                         required
                         min='0'
-                        max='32'
+                        max='20'
                         type='number'
                         name='f-ada-status-gigi-desidus'
                         id='f-ada-status-gigi-desidus'
@@ -727,29 +681,12 @@ export default function PemeriksaanAwal(props) {
                       />
                     </div>
                     <div className='flex flex-row items-center pl-5'>
-                      <p className='text-sm font-m lowercase'>e: </p>
-                      <span className='text-user6'>*</span>
-                      <input
-                        required
-                        min='0'
-                        max='32'
-                        type='number'
-                        name='e-ada-status-gigi-desidus'
-                        id='e-ada-status-gigi-desidus'
-                        value={props.eAdaGigiDesidus}
-                        onChange={(e) => {
-                          props.setEAdaGigiDesidus(e.target.value);
-                        }}
-                        className='outline outline-1 outline-userBlack w-10 m-3 text-sm font-m'
-                      />
-                    </div>
-                    <div className='flex flex-row items-center pl-5'>
                       <p className='text-sm font-m lowercase'>x: </p>
                       <span className='text-user6'>*</span>
                       <input
                         required
                         min='0'
-                        max='32'
+                        max='20'
                         type='number'
                         name='x-ada-status-gigi-desidus'
                         id='x-ada-status-gigi-desidus'
@@ -762,6 +699,12 @@ export default function PemeriksaanAwal(props) {
                     </div>
                   </div>
                 </div>
+                {props.sumDMFXDesidus > 20 && (
+                  <p className='text-user6 font-semibold'>
+                    jumlah <span className='lowercase'>dmfx</span> tidak boleh
+                    melebihi 20
+                  </p>
+                )}
               </article>
               <article className='border border-userBlack pl-3 p-2 rounded-md'>
                 <h4 className='font-bold flex flex-row pl-5'>
@@ -873,6 +816,11 @@ export default function PemeriksaanAwal(props) {
                     </div>
                   </div>
                 </div>
+                {props.sumDMFXKekal > 32 && (
+                  <p className='text-user6 font-semibold'>
+                    jumlah DMFX tidak boleh melebihi 32
+                  </p>
+                )}
               </article>
               <article className='border border-userBlack pl-3 p-2 rounded-md'>
                 <div className='grid grid-cols-1'>
@@ -1125,6 +1073,11 @@ export default function PemeriksaanAwal(props) {
                     className='outline outline-1 outline-userBlack w-10 m-3 text-sm font-m'
                   />
                 </div>
+                {props.sumClassD > props.dAdaGigiKekal && (
+                  <p className='col-span-2 text-user6 font-semibold'>
+                    jumlah class I + class II D tidak boleh melebihi D
+                  </p>
+                )}
               </article>
               <article className='grid grid-cols-2 border border-userBlack pl-3 p-2 rounded-md'>
                 <h4 className='font-bold flex flex-row pl-5 col-span-2'>F</h4>
@@ -1158,6 +1111,11 @@ export default function PemeriksaanAwal(props) {
                     className='outline outline-1 outline-userBlack w-10 m-3 text-sm font-m'
                   />
                 </div>
+                {props.sumClassF > props.fAdaGigiKekal && (
+                  <p className='col-span-2 text-user6 font-semibold'>
+                    jumlah class I + class II F tidak boleh melebihi F
+                  </p>
+                )}
               </article>
             </div>
           </section>

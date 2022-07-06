@@ -57,6 +57,11 @@ export default function PenyataAkhir1(props) {
                     required
                   />
                 </div>
+                {props.sumDibuatFs > 16 && (
+                  <p className='col-span-2 text-user6 font-semibold'>
+                    jumlah baru & semula FS tidak boleh melebihi 16
+                  </p>
+                )}
               </article>
               <article className='grid grid-cols-2 gap-2 border border-userBlack pl-3 p-2 rounded-md'>
                 <h4 className='font-bold flex flex-row pl-5 col-span-2'>
@@ -82,7 +87,7 @@ export default function PenyataAkhir1(props) {
                     }}
                     className='outline outline-1 outline-userBlack w-10 m-3 text-sm font-m'
                     min='0'
-                    max='32'
+                    max='16'
                     required
                   />
                 </div>
@@ -103,10 +108,15 @@ export default function PenyataAkhir1(props) {
                     }}
                     className='outline outline-1 outline-userBlack w-10 m-3 text-sm font-m'
                     min='0'
-                    max='32'
+                    max='16'
                     required
                   />
                 </div>
+                {props.sumDiberiFv > 16 && (
+                  <p className='col-span-2 text-user6 font-semibold'>
+                    jumlah baru & semula FV tidak boleh melebihi 16
+                  </p>
+                )}
               </article>
               <article className='grid grid-cols-2 gap-2 border border-userBlack pl-3 p-2 rounded-md'>
                 <h4 className='font-bold flex flex-row pl-5 col-span-2'>
@@ -161,6 +171,11 @@ export default function PenyataAkhir1(props) {
                     required
                   />
                 </div>
+                {props.sumDiberiPrr > 16 && (
+                  <p className='col-span-2 text-user6 font-semibold'>
+                    jumlah baru & semula PRR tidak boleh melebihi 16
+                  </p>
+                )}
               </article>
             </div>
             <div className='row-start-2 lg:row-start-1 col-start-1 lg:col-start-2'>

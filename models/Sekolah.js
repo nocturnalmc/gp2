@@ -65,11 +65,11 @@ const SekolahSchema = new mongoose.Schema({
     type: Number,
   },
   // pendaftaran -------------------------------------------------------
-  kpBergerak: {
-    type: Boolean,
-    default: false,
+  statikBergerak: {
+    type: String,
+    default: '',
   },
-  pasukanPergigianBergerak: {
+  kpBergerak: {
     type: Boolean,
     default: false,
   },
@@ -110,17 +110,9 @@ const SekolahSchema = new mongoose.Schema({
     type: String,
     default: '',
   },
-  atasSediaAdaDenture: {
-    type: Boolean,
-    default: false,
-  },
   separaPenuhAtasSediaAdaDenture: {
     type: String,
     default: '',
-  },
-  bawahSediaAdaDenture: {
-    type: Boolean,
-    default: false,
   },
   separaPenuhBawahSediaAdaDenture: {
     type: String,
@@ -130,17 +122,9 @@ const SekolahSchema = new mongoose.Schema({
     type: String,
     default: '',
   },
-  atasPerluDenture: {
-    type: Boolean,
-    default: false,
-  },
   separaPenuhAtasPerluDenture: {
     type: String,
     default: '',
-  },
-  bawahPerluDenture: {
-    type: Boolean,
-    default: false,
   },
   separaPenuhBawahPerluDenture: {
     type: String,
@@ -190,11 +174,6 @@ const SekolahSchema = new mongoose.Schema({
     default: 0,
   },
   fAdaGigiDesidus: {
-    type: Number,
-    min: 0,
-    default: 0,
-  },
-  eAdaGigiDesidus: {
     type: Number,
     min: 0,
     default: 0,
@@ -528,8 +507,9 @@ const SekolahSchema = new mongoose.Schema({
     default: 0,
   },
   penskaleranPenyataAkhir2: {
-    type: Boolean,
-    default: false,
+    type: Number,
+    min: 0,
+    default: 0,
   },
   kesSelesaiPenyataAkhir2: {
     type: Boolean,
