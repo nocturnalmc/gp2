@@ -1,23 +1,19 @@
-import { useQuery } from '@apollo/client';
-
-import { useGlobalUserAppContext } from '../../context/userAppContext';
-
-import { Link } from 'react-router-dom';
-
-export default function PatientData({ showForm, setShowForm }) {
-  const { dateToday, GET_PATIENT_BY_TARIKH_KEDATANGAN } =
-    useGlobalUserAppContext();
-
-  const { loading, error, data } = useQuery(GET_PATIENT_BY_TARIKH_KEDATANGAN, {
-    variables: {
-      tarikhKedatangan: `${dateToday}`,
-    },
-  });
-
+export default function PatientData({
+  showForm,
+  setShowForm,
+  setEditId,
+  editForm,
+  setEditForm,
+  data,
+  error,
+  loading,
+  philter,
+  setPhilter,
+}) {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
-  if (!showForm) {
+  if (!showForm && !editForm) {
     return (
       <>
         <input
@@ -25,6 +21,7 @@ export default function PatientData({ showForm, setShowForm }) {
           type='text'
           name='carianPesakit'
           placeholder='Cari pesakit...'
+          onChange={(e) => setPhilter(e.target.value.toLowerCase())}
         />
         <br />
         <button
@@ -53,32 +50,39 @@ export default function PatientData({ showForm, setShowForm }) {
                       AKTIFKAN???
                     </th>
                   </tr>
-                  {data.listPatientByTarikhKedatangan.map((p, index) => (
-                    <>
-                      <tr>
-                        <td className='outline outline-1 outline-userBlack'>
-                          {index + 1}
-                        </td>
-                        <td className='outline outline-1 outline-userBlack'>
-                          {p.nama}
-                        </td>
-                        <td className='outline outline-1 outline-userBlack'>
-                          {p.ic}
-                        </td>
-                        <td className='outline outline-1 outline-userBlack'>
-                          {p.tarikhKedatangan}
-                        </td>
-                        <td className='outline outline-1 outline-userBlack'>
-                          <Link
-                            to={`/kaunter/ubah/${p._id}`}
-                            className='border border-1 border-userBlack bg-user3 items-left text-xs'
-                          >
-                            Edit
-                          </Link>
-                        </td>
-                      </tr>
-                    </>
-                  ))}
+                  {data.listPatientByTarikhKedatangan
+                    .filter((pt) => pt.nama.includes(philter))
+                    .map((p, index) => (
+                      <>
+                        <tr key={p._id}>
+                          <td className='outline outline-1 outline-userBlack'>
+                            {index + 1}
+                          </td>
+                          <td className='outline outline-1 outline-userBlack'>
+                            {p.nama}
+                          </td>
+                          <td className='outline outline-1 outline-userBlack'>
+                            {p.ic}
+                          </td>
+                          <td className='outline outline-1 outline-userBlack'>
+                            {p.tarikhKedatangan}
+                          </td>
+                          <td className='outline outline-1 outline-userBlack'>
+                            <button
+                              className='border border-1 border-userBlack bg-user3 items-left text-xs'
+                              onClick={(e) => {
+                                setEditId(p._id);
+                                setTimeout(() => {
+                                  setEditForm(true);
+                                }, 300);
+                              }}
+                            >
+                              Edit
+                            </button>
+                          </td>
+                        </tr>
+                      </>
+                    ))}
                 </tbody>
               </table>
             </div>

@@ -42,6 +42,25 @@ module.exports = buildSchema(`
     kumpulanEtnik: String,
     rujukDaripada: String,
   }
+  input UpdatePatient{
+    _id: String,
+    createdByNegeri: String,
+    createdByDaerah: String,
+    createdByKp: String,
+    createdByUsername: String,
+    nama: String,
+    jenisIc: String,
+    ic: String,
+    tarikhLahir: String,
+    tarikhKedatangan: String,
+    jantina: String,
+    umur: Int,
+    alamat: String,
+    waktuSampai: String,
+    kategoriPesakit: String,
+    kumpulanEtnik: String,
+    rujukDaripada: String,
+  }
   type RootQuery {
     patient(_id: String!): Patient!
     patients: [Patient!]
@@ -50,20 +69,7 @@ module.exports = buildSchema(`
   type Mutation {
     createPatient(patient: PatientType): Patient,
     deletePatient(_id: String): Patient,
-    updatePatient(_id: String, 
-      nama: String,
-      jenisIc: String,
-      ic: String,
-      tarikhLahir: String,
-      tarikhKedatangan: String,
-      jantina: String,
-      umur: Int,
-      alamat: String,
-      waktuSampai: String,
-      kategoriPesakit: String,
-      kumpulanEtnik: String,
-      rujukDaripada: String
-      ): String
+    updatePatient(patient: UpdatePatient): Patient,
   }
   schema {
     query: RootQuery

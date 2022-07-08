@@ -1,76 +1,74 @@
-import { useState } from 'react';
-import { useMutation } from '@apollo/client';
+import { useState, useEffect } from 'react';
+import { useQuery, useMutation } from '@apollo/client';
 
 import { useGlobalUserAppContext } from '../../context/userAppContext';
 
-export default function FillableForm({
-  showForm,
-  setShowForm,
+export default function EditableForm({
+  editId,
+  editForm,
+  setEditForm,
   createdByKp,
   createdByDaerah,
   createdByNegeri,
-  dateToday,
   refetch,
   toast,
 }) {
-  const { ADD_PATIENT } = useGlobalUserAppContext();
-  const [nama, setNama] = useState('');
-  const [jenisIc, setJenisIc] = useState('');
-  const [ic, setIc] = useState('');
-  const [umur, setUmur] = useState('');
-  const [tarikhLahir, setTarikhLahir] = useState('');
-  const [tarikhKedatangan, setTarikhKedatangan] = useState(dateToday);
-  const [jantina, setJantina] = useState('');
-  const [alamat, setAlamat] = useState('');
-  const [waktuSampai, setWaktuSampai] = useState('');
-  const [kategoriPesakit, setKategoriPesakit] = useState('');
-  const [kumpulanEtnik, setKumpulanEtnik] = useState('');
-  const [rujukDaripada, setRujukDaripada] = useState('');
+  const { GET_PATIENT, UPDATE_PATIENT } = useGlobalUserAppContext();
 
-  const [CreatePatient, { loading, error }] = useMutation(ADD_PATIENT);
+  const [editNama, setEditNama] = useState('');
+  const [editJenisIc, setJenisIc] = useState('');
+  const [editIc, setIc] = useState('');
+  const [editUmur, setUmur] = useState('');
+  const [editTarikhLahir, setTarikhLahir] = useState('');
+  const [editTarikhKedatangan, setTarikhKedatangan] = useState('');
+  const [editJantina, setJantina] = useState('');
+  const [editAlamat, setAlamat] = useState('');
+  const [editWaktuSampai, setWaktuSampai] = useState('');
+  const [editKategoriPesakit, setKategoriPesakit] = useState('');
+  const [editKumpulanEtnik, setKumpulanEtnik] = useState('');
+  const [editRujukDaripada, setRujukDaripada] = useState('');
 
-  const handleSubmit = (e) => {
+  const { data } = useQuery(GET_PATIENT, {
+    variables: { id: editId },
+  });
+
+  const [UpdatePatient, { editError }] = useMutation(UPDATE_PATIENT);
+
+  const handleEdit = (e) => {
     e.preventDefault();
-    CreatePatient({
+    UpdatePatient({
       variables: {
+        _id: editId,
         createdByKp: createdByKp,
         createdByDaerah: createdByDaerah,
         createdByNegeri: createdByNegeri,
         createdByUsername: 'AdminKaunter',
-        nama: nama.toLowerCase(),
-        jenisIc: jenisIc,
-        ic: ic,
-        tarikhLahir: tarikhLahir,
-        tarikhKedatangan: tarikhKedatangan,
-        jantina: jantina,
-        umur: umur,
-        alamat: alamat,
-        waktuSampai: waktuSampai,
-        kategoriPesakit: kategoriPesakit,
-        kumpulanEtnik: kumpulanEtnik,
-        rujukDaripada: rujukDaripada,
+        nama: editNama,
+        jenisIc: editJenisIc,
+        ic: editIc,
+        tarikhLahir: editTarikhLahir,
+        // tarikhKedatangan: editTarikhKedatangan,
+        jantina: editJantina,
+        umur: editUmur,
+        alamat: editAlamat,
+        waktuSampai: editWaktuSampai,
+        kategoriPesakit: editKategoriPesakit,
+        kumpulanEtnik: editKumpulanEtnik,
+        rujukDaripada: editRujukDaripada,
       },
     })
-      .then(() => {
+      .then((res) => {
         refetch();
-        addDoneNotification();
-        setShowForm(false);
+        editDoneNotification();
+        setEditForm(false);
       })
-      .catch(() => {
-        toast.error('Gagal!', {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+      .catch((err) => {
+        console.log(err);
       });
   };
 
-  const addDoneNotification = () => {
-    toast.success(`Pesakit berjaya ditambah`, {
+  const editDoneNotification = () => {
+    toast.info(`Pesakit berjaya dikemaskini`, {
       position: 'top-right',
       autoClose: 5000,
       hideProgressBar: false,
@@ -81,53 +79,55 @@ export default function FillableForm({
     });
   };
 
-  if (loading) return <p>Submitting...</p>;
-  if (error) return <p>Error :(</p>;
+  useEffect(() => {
+    if (data) {
+      setEditNama(data.patient.nama);
+      setJenisIc(data.patient.jenisIc);
+      setIc(data.patient.ic);
+      setUmur(data.patient.umur);
+      setTarikhLahir(data.patient.tarikhLahir);
+      setTarikhKedatangan(data.patient.tarikhKedatangan);
+      setJantina(data.patient.jantina);
+      setAlamat(data.patient.alamat);
+      setWaktuSampai(data.patient.waktuSampai);
+      setKategoriPesakit(data.patient.kategoriPesakit);
+      setKumpulanEtnik(data.patient.kumpulanEtnik);
+      setRujukDaripada(data.patient.rujukDaripada);
+    }
+  }, [data]);
 
-  if (showForm) {
+  if (editForm) {
     return (
       <>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleEdit}>
           <h1 className='bg-user3 font-bold text-2xl'>pendaftaran</h1>
-          <p className='font-semibold text-user6 text-left mt-3 ml-3'>
-            * required
-          </p>
           <div className='grid'>
             <div className='flex m-2 ml-auto'>
-              <p className='mr-3 font-semibold'>
-                tarikh kedatangan:{' '}
-                <span className='font-semibold text-user6'>*</span>
-              </p>
+              <p className='mr-3 font-semibold'>tarikh kedatangan: </p>
               <input
-                required
-                value={tarikhKedatangan}
-                onChange={(e) => setTarikhKedatangan(e.target.value)}
+                disabled
                 type='date'
                 name='tarikhKedatangan'
                 className='outline outline-1 outline-userBlack'
+                value={editTarikhKedatangan}
               />
             </div>
             <div className='flex m-2'>
-              <p className='mr-3 font-semibold'>
-                nama: <span className='font-semibold text-user6'>*</span>
-              </p>
+              <p className='mr-3 font-semibold'>nama: </p>
               <input
-                required
-                onChange={(e) => setNama(e.target.value)}
+                onChange={(e) => setEditNama(e.target.value)}
                 type='text'
                 name='namaUmum'
-                className='appearance-none w-7/12 leading-7 px-3 py-1 ring-2 focus:ring-2 focus:ring-user1 focus:outline-none rounded-md shadow-md'
+                value={editNama}
+                className='capitalize appearance-none w-7/12 leading-7 px-3 py-1 ring-2 focus:ring-2 focus:ring-user1 focus:outline-none rounded-md shadow-md'
               />
             </div>
             <div className='flex m-2'>
-              <p className='mr-3 font-semibold'>
-                jenis pengenalan{' '}
-                <span className='font-semibold text-user6'>*</span>
-              </p>
+              <p className='mr-3 font-semibold'>jenis pengenalan</p>
               <select
-                required
                 name='pengenalan'
                 id='pengenalan'
+                value={editJenisIc}
                 onChange={(e) => setJenisIc(e.target.value)}
                 className='mr-3'
               >
@@ -139,87 +139,72 @@ export default function FillableForm({
                 <option value='sijil-lahir'>Sijil lahir</option>
               </select>
               <input
-                required
                 onChange={(e) => setIc(e.target.value)}
                 type='text'
                 name='ic'
                 placeholder='123456-09-0987'
+                value={editIc}
                 className='appearance-none leading-7 px-3 py-1 ring-2 focus:ring-2 focus:ring-user1 focus:outline-none rounded-md shadow-md'
               />
             </div>
             <div className='flex m-2'>
-              <p className='mr-3 font-semibold'>
-                tarikh lahir:{' '}
-                <span className='font-semibold text-user6'>*</span>
-              </p>
+              <p className='mr-3 font-semibold'>tarikh lahir: </p>
               <input
-                required
                 onChange={(e) => setTarikhLahir(e.target.value)}
                 type='date'
+                value={editTarikhLahir}
                 name='tarikhLahir'
               />
             </div>
             <div className='flex m-2'>
-              <p className='mr-3 font-semibold'>
-                umur: <span className='font-semibold text-user6'>*</span>
-              </p>
+              <p className='mr-3 font-semibold'>umur: </p>
               <input
-                required
                 onChange={(e) => setUmur(parseInt(e.target.value))}
                 type='number'
                 name='umur'
+                value={editUmur}
                 className='outline outline-1 outline-userBlack w-16 text-sm font-m'
               />
             </div>
             <div className='flex m-2'>
-              <p className='mr-3 font-semibold'>
-                jantina: <span className='font-semibold text-user6'>*</span>
-              </p>
+              <p className='mr-3 font-semibold'>jantina: </p>
               <select
-                required
                 name='jantina'
                 id='jantina'
+                value={editJantina}
                 onChange={(e) => setJantina(e.target.value)}
               >
                 <option value=''>Sila pilih..</option>
-                <option value='lelaki'>Lelaki</option>
-                <option value='perempuan'>Perempuan</option>
+                <option value='lelaki'>lelaki</option>
+                <option value='perempuan'>perempuan</option>
               </select>
             </div>
             <div className='flex m-2'>
-              <p className='mr-3 font-semibold'>
-                alamat: <span className='font-semibold text-user6'>*</span>
-              </p>
+              <p className='mr-3 font-semibold'>alamat: </p>
               <input
-                required
                 onChange={(e) => setAlamat(e.target.value)}
                 type='text'
                 name='alamat'
+                value={editAlamat}
                 className='appearance-none w-10/12 leading-7 px-3 py-1 ring-2 focus:ring-2 focus:ring-user1 focus:outline-none rounded-md shadow-md'
               />
             </div>
             <div className='flex m-2'>
-              <p className='mr-3 font-semibold'>
-                waktu sampai:{' '}
-                <span className='font-semibold text-user6'>*</span>
-              </p>
+              <p className='mr-3 font-semibold'>waktu sampai: </p>
               <input
-                required
                 onChange={(e) => setWaktuSampai(e.target.value)}
                 type='time'
                 name='waktuSampai'
+                value={editWaktuSampai}
                 className='outline outline-1 outline-userBlack'
               />
             </div>
             <div className='flex m-2'>
-              <p className='mr-3 font-semibold'>
-                kategori pesakit:{' '}
-                <span className='font-semibold text-user6'>*</span>
-              </p>
+              <p className='mr-3 font-semibold'>kategori pesakit:</p>
               <select
-                required
                 name='kategoriPesakit'
                 id='kategoriPesakit'
+                value={editKategoriPesakit}
                 onChange={(e) => setKategoriPesakit(e.target.value)}
               >
                 <option value=''>Sila pilih..</option>
@@ -234,14 +219,11 @@ export default function FillableForm({
               </select>
             </div>
             <div className='flex m-2'>
-              <p className='mr-3 font-semibold'>
-                kumpulan etnik:{' '}
-                <span className='font-semibold text-user6'>*</span>
-              </p>
+              <p className='mr-3 font-semibold'>kumpulan etnik:</p>
               <select
-                required
                 name='kumpulanEtnik'
                 id='kumpulanEtnik'
+                value={editKumpulanEtnik}
                 onChange={(e) => {
                   setKumpulanEtnik(e.target.value);
                 }}
@@ -272,18 +254,19 @@ export default function FillableForm({
               </select>
             </div>
             <div className='flex m-2'>
-              <p className='mr-3 font-semibold'>rujuk daripada: </p>
+              <p className='mr-3 font-semibold'>rujuk daripada:</p>
               <input
                 onChange={(e) => setRujukDaripada(e.target.value)}
                 type='text'
                 name='rujukDaripada'
+                value={editRujukDaripada}
                 className='appearance-none leading-7 px-3 py-1 ring-2 focus:ring-2 focus:ring-user1 focus:outline-none rounded-md shadow-md'
               />
             </div>
           </div>
           <span
-            onClick={() => setShowForm(false)}
             className='m-2 p-2 capitalize bg-user3 hover:bg-user1 hover:text-userWhite hover:cursor-pointer transition-all'
+            onClick={() => setEditForm(false)}
           >
             kembali
           </span>
@@ -291,7 +274,7 @@ export default function FillableForm({
             type='submit'
             className='m-2 p-2 capitalize bg-user3 hover:bg-user1 hover:text-userWhite transition-all'
           >
-            daftar
+            Submit
           </button>
         </form>
       </>

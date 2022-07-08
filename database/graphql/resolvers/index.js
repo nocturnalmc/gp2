@@ -67,7 +67,7 @@ module.exports = {
 
   patient: async (_id) => {
     try {
-      const patient = await Umum.findById(_id);
+      const patient = await Umum.findById(_id._id);
       return {
         ...patient._doc,
         _id: patient.id,
@@ -94,7 +94,7 @@ module.exports = {
 
   createPatient: async (args) => {
     try {
-      const {
+      var {
         createdByNegeri,
         createdByDaerah,
         createdByKp,
@@ -112,6 +112,7 @@ module.exports = {
         kumpulanEtnik,
         rujukDaripada,
       } = args.patient;
+      nama = nama.toLowerCase();
       const ptdata = new Umum({
         createdByNegeri,
         createdByDaerah,
@@ -159,27 +160,27 @@ module.exports = {
         tarikhLahir,
         umur,
         jantina,
-        tarikhKedatangan,
+        // tarikhKedatangan,
         alamat,
         waktuSampai,
         kategoriPesakit,
         kumpulanEtnik,
         rujukDaripada,
-      } = args;
+      } = args.patient;
       const updatedPt = await Umum.findByIdAndUpdate(_id, {
-        nama: nama,
+        nama: nama.toLowerCase(),
         ic: ic,
         tarikhLahir: tarikhLahir,
         umur: umur,
         jantina: jantina,
-        tarikhKedatangan: tarikhKedatangan,
+        // tarikhKedatangan: tarikhKedatangan,
         alamat: alamat,
         waktuSampai: waktuSampai,
         kategoriPesakit: kategoriPesakit,
         kumpulanEtnik: kumpulanEtnik,
         rujukDaripada: rujukDaripada,
       });
-      return `Patient ${updatedPt.id} updated Successfully!!!`;
+      return `Patient ${updatedPt._id} updated Successfully!!!`;
     } catch (error) {
       throw error;
     }
