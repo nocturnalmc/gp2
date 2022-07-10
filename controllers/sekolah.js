@@ -82,29 +82,31 @@ const deletePersonSekolah = async (req, res) => {
 
 // query route
 const queryPersonSekolah = async (req, res) => {
-  // in future query input we must make uppercase all input at the front end
-  // req.query.namaPendaftaranSekolah is UPPERCASE
-
   const {
     user: { kp },
-    query: { namaPendaftaranSekolah, kelasPendaftaranSekolah },
+    query: { namaSekolah, darjah, tingkatan, kelas },
   } = req;
   const queryObject = {};
-  queryObject.createdByKp = kp;
 
-  if (namaPendaftaranSekolah) {
-    queryObject.namaPendaftaranSekolah = namaPendaftaranSekolah;
+  if (namaSekolah) {
+    queryObject.namaSekolah = namaSekolah;
   }
 
-  if (kelasPendaftaranSekolah) {
-    // this query is not used at front end atm, just to justify why queryObject is used
-    queryObject.kelasPendaftaranSekolah = kelasPendaftaranSekolah;
+  if (darjah) {
+    queryObject.darjah = darjah;
   }
 
-  // const sekolah = await Sekolah.find({ namaPendaftaranSekolah, kelasPendaftaranSekolah, createdByKp: kp }); // try this with Postman to justify why queryObject is used
-  const sekolah = await Sekolah.find(queryObject);
+  if (tingkatan) {
+    queryObject.tingkatan = tingkatan;
+  }
 
-  res.status(200).json({ sekolah });
+  if (kelas) {
+    queryObject.kelas = kelas;
+  }
+
+  const sekolahResultQuery = await Sekolah.find(queryObject);
+
+  res.status(200).json({ sekolahResultQuery });
 };
 
 module.exports = {

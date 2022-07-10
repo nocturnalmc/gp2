@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-// const { queryPersonTadika } = require('../controllers/tadika');
 const { queryPersonUmum } = require('../controllers/umum');
+const { queryPersonSekolah } = require('../controllers/sekolah');
 
-// router.route('/tadika').get(queryPersonTadika);
 router.route('/umum').get(queryPersonUmum);
+router.route('/sekolah').get(queryPersonSekolah);
 
 module.exports = router;
