@@ -83,6 +83,7 @@ function UserAppProvider({ children }) {
     setUserToken(null);
     setUsername(null);
     setFasilitiRelief(null);
+    setKaunterToken(null);
   };
 
   // GQL queries
@@ -279,11 +280,11 @@ function UserAppProvider({ children }) {
         catchAxiosErrorAndLogout,
         useParams,
         dateToday,
+        GET_ALL_PATIENTS,
         ADD_PATIENT,
         GET_PATIENT_BY_TARIKH_KEDATANGAN,
         GET_PATIENT,
         UPDATE_PATIENT,
-        GET_ALL_PATIENTS,
       }}
     >
       {children}

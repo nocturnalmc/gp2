@@ -7,6 +7,7 @@ import { useGlobalUserAppContext } from '../context/userAppContext';
 function UserUmum() {
   const { userToken, dateToday } = useGlobalUserAppContext();
 
+  const [isLoading, setIsLoading] = useState(true);
   const [nama, setNama] = useState('');
   const [tarikhKedatangan, setTarikhKedatangan] = useState(dateToday);
   const [queryResult, setQueryResult] = useState([]);
@@ -16,11 +17,13 @@ function UserUmum() {
   useEffect(() => {
     const query = async () => {
       try {
+        setIsLoading(true);
         const { data } = await axios.get(
           `/api/v1/query/umum?nama=${nama}&tarikhKedatangan=${tarikhKedatangan}`,
           { headers: { Authorization: `Bearer ${userToken}` } }
         );
         setQueryResult(data.umumResultQuery);
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -74,7 +77,7 @@ function UserUmum() {
           <table className='m-auto mb-3 w-11/12 outline outline-1 outline-userBlack'>
             <tr className='bg-user3 p-2'>
               <th className='outline outline-1 outline-userBlack'>BIL</th>
-              <th className='outline outline-1 outline-userBlack px-20'>
+              <th className='outline outline-1 outline-userBlack w-3/6'>
                 NAMA PESAKIT
               </th>
               <th className='outline outline-1 outline-userBlack'>
@@ -85,49 +88,51 @@ function UserUmum() {
               </th>
               <th className='outline outline-1 outline-userBlack'>AKTIFKAN</th>
             </tr>
-            {queryResult.map((singlePersonUmum, index) => {
-              return (
-                <tr>
-                  <td
-                    className={`${
-                      pilih === singlePersonUmum._id && 'bg-user4'
-                    } outline outline-1 outline-userBlack`}
-                  >
-                    {index + 1}
-                  </td>
-                  <td
-                    className={`${
-                      pilih === singlePersonUmum._id && 'bg-user4'
-                    } outline outline-1 outline-userBlack`}
-                  >
-                    {singlePersonUmum.nama}
-                  </td>
-                  <td
-                    className={`${
-                      pilih === singlePersonUmum._id && 'bg-user4'
-                    } outline outline-1 outline-userBlack`}
-                  >
-                    {singlePersonUmum.ic}
-                  </td>
-                  <td
-                    className={`${
-                      pilih === singlePersonUmum._id && 'bg-user4'
-                    } outline outline-1 outline-userBlack`}
-                  >
-                    {singlePersonUmum.tarikhKedatangan}
-                  </td>
-                  <td
-                    onClick={() => setPilih(singlePersonUmum._id)}
-                    className={`${
-                      pilih === singlePersonUmum._id && 'bg-user4'
-                    } outline outline-1 outline-userBlack hover:cursor-pointer text-user2`}
-                  >
-                    <u>PILIH</u>
-                  </td>
-                </tr>
-              );
-            })}
+            {!isLoading &&
+              queryResult.map((singlePersonUmum, index) => {
+                return (
+                  <tr>
+                    <td
+                      className={`${
+                        pilih === singlePersonUmum._id && 'bg-user4'
+                      } outline outline-1 outline-userBlack`}
+                    >
+                      {index + 1}
+                    </td>
+                    <td
+                      className={`${
+                        pilih === singlePersonUmum._id && 'bg-user4'
+                      } outline outline-1 outline-userBlack`}
+                    >
+                      {singlePersonUmum.nama}
+                    </td>
+                    <td
+                      className={`${
+                        pilih === singlePersonUmum._id && 'bg-user4'
+                      } outline outline-1 outline-userBlack`}
+                    >
+                      {singlePersonUmum.ic}
+                    </td>
+                    <td
+                      className={`${
+                        pilih === singlePersonUmum._id && 'bg-user4'
+                      } outline outline-1 outline-userBlack`}
+                    >
+                      {singlePersonUmum.tarikhKedatangan}
+                    </td>
+                    <td
+                      onClick={() => setPilih(singlePersonUmum._id)}
+                      className={`${
+                        pilih === singlePersonUmum._id && 'bg-user4'
+                      } outline outline-1 outline-userBlack hover:cursor-pointer text-user2`}
+                    >
+                      <u>PILIH</u>
+                    </td>
+                  </tr>
+                );
+              })}
           </table>
+          {isLoading && <p className='text-xl font-semibold'>Loading...</p>}
         </section>
         <section className='outline outline-1 outline-userBlack grid grid-cols-1 md:grid-cols-2'>
           {resultPilih.map((singlePersonUmum) => {

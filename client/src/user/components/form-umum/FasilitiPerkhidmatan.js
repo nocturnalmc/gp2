@@ -15,6 +15,12 @@ function FasilitiPerkhidmatan(props) {
                   name='jenis-fasiliti'
                   id='klinik-pergigian'
                   value='klinik-pergigian'
+                  checked={
+                    props.jenisFasiliti == 'klinik-pergigian' ? true : false
+                  }
+                  onChange={(e) => {
+                    props.setJenisFasiliti(e.target.value);
+                  }}
                   className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                 />
                 <label
@@ -28,6 +34,11 @@ function FasilitiPerkhidmatan(props) {
                 <input
                   type='checkbox'
                   id='kepp'
+                  name='kepp'
+                  checked={props.kepp}
+                  onChange={() => {
+                    props.setKepp(!props.kepp);
+                  }}
                   className='w-4 h-4 text-red-600 bg-gray-100 rounded border-gray-300 focus:ring-red-500'
                 />
                 <label htmlFor='kepp' className='ml-2 text-sm font-m'>
@@ -41,6 +52,10 @@ function FasilitiPerkhidmatan(props) {
                   name='jenis-fasiliti'
                   id='kk-kd'
                   value='kk-kd'
+                  checked={props.jenisFasiliti == 'kk-kd' ? true : false}
+                  onChange={(e) => {
+                    props.setJenisFasiliti(e.target.value);
+                  }}
                   className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                 />
                 <label htmlFor='kk-kd' className='m-2 text-sm font-m'>
@@ -54,6 +69,10 @@ function FasilitiPerkhidmatan(props) {
                   name='jenis-fasiliti'
                   id='taska-tadika'
                   value='taska-tadika'
+                  checked={props.jenisFasiliti == 'taska-tadika' ? true : false}
+                  onChange={(e) => {
+                    props.setJenisFasiliti(e.target.value);
+                  }}
                   className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                 />
                 <label htmlFor='taska-tadika' className='m-2 text-sm font-m'>
@@ -67,6 +86,10 @@ function FasilitiPerkhidmatan(props) {
                   name='jenis-fasiliti'
                   id='ipt-kolej'
                   value='ipt-kolej'
+                  checked={props.jenisFasiliti == 'ipt-kolej' ? true : false}
+                  onChange={(e) => {
+                    props.setJenisFasiliti(e.target.value);
+                  }}
                   className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                 />
                 <label htmlFor='ipt-kolej' className='m-2 text-sm font-m'>
@@ -82,6 +105,12 @@ function FasilitiPerkhidmatan(props) {
                   name='jenis-fasiliti'
                   id='program-komuniti'
                   value='program-komuniti'
+                  checked={
+                    props.jenisFasiliti == 'program-komuniti' ? true : false
+                  }
+                  onChange={(e) => {
+                    props.setJenisFasiliti(e.target.value);
+                  }}
                   className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                 />
                 <label
@@ -99,6 +128,12 @@ function FasilitiPerkhidmatan(props) {
                     name='jenis-program-komuniti'
                     id='orang-asli'
                     value='orang-asli'
+                    checked={
+                      props.jenisProgramKomuniti == 'orang-asli' ? true : false
+                    }
+                    onChange={(e) => {
+                      props.setJenisProgramKomuniti(e.target.value);
+                    }}
                     className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                   />
                   <label htmlFor='orang-asli' className='m-2 text-sm font-m'>
@@ -112,6 +147,14 @@ function FasilitiPerkhidmatan(props) {
                     name='jenis-program-komuniti'
                     id='kampung-angkat'
                     value='kampung-angkat'
+                    checked={
+                      props.jenisProgramKomuniti == 'kampung-angkat'
+                        ? true
+                        : false
+                    }
+                    onChange={(e) => {
+                      props.setJenisProgramKomuniti(e.target.value);
+                    }}
                     className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                   />
                   <label
@@ -128,6 +171,10 @@ function FasilitiPerkhidmatan(props) {
                     name='jenis-program-komuniti'
                     id='ppr'
                     value='ppr'
+                    checked={props.jenisProgramKomuniti == 'ppr' ? true : false}
+                    onChange={(e) => {
+                      props.setJenisProgramKomuniti(e.target.value);
+                    }}
                     className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                   />
                   <label htmlFor='ppr' className='m-2 text-sm font-m'>
@@ -141,6 +188,14 @@ function FasilitiPerkhidmatan(props) {
                     name='jenis-program-komuniti'
                     id='projek-komuniti-lain'
                     value='projek-komuniti-lain'
+                    checked={
+                      props.jenisProgramKomuniti == 'projek-komuniti-lain'
+                        ? true
+                        : false
+                    }
+                    onChange={(e) => {
+                      props.setJenisProgramKomuniti(e.target.value);
+                    }}
                     className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                   />
                   <label
@@ -157,6 +212,14 @@ function FasilitiPerkhidmatan(props) {
                     name='jenis-program-komuniti'
                     id='institusi-warga-emas'
                     value='institusi-warga-emas'
+                    checked={
+                      props.jenisProgramKomuniti == 'institusi-warga-emas'
+                        ? true
+                        : false
+                    }
+                    onChange={(e) => {
+                      props.setJenisProgramKomuniti(e.target.value);
+                    }}
                     className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                   />
                   <label
@@ -173,6 +236,10 @@ function FasilitiPerkhidmatan(props) {
                     name='jenis-program-komuniti'
                     id='rtc'
                     value='rtc'
+                    checked={props.jenisProgramKomuniti == 'rtc' ? true : false}
+                    onChange={(e) => {
+                      props.setJenisProgramKomuniti(e.target.value);
+                    }}
                     className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                   />
                   <label htmlFor='rtc' className='m-2 text-sm font-m'>
@@ -186,6 +253,14 @@ function FasilitiPerkhidmatan(props) {
                     name='jenis-program-komuniti'
                     id='institusi-oku'
                     value='institusi-oku'
+                    checked={
+                      props.jenisProgramKomuniti == 'institusi-oku'
+                        ? true
+                        : false
+                    }
+                    onChange={(e) => {
+                      props.setJenisProgramKomuniti(e.target.value);
+                    }}
                     className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                   />
                   <label htmlFor='institusi-oku' className='m-2 text-sm font-m'>

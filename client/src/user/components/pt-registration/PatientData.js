@@ -5,8 +5,8 @@ export default function PatientData({
   editForm,
   setEditForm,
   data,
-  error,
   loading,
+  error,
   philter,
   setPhilter,
 }) {

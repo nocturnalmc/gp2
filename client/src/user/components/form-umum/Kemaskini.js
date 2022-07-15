@@ -266,21 +266,21 @@ function Kemaskini({ showKemaskini, setShowKemaskini }) {
                 <option value='dusun'>Dusun</option>
                 <option value='kadazan'>Kadazan</option>
                 <option value='murut'>Murut</option>
-                <option value='bumiputera-sabah-lain'>
+                <option value='bumiputera sabah lain'>
                   Bumiputera sabah lain
                 </option>
                 <option value='melanau'>Melanau</option>
                 <option value='kedayan'>Kedayan</option>
                 <option value='iban'>Iban</option>
                 <option value='bidayuh'>Bidayuh</option>
-                <option value='bumiputera-sarawak-lain'>
+                <option value='bumiputera sarawak lain'>
                   Bumiputera sarawak lain
                 </option>
-                <option value='orang-asli-semenanjung'>
+                <option value='orang asli semenanjung'>
                   Orang asli semenanjung
                 </option>
                 <option value='lain-lain'>Lain-lain</option>
-                <option value='bukan-warganegara'>Bukan warganegara</option>
+                <option value='bukan warganegara'>Bukan warganegara</option>
               </select>
             </div>
             <div className='flex m-2'>

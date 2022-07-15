@@ -101,20 +101,30 @@ export default function EditableForm({
       <>
         <form onSubmit={handleEdit}>
           <h1 className='bg-user3 font-bold text-2xl'>pendaftaran</h1>
+          <p className='font-semibold text-user6 text-left mt-3 ml-3'>
+            * required
+          </p>
           <div className='grid'>
             <div className='flex m-2 ml-auto'>
-              <p className='mr-3 font-semibold'>tarikh kedatangan: </p>
+              <p className='mr-3 font-semibold'>
+                tarikh kedatangan:{' '}
+                <span className='font-semibold text-user6'>*</span>
+              </p>
               <input
                 disabled
+                required
+                value={editTarikhKedatangan}
                 type='date'
                 name='tarikhKedatangan'
                 className='outline outline-1 outline-userBlack'
-                value={editTarikhKedatangan}
               />
             </div>
             <div className='flex m-2'>
-              <p className='mr-3 font-semibold'>nama: </p>
+              <p className='mr-3 font-semibold'>
+                nama: <span className='font-semibold text-user6'>*</span>
+              </p>
               <input
+                required
                 onChange={(e) => setEditNama(e.target.value)}
                 type='text'
                 name='namaUmum'
@@ -123,8 +133,12 @@ export default function EditableForm({
               />
             </div>
             <div className='flex m-2'>
-              <p className='mr-3 font-semibold'>jenis pengenalan</p>
+              <p className='mr-3 font-semibold'>
+                jenis pengenalan{' '}
+                <span className='font-semibold text-user6'>*</span>
+              </p>
               <select
+                required
                 name='pengenalan'
                 id='pengenalan'
                 value={editJenisIc}
@@ -139,6 +153,7 @@ export default function EditableForm({
                 <option value='sijil-lahir'>Sijil lahir</option>
               </select>
               <input
+                required
                 onChange={(e) => setIc(e.target.value)}
                 type='text'
                 name='ic'
@@ -148,8 +163,12 @@ export default function EditableForm({
               />
             </div>
             <div className='flex m-2'>
-              <p className='mr-3 font-semibold'>tarikh lahir: </p>
+              <p className='mr-3 font-semibold'>
+                tarikh lahir:{' '}
+                <span className='font-semibold text-user6'>*</span>
+              </p>
               <input
+                required
                 onChange={(e) => setTarikhLahir(e.target.value)}
                 type='date'
                 value={editTarikhLahir}
@@ -157,8 +176,11 @@ export default function EditableForm({
               />
             </div>
             <div className='flex m-2'>
-              <p className='mr-3 font-semibold'>umur: </p>
+              <p className='mr-3 font-semibold'>
+                umur: <span className='font-semibold text-user6'>*</span>
+              </p>
               <input
+                required
                 onChange={(e) => setUmur(parseInt(e.target.value))}
                 type='number'
                 name='umur'
@@ -167,21 +189,27 @@ export default function EditableForm({
               />
             </div>
             <div className='flex m-2'>
-              <p className='mr-3 font-semibold'>jantina: </p>
+              <p className='mr-3 font-semibold'>
+                jantina: <span className='font-semibold text-user6'>*</span>
+              </p>
               <select
+                required
                 name='jantina'
                 id='jantina'
                 value={editJantina}
                 onChange={(e) => setJantina(e.target.value)}
               >
                 <option value=''>Sila pilih..</option>
-                <option value='lelaki'>lelaki</option>
-                <option value='perempuan'>perempuan</option>
+                <option value='lelaki'>Lelaki</option>
+                <option value='perempuan'>Perempuan</option>
               </select>
             </div>
             <div className='flex m-2'>
-              <p className='mr-3 font-semibold'>alamat: </p>
+              <p className='mr-3 font-semibold'>
+                alamat: <span className='font-semibold text-user6'>*</span>
+              </p>
               <input
+                required
                 onChange={(e) => setAlamat(e.target.value)}
                 type='text'
                 name='alamat'
@@ -190,8 +218,12 @@ export default function EditableForm({
               />
             </div>
             <div className='flex m-2'>
-              <p className='mr-3 font-semibold'>waktu sampai: </p>
+              <p className='mr-3 font-semibold'>
+                waktu sampai:{' '}
+                <span className='font-semibold text-user6'>*</span>
+              </p>
               <input
+                required
                 onChange={(e) => setWaktuSampai(e.target.value)}
                 type='time'
                 name='waktuSampai'
@@ -200,8 +232,12 @@ export default function EditableForm({
               />
             </div>
             <div className='flex m-2'>
-              <p className='mr-3 font-semibold'>kategori pesakit:</p>
+              <p className='mr-3 font-semibold'>
+                kategori pesakit:{' '}
+                <span className='font-semibold text-user6'>*</span>
+              </p>
               <select
+                required
                 name='kategoriPesakit'
                 id='kategoriPesakit'
                 value={editKategoriPesakit}
@@ -219,8 +255,12 @@ export default function EditableForm({
               </select>
             </div>
             <div className='flex m-2'>
-              <p className='mr-3 font-semibold'>kumpulan etnik:</p>
+              <p className='mr-3 font-semibold'>
+                kumpulan etnik:{' '}
+                <span className='font-semibold text-user6'>*</span>
+              </p>
               <select
+                required
                 name='kumpulanEtnik'
                 id='kumpulanEtnik'
                 value={editKumpulanEtnik}
@@ -236,25 +276,25 @@ export default function EditableForm({
                 <option value='dusun'>Dusun</option>
                 <option value='kadazan'>Kadazan</option>
                 <option value='murut'>Murut</option>
-                <option value='bumiputera-sabah-lain'>
+                <option value='bumiputera sabah lain'>
                   Bumiputera sabah lain
                 </option>
                 <option value='melanau'>Melanau</option>
                 <option value='kedayan'>Kedayan</option>
                 <option value='iban'>Iban</option>
                 <option value='bidayuh'>Bidayuh</option>
-                <option value='bumiputera-sarawak-lain'>
+                <option value='bumiputera sarawak lain'>
                   Bumiputera sarawak lain
                 </option>
-                <option value='orang-asli-semenanjung'>
+                <option value='orang asli semenanjung'>
                   Orang asli semenanjung
                 </option>
                 <option value='lain-lain'>Lain-lain</option>
-                <option value='bukan-warganegara'>Bukan warganegara</option>
+                <option value='bukan warganegara'>Bukan warganegara</option>
               </select>
             </div>
             <div className='flex m-2'>
-              <p className='mr-3 font-semibold'>rujuk daripada:</p>
+              <p className='mr-3 font-semibold'>rujuk daripada: </p>
               <input
                 onChange={(e) => setRujukDaripada(e.target.value)}
                 type='text'

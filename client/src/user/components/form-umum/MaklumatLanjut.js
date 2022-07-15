@@ -17,6 +17,10 @@ function MaklumatLanjut(props) {
                 name='kedatangan'
                 id='baru-kedatangan'
                 value='baru-kedatangan'
+                checked={props.kedatangan == 'baru-kedatangan' ? true : false}
+                onChange={(e) => {
+                  props.setKedatangan(e.target.value);
+                }}
                 className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
               />
               <label htmlFor='baru-kedatangan' className='m-2 text-sm font-m'>
@@ -30,6 +34,12 @@ function MaklumatLanjut(props) {
                 name='kedatangan'
                 id='ulangan-kedatangan'
                 value='ulangan-kedatangan'
+                checked={
+                  props.kedatangan == 'ulangan-kedatangan' ? true : false
+                }
+                onChange={(e) => {
+                  props.setKedatangan(e.target.value);
+                }}
                 className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
               />
               <label
@@ -44,7 +54,14 @@ function MaklumatLanjut(props) {
             <article className='grid grid-cols-2 border border-userBlack pl-3 p-2 rounded-md'>
               <div>
                 <p className='font-semibold'>fasiliti taska / tadika</p>
-                <select name='fasiliti' id='fasiliti'>
+                <select
+                  name='fasiliti-taska-tadika'
+                  id='fasiliti-taska-tadika'
+                  value={props.fasilitiTaskaTadika}
+                  onChange={(e) => {
+                    props.setFasilitiTaskaTadika(e.target.value);
+                  }}
+                >
                   <option value=''>Pilih</option>
                   <option value='taska'>Taska</option>
                   <option value='tadika'>Tadika</option>
@@ -52,7 +69,14 @@ function MaklumatLanjut(props) {
               </div>
               {/* buang className ni nnti */}
               <div className='overflow-x-auto'>
-                <select name='jenis-taska-tadika' id='jenis-taska-tadika'>
+                <select
+                  name='jenis-taska-tadika'
+                  id='jenis-taska-tadika'
+                  value={props.jenisTaskaTadika}
+                  onChange={(e) => {
+                    props.setJenisTaskaTadika(e.target.value);
+                  }}
+                >
                   <option value=''>Pilih</option>
                   <option value='wuuttttt?'>
                     Taska & Tadika Ada Pilihan Kerajaan & Swasta??
@@ -61,6 +85,12 @@ function MaklumatLanjut(props) {
                 <input
                   type='checkbox'
                   id='kelas-toddler'
+                  name='kelas-toddler'
+                  value='kelas-toddler'
+                  checked={props.kelasToddler}
+                  onChange={() => {
+                    props.setKelasToddler(!props.kelasToddler);
+                  }}
                   className='w-4 h-4 text-red-600 bg-gray-100 rounded border-gray-300 focus:ring-red-500'
                 />
                 <label htmlFor='kelas-toddler' className='ml-2 text-sm font-m'>
@@ -69,7 +99,15 @@ function MaklumatLanjut(props) {
               </div>
             </article>
             <p className='font-semibold'>nama fasiliti</p>
-            <select name='nama-fasiliti' id='nama-fasiliti' className='w-11/12'>
+            <select
+              name='nama-fasiliti-taska-tadika'
+              id='nama-fasiliti-taska-tadika'
+              value={props.namaFasilitiTaskaTadika}
+              onChange={(e) => {
+                props.setNamaFasilitiTaskaTadika(e.target.value);
+              }}
+              className='w-11/12'
+            >
               <option value=''>Pilih</option>
               <option value='taska perak'>Taska Perak</option>
               <option value='tadika emas'>Tadika Emas</option>
@@ -85,6 +123,12 @@ function MaklumatLanjut(props) {
                 required
                 type='checkbox'
                 id='enrolmen-taska-tadika'
+                name='enrolmen-taska-tadika'
+                value='enrolmen-taska-tadika'
+                checked={props.enrolmenTaskaTadika}
+                onChange={() => {
+                  props.setEnrolmenTaskaTadika(!props.enrolmenTaskaTadika);
+                }}
                 className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
               />
             </div>
@@ -100,6 +144,15 @@ function MaklumatLanjut(props) {
                     name='kedatangan-taska-tadika'
                     id='baru-kedatangan-taska-tadika'
                     value='baru-kedatangan-taska-tadika'
+                    checked={
+                      props.kedatanganTaskaTadika ==
+                      'baru-kedatangan-taska-tadika'
+                        ? true
+                        : false
+                    }
+                    onChange={(e) => {
+                      props.setKedatanganTaskaTadika(e.target.value);
+                    }}
                     className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                   />
                   <label
@@ -116,6 +169,15 @@ function MaklumatLanjut(props) {
                     name='kedatangan-taska-tadika'
                     id='ulangan-kedatangan-taska-tadika'
                     value='ulangan-kedatangan-taska-tadika'
+                    checked={
+                      props.kedatanganTaskaTadika ==
+                      'ulangan-kedatangan-taska-tadika'
+                        ? true
+                        : false
+                    }
+                    onChange={(e) => {
+                      props.setKedatanganTaskaTadika(e.target.value);
+                    }}
                     className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                   />
                   <label
@@ -132,6 +194,11 @@ function MaklumatLanjut(props) {
                     type='checkbox'
                     name='enggan-taska-tadika'
                     id='enggan-taska-tadika'
+                    value='enggan-taska-tadika'
+                    checked={props.engganTaskaTadika}
+                    onChange={() => {
+                      props.setEngganTaskaTadika(!props.engganTaskaTadika);
+                    }}
                     className='w-4 h-4 text-red-600 bg-gray-100 rounded border-gray-300 focus:ring-red-500 focus:ring-2 '
                   />
                   <label
@@ -146,6 +213,13 @@ function MaklumatLanjut(props) {
                     type='checkbox'
                     name='tidak-hadir-taska-tadika'
                     id='tidak-hadir-taska-tadika'
+                    value='tidak-hadir-taska-tadika'
+                    checked={props.tidakHadirTaskaTadika}
+                    onChange={() => {
+                      props.setTidakHadirTaskaTadika(
+                        !props.tidakHadirTaskaTadika
+                      );
+                    }}
                     className='w-4 h-4 text-red-600 bg-gray-100 rounded border-gray-300 focus:ring-red-500 focus:ring-2 '
                   />
                   <label
@@ -166,6 +240,15 @@ function MaklumatLanjut(props) {
                     name='pemeriksaan-taska-tadika'
                     id='ada-pemeriksaan-taska-tadika'
                     value='ada-pemeriksaan-taska-tadika'
+                    checked={
+                      props.pemeriksaanTaskaTadika ==
+                      'ada-pemeriksaan-taska-tadika'
+                        ? true
+                        : false
+                    }
+                    onChange={(e) => {
+                      props.setPemeriksaanTaskaTadika(e.target.value);
+                    }}
                     className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                   />
                   <label
@@ -181,6 +264,15 @@ function MaklumatLanjut(props) {
                     name='pemeriksaan-taska-tadika'
                     id='tiada-pemeriksaan-taska-tadika'
                     value='tiada-pemeriksaan-taska-tadika'
+                    checked={
+                      props.pemeriksaanTaskaTadika ==
+                      'tiada-pemeriksaan-taska-tadika'
+                        ? true
+                        : false
+                    }
+                    onChange={(e) => {
+                      props.setPemeriksaanTaskaTadika(e.target.value);
+                    }}
                     className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                   />
                   <label
@@ -205,6 +297,14 @@ function MaklumatLanjut(props) {
                   name='ya-tidak-ibu-mengandung'
                   id='ya-ibu-mengandung'
                   value='ya-ibu-mengandung'
+                  checked={
+                    props.yaTidakIbuMengandung == 'ya-ibu-mengandung'
+                      ? true
+                      : false
+                  }
+                  onChange={(e) => {
+                    props.setYaTidakIbuMengandung(e.target.value);
+                  }}
                   className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                 />
                 <label
@@ -221,6 +321,14 @@ function MaklumatLanjut(props) {
                   name='ya-tidak-ibu-mengandung'
                   id='tidak-ibu-mengandung'
                   value='tidak-ibu-mengandung'
+                  checked={
+                    props.yaTidakIbuMengandung == 'tidak-ibu-mengandung'
+                      ? true
+                      : false
+                  }
+                  onChange={(e) => {
+                    props.setYaTidakIbuMengandung(e.target.value);
+                  }}
                   className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                 />
                 <label
@@ -237,6 +345,14 @@ function MaklumatLanjut(props) {
                   name='baru-ulangan-ibu-mengandung'
                   id='baru-ibu-mengandung'
                   value='baru-ibu-mengandung'
+                  checked={
+                    props.baruUlanganIbuMengandung == 'baru-ibu-mengandung'
+                      ? true
+                      : false
+                  }
+                  onChange={(e) => {
+                    props.setBaruUlanganIbuMengandung(e.target.value);
+                  }}
                   className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                 />
                 <label
@@ -253,6 +369,14 @@ function MaklumatLanjut(props) {
                   name='baru-ulangan-ibu-mengandung'
                   id='ulangan-ibu-mengandung'
                   value='ulangan-ibu-mengandung'
+                  checked={
+                    props.baruUlanganIbuMengandung == 'ulangan-ibu-mengandung'
+                      ? true
+                      : false
+                  }
+                  onChange={(e) => {
+                    props.setBaruUlanganIbuMengandung(e.target.value);
+                  }}
                   className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                 />
                 <label
@@ -276,6 +400,14 @@ function MaklumatLanjut(props) {
                   name='kedatangan-kepp'
                   id='baru-kedatangan-kepp'
                   value='baru-kedatangan-kepp'
+                  checked={
+                    props.kedatanganKepp == 'baru-kedatangan-kepp'
+                      ? true
+                      : false
+                  }
+                  onChange={(e) => {
+                    props.setKedatanganKepp(e.target.value);
+                  }}
                   className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                 />
                 <label
@@ -292,6 +424,14 @@ function MaklumatLanjut(props) {
                   name='kedatangan-kepp'
                   id='ulangan-kedatangan-kepp'
                   value='ulangan-kedatangan-kepp'
+                  checked={
+                    props.kedatanganKepp == 'ulangan-kedatangan-kepp'
+                      ? true
+                      : false
+                  }
+                  onChange={(e) => {
+                    props.setKedatanganKepp(e.target.value);
+                  }}
                   className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                 />
                 <label
@@ -308,8 +448,12 @@ function MaklumatLanjut(props) {
               </label>
               <input
                 type='date'
-                name='tarikh-rujukan'
-                id='tarikh-rujukan'
+                name='tarikh-rujukan-kepp'
+                id='tarikh-rujukan-kepp'
+                value={props.tarikhRujukanKepp}
+                onChange={(e) => {
+                  props.setTarikhRujukanKepp(e.target.value);
+                }}
                 className='outline outline-1 outline-userBlack m-2 text-sm font-m'
               />
             </div>
@@ -322,8 +466,12 @@ function MaklumatLanjut(props) {
               </label>
               <input
                 type='date'
-                name='tarikh-mula-rawatan'
-                id='tarikh-mula-rawatan'
+                name='tarikh-mula-rawatan-kepp'
+                id='tarikh-mula-rawatan-kepp'
+                value={props.tarikhMulaRawatanKepp}
+                onChange={(e) => {
+                  props.setTarikhMulaRawatanKepp(e.target.value);
+                }}
                 className='outline outline-1 outline-userBlack m-2 text-sm font-m'
               />
             </div>
@@ -334,13 +482,32 @@ function MaklumatLanjut(props) {
               <input
                 required
                 type='checkbox'
-                id='kp-bergerak'
+                id='kp-bergerak-maklumat-lanjut-umum'
+                name='kp-bergerak-maklumat-lanjut-umum'
+                checked={props.kpBergerakMaklumatLanjutUmum ? true : false}
+                onChange={() => {
+                  props.setKpBergerakMaklumatLanjutUmum(
+                    !props.kpBergerakMaklumatLanjutUmum
+                  );
+                }}
                 className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
               />
-              <label htmlFor='kp-bergerak' className='m-2 text-sm font-m'>
+              <label
+                htmlFor='kp-bergerak-maklumat-lanjut-umum'
+                className='m-2 text-sm font-m'
+              >
                 KP bergerak
               </label>
-              <select name='kp-bergerak' id='kp-bergerak'>
+              <select
+                name='label-kp-bergerak-maklumat-lanjut-umum'
+                id='label-kp-bergerak-maklumat-lanjut-umum'
+                value={props.labelKpBergerakMaklumatLanjutUmum}
+                onChange={() => {
+                  props.setLabelKpBergerakMaklumatLanjutUmum(
+                    !props.labelKpBergerakMaklumatLanjutUmum
+                  );
+                }}
+              >
                 <option value=''>Label</option>
                 <option value='apa??'>Apa?</option>
               </select>
@@ -349,11 +516,22 @@ function MaklumatLanjut(props) {
               <input
                 required
                 type='checkbox'
-                id='pasukan-pergigian-bergerak'
+                id='pasukan-pergigian-bergerak-maklumat-lanjut-umum'
+                name='pasukan-pergigian-bergerak-maklumat-lanjut-umum'
+                checked={
+                  props.pasukanPergigianBergerakMaklumatLanjutUmum
+                    ? true
+                    : false
+                }
+                onChange={() => {
+                  props.setPasukanPergigianBergerakMaklumatLanjutUmum(
+                    !props.pasukanPergigianBergerakMaklumatLanjutUmum
+                  );
+                }}
                 className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
               />
               <label
-                htmlFor='pasukan-pergigian-bergerak'
+                htmlFor='pasukan-pergigian-bergerak-maklumat-lanjut-umum'
                 className='m-2 text-sm font-m'
               >
                 pasukan pergigian bergerak
@@ -363,18 +541,33 @@ function MaklumatLanjut(props) {
               <input
                 required
                 type='checkbox'
-                id='makmal-pergigian-bergerak'
+                id='makmal-pergigian-bergerak-maklumat-lanjut-umum'
+                name='makmal-pergigian-bergerak-maklumat-lanjut-umum'
+                checked={
+                  props.makmalPergigianBergerakMaklumatLanjutUmum ? true : false
+                }
+                onChange={() => {
+                  props.setMakmalPergigianBergerakMaklumatLanjutUmum(
+                    !props.makmalPergigianBergerakMaklumatLanjutUmum
+                  );
+                }}
                 className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
               />
               <label
-                htmlFor='makmal-pergigian-bergerak'
+                htmlFor='makmal-pergigian-bergerak-maklumat-lanjut-umum'
                 className='m-2 text-sm font-m'
               >
                 makmal pergigian bergerak
               </label>
               <select
-                name='makmal-pergigian-bergerak'
-                id='makmal-pergigian-bergerak'
+                name='label-makmal-pergigian-bergerak-maklumat-lanjut-umum'
+                id='label-makmal-pergigian-bergerak-maklumat-lanjut-umum'
+                value={props.labelMakmalPergigianBergerakMaklumatLanjutUmum}
+                onChange={(e) => {
+                  props.setLabelMakmalPergigianBergerakMaklumatLanjutUmum(
+                    e.target.value
+                  );
+                }}
               >
                 <option value=''>Label</option>
                 <option value='apa??'>Apa?</option>
@@ -393,6 +586,12 @@ function MaklumatLanjut(props) {
                   name='kg-angkat'
                   id='komuniti-kg-angkat'
                   value='komuniti-kg-angkat'
+                  checked={
+                    props.kgAngkat === 'komuniti-kg-angkat' ? true : false
+                  }
+                  onChange={(e) => {
+                    props.setKgAngkat(e.target.value);
+                  }}
                   className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                 />
                 <label
@@ -409,6 +608,14 @@ function MaklumatLanjut(props) {
                   name='kg-angkat'
                   id='lawatan-ke-rumah-kg-angkat'
                   value='lawatan-ke-rumah-kg-angkat'
+                  checked={
+                    props.kgAngkat === 'lawatan-ke-rumah-kg-angkat'
+                      ? true
+                      : false
+                  }
+                  onChange={(e) => {
+                    props.setKgAngkat(e.target.value);
+                  }}
                   className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                 />
                 <label
@@ -435,6 +642,15 @@ function MaklumatLanjut(props) {
                     name='institusi-pengajian-tinggi-kolej'
                     id='ipg-institusi-pengajian-tinggi-kolej'
                     value='ipg-institusi-pengajian-tinggi-kolej'
+                    checked={
+                      props.institusiPengajianTinggiKolej ===
+                      'ipg-institusi-pengajian-tinggi-kolej'
+                        ? true
+                        : false
+                    }
+                    onChange={(e) => {
+                      props.setInstitusiPengajianTinggiKolej(e.target.value);
+                    }}
                     className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                   />
                   <label
@@ -451,6 +667,15 @@ function MaklumatLanjut(props) {
                     name='institusi-pengajian-tinggi-kolej'
                     id='kolej-komuniti-institusi-pengajian-tinggi-kolej'
                     value='kolej-komuniti-institusi-pengajian-tinggi-kolej'
+                    checked={
+                      props.institusiPengajianTinggiKolej ===
+                      'kolej-komuniti-institusi-pengajian-tinggi-kolej'
+                        ? true
+                        : false
+                    }
+                    onChange={(e) => {
+                      props.setInstitusiPengajianTinggiKolej(e.target.value);
+                    }}
                     className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                   />
                   <label
@@ -467,6 +692,15 @@ function MaklumatLanjut(props) {
                     name='institusi-pengajian-tinggi-kolej'
                     id='politeknik-institusi-pengajian-tinggi-kolej'
                     value='politeknik-institusi-pengajian-tinggi-kolej'
+                    checked={
+                      props.institusiPengajianTinggiKolej ===
+                      'politeknik-institusi-pengajian-tinggi-kolej'
+                        ? true
+                        : false
+                    }
+                    onChange={(e) => {
+                      props.setInstitusiPengajianTinggiKolej(e.target.value);
+                    }}
                     className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                   />
                   <label
@@ -483,6 +717,15 @@ function MaklumatLanjut(props) {
                     name='institusi-pengajian-tinggi-kolej'
                     id='institut-latihan-kerajaan-institusi-pengajian-tinggi-kolej'
                     value='institut-latihan-kerajaan-institusi-pengajian-tinggi-kolej'
+                    checked={
+                      props.institusiPengajianTinggiKolej ===
+                      'institut-latihan-kerajaan-institusi-pengajian-tinggi-kolej'
+                        ? true
+                        : false
+                    }
+                    onChange={(e) => {
+                      props.setInstitusiPengajianTinggiKolej(e.target.value);
+                    }}
                     className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                   />
                   <label
@@ -499,6 +742,15 @@ function MaklumatLanjut(props) {
                     name='institusi-pengajian-tinggi-kolej'
                     id='giatmara-institusi-pengajian-tinggi-kolej'
                     value='giatmara-institusi-pengajian-tinggi-kolej'
+                    checked={
+                      props.institusiPengajianTinggiKolej ===
+                      'giatmara-institusi-pengajian-tinggi-kolej'
+                        ? true
+                        : false
+                    }
+                    onChange={(e) => {
+                      props.setInstitusiPengajianTinggiKolej(e.target.value);
+                    }}
                     className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                   />
                   <label
@@ -514,6 +766,10 @@ function MaklumatLanjut(props) {
                   <select
                     name='ipg-institusi-pengajian-tinggi-kolej'
                     id='ipg-institusi-pengajian-tinggi-kolej'
+                    value={props.ipgInstitusiPengajianTinggiKolej}
+                    onChange={(e) => {
+                      props.setIpgInstitusiPengajianTinggiKolej(e.target.value);
+                    }}
                     className='ml-5'
                   >
                     <option value=''>Label</option>
@@ -524,6 +780,12 @@ function MaklumatLanjut(props) {
                   <select
                     name='kolej-komuniti-institusi-pengajian-tinggi-kolej'
                     id='kolej-komuniti-institusi-pengajian-tinggi-kolej'
+                    value={props.kolejKomunitiInstitusiPengajianTinggiKolej}
+                    onChange={(e) => {
+                      props.setKolejKomunitiInstitusiPengajianTinggiKolej(
+                        e.target.value
+                      );
+                    }}
                     className='ml-5'
                   >
                     <option value=''>Label</option>
@@ -534,6 +796,12 @@ function MaklumatLanjut(props) {
                   <select
                     name='politeknik-institusi-pengajian-tinggi-kolej'
                     id='politeknik-institusi-pengajian-tinggi-kolej'
+                    value={props.politeknikInstitusiPengajianTinggiKolej}
+                    onChange={(e) => {
+                      props.setPoliteknikInstitusiPengajianTinggiKolej(
+                        e.target.value
+                      );
+                    }}
                     className='ml-5'
                   >
                     <option value=''>Label</option>
@@ -544,6 +812,14 @@ function MaklumatLanjut(props) {
                   <select
                     name='institut-latihan-kerajaan-institusi-pengajian-tinggi-kolej'
                     id='institut-latihan-kerajaan-institusi-pengajian-tinggi-kolej'
+                    value={
+                      props.institutLatihanKerajaanInstitusiPengajianTinggiKolej
+                    }
+                    onChange={(e) => {
+                      props.setInstitutLatihanKerajaanInstitusiPengajianTinggiKolej(
+                        e.target.value
+                      );
+                    }}
                     className='ml-5'
                   >
                     <option value=''>Label</option>
@@ -554,6 +830,12 @@ function MaklumatLanjut(props) {
                   <select
                     name='giatmara-institusi-pengajian-tinggi-kolej'
                     id='giatmara-institusi-pengajian-tinggi-kolej'
+                    value={props.giatmaraInstitusiPengajianTinggiKolej}
+                    onChange={(e) => {
+                      props.setGiatmaraInstitusiPengajianTinggiKolej(
+                        e.target.value
+                      );
+                    }}
                     className='ml-5'
                   >
                     <option value=''>Label</option>
@@ -572,6 +854,14 @@ function MaklumatLanjut(props) {
                   required
                   type='checkbox'
                   id='enrolmen-institusi-pengajian-tinggi-kolej'
+                  name='enrolmen-institusi-pengajian-tinggi-kolej'
+                  value='enrolmen-institusi-pengajian-tinggi-kolej'
+                  checked={props.enrolmenInstitusiPengajianTinggiKolej}
+                  onChange={() => {
+                    props.setEnrolmenInstitusiPengajianTinggiKolej(
+                      !props.enrolmenInstitusiPengajianTinggiKolej
+                    );
+                  }}
                   className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                 />
               </div>
@@ -589,6 +879,12 @@ function MaklumatLanjut(props) {
                   name='institusi-oku'
                   id='pdk-institusi-oku'
                   value='pdk-institusi-oku'
+                  checked={
+                    props.institusiOku === 'pdk-institusi-oku' ? true : false
+                  }
+                  onChange={(e) => {
+                    props.setInstitusiOku(e.target.value);
+                  }}
                   className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                 />
                 <label
@@ -605,6 +901,14 @@ function MaklumatLanjut(props) {
                   name='institusi-oku'
                   id='non-pdk-institusi-oku'
                   value='non-pdk-institusi-oku'
+                  checked={
+                    props.institusiOku === 'non-pdk-institusi-oku'
+                      ? true
+                      : false
+                  }
+                  onChange={(e) => {
+                    props.setInstitusiOku(e.target.value);
+                  }}
                   className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                 />
                 <label
@@ -628,6 +932,14 @@ function MaklumatLanjut(props) {
                   name='institusi-warga-emas'
                   id='kerajaan-institusi-warga-emas'
                   value='kerajaan-institusi-warga-emas'
+                  checked={
+                    props.institusiWargaEmas === 'kerajaan-institusi-warga-emas'
+                      ? true
+                      : false
+                  }
+                  onChange={(e) => {
+                    props.setInstitusiWargaEmas(e.target.value);
+                  }}
                   className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                 />
                 <label
@@ -639,6 +951,10 @@ function MaklumatLanjut(props) {
                 <select
                   name='kerajaan-institusi-warga-emas'
                   id='kerajaan-institusi-warga-emas'
+                  value={props.kerajaanInstitusiWargaEmas}
+                  onChange={(e) => {
+                    props.setKerajaanInstitusiWargaEmas(e.target.value);
+                  }}
                   className='ml-3'
                 >
                   <option value=''>Label</option>
@@ -652,6 +968,14 @@ function MaklumatLanjut(props) {
                   name='institusi-warga-emas'
                   id='swasta-institusi-warga-emas'
                   value='swasta-institusi-warga-emas'
+                  checked={
+                    props.institusiWargaEmas === 'swasta-institusi-warga-emas'
+                      ? true
+                      : false
+                  }
+                  onChange={(e) => {
+                    props.setInstitusiWargaEmas(e.target.value);
+                  }}
                   className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                 />
                 <label
@@ -663,6 +987,10 @@ function MaklumatLanjut(props) {
                 <select
                   name='swasta-institusi-warga-emas'
                   id='swasta-institusi-warga-emas'
+                  value={props.swastaInstitusiWargaEmas}
+                  onChange={(e) => {
+                    props.setSwastaInstitusiWargaEmas(e.target.value);
+                  }}
                   className='ml-5'
                 >
                   <option value=''>Label</option>

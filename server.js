@@ -1,14 +1,12 @@
-// CORE ----------------------------------------------------
+// CORE --------------------------------------------------------
 require('dotenv').config();
 require('express-async-errors');
-// KAUNTER IS USING GRAPHQL (TEST)
-const { graphqlHTTP } = require('express-graphql');
-// KAUNTER IS USING GRAPHQL (TEST)
 const express = require('express');
 const app = express();
 const path = require('path');
+const { graphqlHTTP } = require('express-graphql');
 
-// IMPORT ROUTER -------------------------------------------
+// IMPORT ROUTER -----------------------------------------------
 // user import
 const authLogin = require('./routes/authLogin');
 const identity = require('./routes/identity');
@@ -16,7 +14,6 @@ const pilihOperatorFasiliti = require('./routes/pilihOperatorFasiliti');
 const umum = require('./routes/umum');
 const sekolah = require('./routes/sekolah');
 const allQueryRoute = require('./routes/allQueryRoute');
-// const tadika = require('./routes/tadika');
 
 // admin import
 const adminAPI = require('./routes/adminAPI');
@@ -24,29 +21,24 @@ const adminAPI = require('./routes/adminAPI');
 // generate import
 const genRouter = require('./routes/generateRouter');
 
-// kaunter import (TEST)
-const kaunterAPI = require('./routes/kaunterAPI');
-
-// IMPORT MIDDLEWARES --------------------------------------
+// IMPORT MIDDLEWARES ------------------------------------------
 const authCheck = require('./middlewares/authCheck');
 const errorHandler = require('./middlewares/errorHandler');
 const notFound = require('./middlewares/notFound');
-const genAuth = require('./middlewares/genAuth').verifyToken;
 
-// DATABASE ------------------------------------------------
+// DATABASE ----------------------------------------------------
 const connectDB = require('./database/connect');
 
-// KAUNTER IS USING GRAPHQL (TEST)
+// GraphQL import
 const graphQlSchema = require('./database/graphql/schema');
 const graphQlResolvers = require('./database/graphql/resolvers');
-// KAUNTER IS USING GRAPHQL (TEST)
 
-// MIDDLEWARES ---------------------------------------------
+// USE MIDDLEWARES ---------------------------------------------
 const root = path.join(__dirname, 'client', 'build');
 app.use(express.static(root));
 app.use(express.json());
 
-// KAUNTER IS USING GRAPHQL (TEST)
+// GraphQL route
 app.use(
   '/graphql',
   graphqlHTTP({
@@ -55,7 +47,6 @@ app.use(
     graphiql: true,
   })
 );
-// KAUNTER IS USING GRAPHQL (TEST)
 
 // user route
 app.use('/api/v1/auth', authLogin);
@@ -64,15 +55,12 @@ app.use('/api/v1/pilih', authCheck, pilihOperatorFasiliti);
 app.use('/api/v1/umum', authCheck, umum);
 app.use('/api/v1/sekolah', authCheck, sekolah);
 app.use('/api/v1/query', authCheck, allQueryRoute);
-// app.use('/api/v1/tadika', authCheck, tadika);
 
 // admin route
 app.use('/api/v1/superadmin', adminAPI);
+
 // generate route
 app.use('/api/v1/generate', genRouter);
-
-// kaunter route (TEST)
-app.use('/api/v1/kaunter', kaunterAPI);
 
 // for use in deployment
 app.get('*', (req, res) => {
@@ -83,7 +71,7 @@ app.get('*', (req, res) => {
 app.use(errorHandler);
 app.use(notFound);
 
-// SERVER --------------------------------------------------
+// SERVER ------------------------------------------------------
 const port = process.env.PORT || 5000;
 
 const start = async () => {
