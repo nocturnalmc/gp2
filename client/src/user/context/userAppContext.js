@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { gql } from '@apollo/client';
+import { ToastContainer, toast } from 'react-toastify';
 
 const storageUserToken = localStorage.getItem('userToken');
 const storageUsername = localStorage.getItem('username');
@@ -280,6 +281,8 @@ function UserAppProvider({ children }) {
         catchAxiosErrorAndLogout,
         useParams,
         dateToday,
+        ToastContainer,
+        toast,
         GET_ALL_PATIENTS,
         ADD_PATIENT,
         GET_PATIENT_BY_TARIKH_KEDATANGAN,

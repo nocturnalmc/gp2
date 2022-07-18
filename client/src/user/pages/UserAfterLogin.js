@@ -21,9 +21,14 @@ import UserLoggedInNotFound from './UserLoggedInNotFound';
 
 import UserFooter from '../components/UserFooter';
 
+import { useGlobalUserAppContext } from '../context/userAppContext';
+
 function UserAfterLogin() {
+  const { ToastContainer } = useGlobalUserAppContext();
+
   return (
     <>
+      <ToastContainer />
       <UserHeader />
       <div className='absolute inset-0 -z-10 bg-user5'></div>
       <UserNavbar />

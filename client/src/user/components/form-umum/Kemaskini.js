@@ -4,9 +4,8 @@ import { FaWindowClose } from 'react-icons/fa';
 
 import { useGlobalUserAppContext } from '../../context/userAppContext';
 
-function Kemaskini({ showKemaskini, setShowKemaskini }) {
-  const { userToken, catchAxiosErrorAndLogout, useParams } =
-    useGlobalUserAppContext();
+function Kemaskini({ showKemaskini, setShowKemaskini, toast }) {
+  const { userToken, useParams } = useGlobalUserAppContext();
 
   const { personUmumId } = useParams();
 
@@ -73,7 +72,15 @@ function Kemaskini({ showKemaskini, setShowKemaskini }) {
         },
         { headers: { Authorization: `Bearer ${userToken}` } }
       );
-      alert('Kemaskini success');
+      toast.info(`Pesakit berjaya dikemaskini`, {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       setShowKemaskini(false);
     } catch (error) {
       console.log(error);
