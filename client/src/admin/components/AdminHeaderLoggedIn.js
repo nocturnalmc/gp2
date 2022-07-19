@@ -1,18 +1,7 @@
-import { useState, useEffect } from 'react';
-
 import { useGlobalAdminAppContext } from '../context/adminAppContext';
 
-function AdminHeaderLoggedIn() {
-  const [user, setUser] = useState('');
-  const [daerah, setDaerah] = useState('');
-  const { getCurrentUser } = useGlobalAdminAppContext();
-
-  useEffect(() => {
-    getCurrentUser().then((res) => {
-      setUser(res.data.data.username);
-      setDaerah(res.data.data.daerah);
-    });
-  }, []);
+function AdminHeaderLoggedIn({ user, daerah }) {
+  const { navigate, catchAxiosErrorAndLogout } = useGlobalAdminAppContext();
 
   return (
     <div className='absolute top-0 left-0 right-0 flex flew-wrap items-center justify-center h-40 bg-admin2 text-adminWhite font-sans capitalize'>
@@ -50,8 +39,8 @@ function AdminHeaderLoggedIn() {
               type='button'
               className='mt-5 mb-5 p-1 text-admin2 bg-admin3 hover:bg-opacity-80 rounded-sm shadow-xl outline outline-1 outline-admin4 transition-all'
               onClick={() => {
-                localStorage.removeItem('adminToken');
-                window.location.href = '/admin';
+                catchAxiosErrorAndLogout();
+                navigate('/admin');
               }}
             >
               LOGOUT

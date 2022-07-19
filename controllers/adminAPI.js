@@ -150,6 +150,7 @@ exports.getCurrentUser = async (req, res) => {
     userId: jwt.verify(req.body.token, process.env.JWT_SECRET).userId,
     username: jwt.verify(req.body.token, process.env.JWT_SECRET).username,
     daerah: jwt.verify(req.body.token, process.env.JWT_SECRET).daerah,
+    negeri: jwt.verify(req.body.token, process.env.JWT_SECRET).negeri,
   };
   res.status(200).json({
     status: 'success',

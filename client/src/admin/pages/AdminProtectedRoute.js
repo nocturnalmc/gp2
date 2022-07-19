@@ -4,7 +4,6 @@ import { useGlobalAdminAppContext } from '../context/adminAppContext';
 
 function AdminProtectedRoute({ children }) {
   const { token } = useGlobalAdminAppContext();
-  // const { admin } = token;
 
   if (!token) {
     return <Navigate to='/' />;

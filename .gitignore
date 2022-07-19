@@ -6,3 +6,6 @@ multiSeederFasiliti.js
 # register user
 /routes/authRegister.js
 /controllers/authRegister.js
+
+# config file for graphql development
+graphql.config.json

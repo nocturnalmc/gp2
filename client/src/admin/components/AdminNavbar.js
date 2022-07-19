@@ -1,12 +1,60 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 
-function AdminNavbar() {
+function AdminNavbar({
+  setShowData,
+  setShowFacility,
+  setShowPegawai,
+  setShowKlinik,
+  setShowWelcome,
+  setFacilityType,
+  getFacilities,
+  getOperators,
+  daerah,
+}) {
   const [showLinks, setShowLinks] = useState(false);
+  const [thisIsClicked, setThisIsClicked] = useState('');
 
-  const toggleLinks = () => {
+  const showWelcomeScreen = () => {
     setShowLinks(!showLinks);
+    setShowWelcome(true);
+    setShowData(false);
+    setShowFacility(false);
+    setShowPegawai(false);
+    setShowKlinik(false);
+  };
+
+  const showKlinikNotFacil = () => {
+    setShowKlinik(true);
+    setShowFacility(false);
+    setShowPegawai(false);
+  };
+
+  const showPegawaiOnly = () => {
+    setShowPegawai(true);
+    setShowKlinik(false);
+    setShowFacility(false);
+  };
+
+  const showFacilNotKlinik = () => {
+    setShowFacility(true);
+    setShowKlinik(false);
+    setShowPegawai(false);
+  };
+
+  const toggleData = () => {
+    setShowLinks(!showLinks);
+    setShowWelcome(false);
+    setShowData(true);
+  };
+
+  const reset = () => {
+    setShowLinks(!showLinks);
+    setShowWelcome(false);
+    setShowData(false);
+    setShowFacility(false);
+    setShowPegawai(false);
+    setShowKlinik(false);
   };
 
   return (
@@ -18,42 +66,63 @@ function AdminNavbar() {
       >
         <div className='h-40'></div>
         <div className='grid'>
-          <NavLink
+          <button
             className='outline outline-admin3 outline-1 bg-admin2 rounded-md shadow-xl p-3 m-1 hover:bg-admin3 transition-all'
-            to='/admin/landing'
             onClick={() => {
-              setShowLinks(!showLinks);
+              setThisIsClicked('');
+              showWelcomeScreen();
             }}
           >
             PAPARAN UTAMA
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
+          </button>
+          <button
+            className={
+              thisIsClicked === 'klinik-pergigian'
                 ? 'outline outline-admin3 outline-1 bg-admin3 rounded-md shadow-xl p-3 m-1 hover:bg-admin3 transition-all'
                 : 'outline outline-admin3 outline-1 bg-admin2 rounded-md shadow-xl p-3 m-1 hover:bg-admin3 transition-all'
             }
-            to='kp'
             onClick={() => {
-              setShowLinks(!showLinks);
+              reset();
+              setThisIsClicked('klinik-pergigian');
+              setFacilityType('klinik');
+              showKlinikNotFacil();
+              setTimeout(() => {
+                getFacilities({
+                  variables: {
+                    jenisFasiliti: 'klinik',
+                    daerah: daerah,
+                  },
+                });
+                toggleData();
+              }, 100);
             }}
           >
             KLINIK PERGIGIAN
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
+          </button>
+          <button
+            className={
+              thisIsClicked === 'pegawai-pergigian'
                 ? 'outline outline-admin3 outline-1 bg-admin3 rounded-md shadow-xl p-3 m-1 hover:bg-admin3 transition-all'
                 : 'outline outline-admin3 outline-1 bg-admin2 rounded-md shadow-xl p-3 m-1 hover:bg-admin3 transition-all'
             }
-            to='pp'
             onClick={() => {
-              setShowLinks(!showLinks);
+              reset();
+              setThisIsClicked('pegawai-pergigian');
+              setFacilityType('pegawai');
+              showPegawaiOnly();
+              setTimeout(() => {
+                getOperators({
+                  variables: {
+                    daerah: daerah,
+                  },
+                });
+                toggleData();
+              }, 100);
             }}
           >
             PEGAWAI PERGIGIAN
-          </NavLink>
-          <NavLink
+          </button>
+          {/* <NavLink
             className={({ isActive }) =>
               isActive
                 ? 'outline outline-admin3 outline-1 bg-admin3 rounded-md shadow-xl p-3 m-1 hover:bg-admin3 transition-all'
@@ -65,91 +134,157 @@ function AdminNavbar() {
             }}
           >
             JURUTERAPI PERGIGIAN
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
+          </NavLink> */}
+          <button
+            className={
+              thisIsClicked === 'taska'
                 ? 'outline outline-admin3 outline-1 bg-admin3 rounded-md shadow-xl p-3 m-1 hover:bg-admin3 transition-all'
                 : 'outline outline-admin3 outline-1 bg-admin2 rounded-md shadow-xl p-3 m-1 hover:bg-admin3 transition-all'
             }
-            to='taska'
             onClick={() => {
-              setShowLinks(!showLinks);
+              reset();
+              setThisIsClicked('taska');
+              setFacilityType('taska');
+              showFacilNotKlinik();
+              setTimeout(() => {
+                getFacilities({
+                  variables: {
+                    jenisFasiliti: 'taska',
+                    daerah: daerah,
+                  },
+                });
+                toggleData();
+              }, 100);
             }}
           >
             TASKA
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
+          </button>
+          <button
+            className={
+              thisIsClicked === 'tadika'
                 ? 'outline outline-admin3 outline-1 bg-admin3 rounded-md shadow-xl p-3 m-1 hover:bg-admin3 transition-all'
                 : 'outline outline-admin3 outline-1 bg-admin2 rounded-md shadow-xl p-3 m-1 hover:bg-admin3 transition-all'
             }
-            to='tadika'
             onClick={() => {
-              setShowLinks(!showLinks);
+              reset();
+              setThisIsClicked('tadika');
+              setFacilityType('tadika');
+              showFacilNotKlinik();
+              setTimeout(() => {
+                getFacilities({
+                  variables: {
+                    jenisFasiliti: 'tadika',
+                    daerah: daerah,
+                  },
+                });
+                toggleData();
+              }, 100);
             }}
           >
             TADIKA
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
+          </button>
+          <button
+            className={
+              thisIsClicked === 'sekolah-rendah'
                 ? 'outline outline-admin3 outline-1 bg-admin3 rounded-md shadow-xl p-3 m-1 hover:bg-admin3 transition-all'
                 : 'outline outline-admin3 outline-1 bg-admin2 rounded-md shadow-xl p-3 m-1 hover:bg-admin3 transition-all'
             }
-            to='sr'
             onClick={() => {
-              setShowLinks(!showLinks);
+              reset();
+              setThisIsClicked('sekolah-rendah');
+              setFacilityType('sekolah-rendah');
+              showFacilNotKlinik();
+              setTimeout(() => {
+                getFacilities({
+                  variables: {
+                    jenisFasiliti: 'sekolah-rendah',
+                    daerah: daerah,
+                  },
+                });
+                toggleData();
+              }, 100);
             }}
           >
             SEKOLAH RENDAH
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
+          </button>
+          <button
+            className={
+              thisIsClicked === 'sekolah-menengah'
                 ? 'outline outline-admin3 outline-1 bg-admin3 rounded-md shadow-xl p-3 m-1 hover:bg-admin3 transition-all'
                 : 'outline outline-admin3 outline-1 bg-admin2 rounded-md shadow-xl p-3 m-1 hover:bg-admin3 transition-all'
             }
-            to='sm'
             onClick={() => {
-              setShowLinks(!showLinks);
+              reset();
+              setThisIsClicked('sekolah-menengah');
+              setFacilityType('sekolah-menengah');
+              showFacilNotKlinik();
+              setTimeout(() => {
+                getFacilities({
+                  variables: {
+                    jenisFasiliti: 'sekolah-menengah',
+                    daerah: daerah,
+                  },
+                });
+                toggleData();
+              }, 100);
             }}
           >
             SEKOLAH MENENGAH
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
+          </button>
+          <button
+            className={
+              thisIsClicked === 'institusi'
                 ? 'outline outline-admin3 outline-1 bg-admin3 rounded-md shadow-xl p-3 m-1 hover:bg-admin3 transition-all'
                 : 'outline outline-admin3 outline-1 bg-admin2 rounded-md shadow-xl p-3 m-1 hover:bg-admin3 transition-all'
             }
-            to='ins'
             onClick={() => {
-              setShowLinks(!showLinks);
+              reset();
+              setThisIsClicked('institusi');
+              setFacilityType('institusi');
+              showFacilNotKlinik();
+              setTimeout(() => {
+                getFacilities({
+                  variables: {
+                    jenisFasiliti: 'institusi',
+                    daerah: daerah,
+                  },
+                });
+                toggleData();
+              }, 100);
             }}
           >
             INSTITUSI
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
+          </button>
+          <button
+            className={
+              thisIsClicked === 'kp-bergerak'
                 ? 'outline outline-admin3 outline-1 bg-admin3 rounded-md shadow-xl p-3 m-1 hover:bg-admin3 transition-all'
                 : 'outline outline-admin3 outline-1 bg-admin2 rounded-md shadow-xl p-3 m-1 hover:bg-admin3 transition-all'
             }
-            to='kp-bergerak'
             onClick={() => {
-              setShowLinks(!showLinks);
+              reset();
+              setThisIsClicked('kp-bergerak');
+              setFacilityType('kp-bergerak');
+              showFacilNotKlinik();
+              setTimeout(() => {
+                getFacilities({
+                  variables: {
+                    jenisFasiliti: 'kp-bergerak',
+                    daerah: daerah,
+                  },
+                });
+                toggleData();
+              }, 100);
             }}
           >
             KP BERGERAK
-          </NavLink>
+          </button>
         </div>
       </nav>
       <div className='absolute w-60 top-0 left-0 flex text-center justify-center h-40'>
         <button
           className='text-2xl bg-adminWhite text-adminBlack mt-14 mb-14 px-3 rounded-md shadow-xl hover:rotate-90 transition-all'
-          onClick={toggleLinks}
+          onClick={() => setShowLinks(!showLinks)}
         >
           <FaBars />
         </button>
