@@ -125,54 +125,93 @@ export default function Kotak(props) {
               <article
                 className={`${
                   props.statusM == 'perokokSemasa' ? 'visible' : 'hidden'
-                } grid grid-cols-2 gap-2 border border-userBlack pl-3 p-2 rounded-md`}
+                } grid gap-2 border border-userBlack pl-3 p-2 rounded-md`}
               >
-                <h4 className='font-bold flex flex-row pl-5 '>
+                <h4 className='font-bold flex flex-row pl-5'>
                   status selepas intervensi
                 </h4>
                 <div className='flex items-center flex-row pl-5'>
                   <input
-                    type='checkbox'
-                    name='adaQ'
-                    id='adaQ'
-                    checked={props.adaQ}
+                    required
+                    type='radio'
+                    name='ada-tiada-q'
+                    id='ada-q'
+                    value='ada-q'
+                    checked={props.adaTiadaQ === 'ada-q' ? true : false}
                     onChange={(e) => {
-                      props.setAdaQ(!props.adaQ);
+                      props.setAdaTiadaQ(e.target.value);
                     }}
-                    className='w-4 h-4 text-red-600 bg-gray-100 rounded border-gray-300 focus:ring-red-500 focus:ring-2 '
+                    className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                   />
-                  <label htmlFor='adaQ' className='m-2 text-sm font-m'>
+                  <label htmlFor='ada-q' className='m-2 text-sm font-m'>
                     ada quit date
                   </label>
                 </div>
                 <div className='flex items-center flex-row pl-5'>
                   <input
-                    type='checkbox'
-                    name='tiadaQ'
-                    id='tiadaQ'
-                    checked={props.tiadaQ}
+                    required
+                    type='radio'
+                    name='ada-tiada-q'
+                    id='tiada-q'
+                    value='tiada-q'
+                    checked={props.adaTiadaQ === 'tiada-q' ? true : false}
                     onChange={(e) => {
-                      props.setTiadaQ(!props.tiadaQ);
+                      props.setAdaTiadaQ(e.target.value);
                     }}
-                    className='w-4 h-4 text-red-600 bg-gray-100 rounded border-gray-300 focus:ring-red-500 focus:ring-2 '
+                    className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                   />
-                  <label htmlFor='tiadaQ' className='m-2 text-sm font-m'>
+                  <label htmlFor='tiada-q' className='m-2 text-sm font-m'>
                     tiada quit date
                   </label>
                 </div>
-                <div className='flex items-center flex-row pl-5'>
+                <p className='flex flex-row pl-5 text-sm font-m'>
+                  dirujuk kepada guru kaunseling
+                </p>
+                <div className='flex items-center justify-center'>
                   <input
-                    type='checkbox'
-                    name='rujukG'
-                    id='rujukG'
-                    checked={props.rujukG}
+                    required
+                    type='radio'
+                    name='rujuk-guru-kaunseling'
+                    id='ya-rujuk-guru-kaunseling'
+                    value='ya-rujuk-guru-kaunseling'
+                    checked={
+                      props.rujukGuruKaunseling === 'ya-rujuk-guru-kaunseling'
+                        ? true
+                        : false
+                    }
                     onChange={(e) => {
-                      props.setRujukG(!props.rujukG);
+                      props.setRujukGuruKaunseling(e.target.value);
                     }}
-                    className='w-4 h-4 text-red-600 bg-gray-100 rounded border-gray-300 focus:ring-red-500 focus:ring-2 '
+                    className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
                   />
-                  <label htmlFor='rujukG' className='m-2 text-sm font-m'>
-                    rujuk guru kaunseling
+                  <label
+                    htmlFor='ya-rujuk-guru-kaunseling'
+                    className='m-2 text-sm font-m'
+                  >
+                    Ya
+                  </label>
+                  <input
+                    required
+                    type='radio'
+                    name='rujuk-guru-kaunseling'
+                    id='tidak-rujuk-guru-kaunseling'
+                    value='tidak-rujuk-guru-kaunseling'
+                    checked={
+                      props.rujukGuruKaunseling ===
+                      'tidak-rujuk-guru-kaunseling'
+                        ? true
+                        : false
+                    }
+                    onChange={(e) => {
+                      props.setRujukGuruKaunseling(e.target.value);
+                    }}
+                    className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
+                  />
+                  <label
+                    htmlFor='tidak-rujuk-guru-kaunseling'
+                    className='m-2 text-sm font-m'
+                  >
+                    Tidak
                   </label>
                 </div>
               </article>

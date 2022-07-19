@@ -70,7 +70,7 @@ function Kaunter() {
       <UserHeader />
       <div className='absolute inset-0 -z-10 bg-user5'></div>
       <KaunterHeaderLoggedIn namaKlinik={createdByKp} logout={logout} />
-      <div className='absolute inset-10 top-44 -z-10 bg-userWhite text-center justify-center items-center outline outline-1 outline-userBlack rounded-md shadow-xl capitalize'>
+      <div className='absolute inset-10 top-[8.3rem] -z-10 bg-userWhite text-center justify-center items-center outline outline-1 outline-userBlack rounded-md shadow-xl capitalize'>
         <div className='px-10 h-full p-3 overflow-y-auto'>
           <PatientData
             showForm={showForm}

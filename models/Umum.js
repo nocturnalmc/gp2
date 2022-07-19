@@ -72,6 +72,60 @@ const UmumSchema = new mongoose.Schema(
       // required: [true, 'Please provide rujuk dari'],
     },
     // end of pendaftaran pg101 -------------------------------------------
+    //fasiliti perkhidmatan
+    jenisFasiliti: {
+      type: String,
+      default: '',
+    },
+    kepp: {
+      type: Boolean,
+      default: false,
+    },
+    jenisProgramKomuniti: {
+      type: String,
+      default: '',
+    },
+    //maklumat lanjut
+    kedatangan: {
+      type: String,
+      default: '',
+    },
+    fasilitiTaskaTadika: {
+      type: String,
+      default: '',
+    },
+    jenisTaskaTadika: {
+      type: String,
+      default: '',
+    },
+    kelasToddler: {
+      type: Boolean,
+      default: false,
+    },
+    namaFasilitiTaskaTadika: {
+      type: String,
+      default: '',
+    },
+    enrolmenTaskaTadika: {
+      type: Boolean,
+      default: false,
+    },
+    kedatanganTaskaTadika: {
+      type: String,
+      default: '',
+    },
+    engganTaskaTadika: {
+      type: Boolean,
+      default: false,
+    },
+    tidakHadirTaskaTadika: {
+      type: Boolean,
+      default: false,
+    },
+    pemeriksaanTaskaTadika: {
+      type: String,
+      default: '',
+    },
     statusPesara: {
       //Leong added this
       //nak tahu pesara kerajaan atau ATM atau tidak - utk generate reten PG211

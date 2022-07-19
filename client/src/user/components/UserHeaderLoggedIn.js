@@ -7,7 +7,12 @@ function UserHeaderLoggedIn() {
   const {
     userToken,
     username,
+    setUsername,
     fasilitiRelief,
+    setFasilitiRelief,
+    setDisplayLoginForm,
+    setDisplayPilihNama,
+    setDisplayPilihFasiliti,
     navigate,
     catchAxiosErrorAndLogout,
   } = useGlobalUserAppContext();
@@ -29,41 +34,52 @@ function UserHeaderLoggedIn() {
     fetchIdentity();
   }, []);
 
+  const tukarPengguna = () => {
+    setDisplayLoginForm(false);
+    setDisplayPilihNama(true);
+    setDisplayPilihFasiliti(false);
+    localStorage.removeItem('username');
+    localStorage.removeItem('fasilitiRelief');
+    setUsername(null);
+    setFasilitiRelief(null);
+    navigate('/');
+  };
+
   const logout = () => {
     catchAxiosErrorAndLogout();
     navigate('/');
   };
 
   return (
-    <div className='absolute top-14 right-5 flex w-auto h-10 items-center justify-center capitalize text-userWhite text-xs'>
-      <img
-        className='w-full h-full aspect-square rounded-full shadow-xl outline outline-1 outline-user4'
-        src='https://miro.medium.com/max/1400/1*X7n_UtdTaFoY4wZ4VIS7Dw.jpeg'
-        alt='logo'
-      />
-      <div className='m-3 space-y-1'>
-        <p className='w-32'>
-          <b>user : </b>
-          {username}
+    <div className='absolute top-10 right-5 flex w-auto h-10 items-center justify-center capitalize text-userWhite text-xs'>
+      <div className='m-3 space-y-1 text-right pr-2'>
+        <p className='w-96 text-sm leading-3'>
+          <b>{username}</b>
         </p>
-        <p className='w-32'>
-          <b>klinik pergigian : </b>
-          {namaKlinik}
-        </p>
+        <p className='w-96 text-sm'>{namaKlinik}</p>
         {fasilitiRelief && (
-          <p className='w-32'>
+          <p className='w-96 text-sm pt-1'>
             <b>anda relief : </b>
             {fasilitiRelief}
           </p>
         )}
       </div>
-      <button
-        type='button'
-        className='mt-5 mb-5 p-1 text-user2 bg-user3 hover:bg-opacity-80 rounded-sm shadow-xl outline outline-1 outline-user4 transition-all'
-        onClick={logout}
-      >
-        LOGOUT
-      </button>
+      <div className='grid grid-rows-2 gap-2'>
+        <button
+          type='button'
+          className='p-1 text-user2 bg-user3 hover:bg-opacity-80 rounded-sm shadow-xl outline outline-1 outline-user4 transition-all'
+          onClick={tukarPengguna}
+        >
+          TUKAR PENGGUNA
+        </button>
+        <button
+          type='button'
+          className='p-1 text-user2 bg-user3 hover:bg-opacity-80 rounded-sm shadow-xl outline outline-1 outline-user4 transition-all'
+          onClick={logout}
+        >
+          LOGOUT
+        </button>
+      </div>
     </div>
   );
 }

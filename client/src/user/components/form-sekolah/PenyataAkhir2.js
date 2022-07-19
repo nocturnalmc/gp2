@@ -118,6 +118,7 @@ export default function PenyataAkhir2(props) {
                   </div>
                 </div>
                 <div className='flex flex-row items-center pl-5'>
+                  <p className='text-sm font-m'>Penskaleran:</p>
                   <input
                     type='number'
                     name='penskaleran-penyata-akhir-2'
@@ -129,7 +130,6 @@ export default function PenyataAkhir2(props) {
                     className='outline outline-1 outline-userBlack w-10 m-3 text-sm font-m'
                     min='0'
                   />
-                  <p className='mx-2 text-sm font-m'>Penskaleran</p>
                 </div>
               </article>
               <article className='grid grid-cols-1 gap-2 border border-userBlack pl-3 p-2 rounded-md'>

@@ -26,7 +26,7 @@ function UserNavbar() {
           showLinks ? 'translate-x-0' : '-translate-x-60'
         }`}
       >
-        <div className='h-40'></div>
+        <div className='h-28'></div>
         <div className='grid'>
           <NavLink
             to='/user'
@@ -38,6 +38,21 @@ function UserNavbar() {
             className='bg-user4 rounded-md shadow-xl p-3 m-1 hover:bg-user3 transition-all'
           >
             DASHBOARD
+          </NavLink>
+          <NavLink
+            to='status-harian'
+            onClick={() => {
+              setShowLinks(!showLinks);
+              setShowRetenSubMenu(false);
+              setShowGenerateSubMenu(false);
+            }}
+            className={({ isActive }) =>
+              isActive
+                ? 'bg-user3 rounded-md shadow-xl p-3 m-1 hover:bg-user3 transition-all'
+                : 'bg-user4 rounded-md shadow-xl p-3 m-1 hover:bg-user3 transition-all'
+            }
+          >
+            STATUS HARIAN
           </NavLink>
           <div>
             <div
@@ -90,21 +105,6 @@ function UserNavbar() {
               </NavLink>
             </div>
           </div>
-          <NavLink
-            to='status-harian'
-            onClick={() => {
-              setShowLinks(!showLinks);
-              setShowRetenSubMenu(false);
-              setShowGenerateSubMenu(false);
-            }}
-            className={({ isActive }) =>
-              isActive
-                ? 'bg-user3 rounded-md shadow-xl p-3 m-1 hover:bg-user3 transition-all'
-                : 'bg-user4 rounded-md shadow-xl p-3 m-1 hover:bg-user3 transition-all'
-            }
-          >
-            STATUS HARIAN
-          </NavLink>
           <div>
             <div
               className={`${
@@ -173,9 +173,9 @@ function UserNavbar() {
           </NavLink>
         </div>
       </nav>
-      <div className='absolute w-60 top-0 left-0 flex text-center justify-center h-40'>
+      <div className='absolute w-60 top-0 left-0 flex text-center justify-center h-28'>
         <button
-          className='text-2xl bg-userWhite text-userBlack mt-14 mb-14 px-3 rounded-md shadow-xl hover:rotate-90 transition-all'
+          className='text-2xl bg-userWhite text-userBlack mt-8 mb-8 px-3 rounded-md shadow-xl hover:rotate-90 transition-all'
           onClick={toggleLinks}
         >
           <FaBars />

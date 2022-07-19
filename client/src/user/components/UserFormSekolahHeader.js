@@ -650,15 +650,12 @@ function UserFormSekolah() {
   const [tarikh4, setTarikh4] = useState('');
   masterForm.tarikh4 = tarikh4;
   masterForm.setTarikh4 = setTarikh4;
-  const [adaQ, setAdaQ] = useState(false);
-  masterForm.adaQ = adaQ;
-  masterForm.setAdaQ = setAdaQ;
-  const [tiadaQ, setTiadaQ] = useState(false);
-  masterForm.tiadaQ = tiadaQ;
-  masterForm.setTiadaQ = setTiadaQ;
-  const [rujukG, setRujukG] = useState(false);
-  masterForm.rujukG = rujukG;
-  masterForm.setRujukG = setRujukG;
+  const [adaTiadaQ, setAdaTiadaQ] = useState('');
+  masterForm.adaTiadaQ = adaTiadaQ;
+  masterForm.setAdaTiadaQ = setAdaTiadaQ;
+  const [rujukGuruKaunseling, setRujukGuruKaunseling] = useState('');
+  masterForm.rujukGuruKaunseling = rujukGuruKaunseling;
+  masterForm.setRujukGuruKaunseling = setRujukGuruKaunseling;
   const [tarikhQ, setTarikhQ] = useState('');
   masterForm.tarikhQ = tarikhQ;
   masterForm.setTarikhQ = setTarikhQ;
@@ -964,9 +961,8 @@ function UserFormSekolah() {
         setTarikh2(data.singlePersonSekolah.tarikh2);
         setTarikh3(data.singlePersonSekolah.tarikh3);
         setTarikh4(data.singlePersonSekolah.tarikh4);
-        setAdaQ(data.singlePersonSekolah.adaQ);
-        setTiadaQ(data.singlePersonSekolah.tiadaQ);
-        setRujukG(data.singlePersonSekolah.rujukG);
+        setAdaTiadaQ(data.singlePersonSekolah.adaTiadaQ);
+        setRujukGuruKaunseling(data.singlePersonSekolah.rujukGuruKaunseling);
         setTarikhQ(data.singlePersonSekolah.tarikhQ);
         setStatusSelepas6Bulan(data.singlePersonSekolah.statusSelepas6Bulan);
       } catch (error) {
@@ -1067,11 +1063,47 @@ function UserFormSekolah() {
 
   //reset value
   useEffect(() => {
+    if (statikBergerak === 'klinik-pergigian-statik' || statikBergerak === '') {
+      setKpBergerak(false);
+      setPlateNo('');
+    }
+    if (!engganKedatanganPendaftaran) {
+      setAdaTiadaPemeriksaanPendaftaran('');
+    }
+    if (!tidakHadirKedatanganPendaftaran) {
+      setAdaTiadaPemeriksaanPendaftaran('');
+    }
     if (yaTidakSediaAdaStatusDenture === 'tidak-sedia-ada-status-denture') {
       setSeparaPenuhAtasSediaAdaDenture('');
       setSeparaPenuhBawahSediaAdaDenture('');
     }
-  }, [yaTidakSediaAdaStatusDenture]);
+    if (yaTidakPerluStatusDenture === 'tidak-perlu-status-denture') {
+      setSeparaPenuhAtasPerluDenture('');
+      setSeparaPenuhBawahPerluDenture('');
+    }
+    if (
+      statusM === 'perokokPasif' ||
+      statusM === 'bekasPerokok' ||
+      statusM === 'bukanPerokok' ||
+      statusM === ''
+    ) {
+      setTarikh1('');
+      setTarikh2('');
+      setTarikh3('');
+      setTarikh4('');
+      setAdaTiadaQ('');
+      setRujukGuruKaunseling('');
+      setTarikhQ('');
+      setStatusSelepas6Bulan('');
+    }
+  }, [
+    statikBergerak,
+    engganKedatanganPendaftaran,
+    tidakHadirKedatanganPendaftaran,
+    yaTidakSediaAdaStatusDenture,
+    yaTidakPerluStatusDenture,
+    statusM,
+  ]);
 
   // idea dapat masa angkat takbir subhanAllah..
   // useEffect(() => {
@@ -1264,9 +1296,8 @@ function UserFormSekolah() {
           tarikh2,
           tarikh3,
           tarikh4,
-          adaQ,
-          tiadaQ,
-          rujukG,
+          adaTiadaQ,
+          rujukGuruKaunseling,
           tarikhQ,
           statusSelepas6Bulan,
         },
@@ -1457,9 +1488,8 @@ function UserFormSekolah() {
           tarikh2,
           tarikh3,
           tarikh4,
-          adaQ,
-          tiadaQ,
-          rujukG,
+          adaTiadaQ,
+          rujukGuruKaunseling,
           tarikhQ,
           statusSelepas6Bulan,
         },

@@ -514,12 +514,10 @@ export default function PemeriksaanAwal(props) {
               </article>
             </div>
             <div className='grid gap-2'>
-              <article className='grid grid-cols-2 border border-userBlack pl-3 p-2 rounded-md'>
-                <h4 className='font-bold flex flex-row pl-5 col-span-2'>
-                  Oral Hygiene
-                </h4>
+              <article className='grid grid-cols-1 border border-userBlack pl-3 p-2 rounded-md'>
+                <h4 className='font-bold flex flex-row pl-5'>Oral Hygiene</h4>
                 <div className='flex items-center '>
-                  <p className='flex flex-row pl-5 text-sm font-m col-span-2 md:col'>
+                  <p className='flex flex-row pl-5 text-sm font-m'>
                     Kebersihan Mulut<span className='text-user6'>*</span>
                   </p>
                   <select
@@ -543,6 +541,9 @@ export default function PemeriksaanAwal(props) {
                     props.umur < 15 && 'hidden'
                   } flex items-center flex-row pl-5`}
                 >
+                  <p className='text-sm font-m'>
+                    Skor BPE<span className='text-user6'>*</span>
+                  </p>
                   <select
                     required={props.umur < 15 ? false : true}
                     name='skor-bpe'
@@ -553,14 +554,13 @@ export default function PemeriksaanAwal(props) {
                     }}
                     className='outline outline-1 outline-userBlack w-30 m-3 text-sm font-m'
                   >
-                    <option value=''>Skor BPE</option>
+                    <option value=''></option>
                     <option value='0'>0</option>
                     <option value='1'>1</option>
                     <option value='2'>2</option>
                     <option value='3'>3</option>
                     <option value='4'>4</option>
                   </select>
-                  <span className='text-user6'>*</span>
                 </div>
                 <div
                   className={`${
@@ -587,6 +587,9 @@ export default function PemeriksaanAwal(props) {
                   />
                 </div>
                 <div className='flex items-center flex-row pl-5'>
+                  <p className='flex text-sm font-m'>
+                    Skor GIS<span className='text-user6'>*</span>
+                  </p>
                   <select
                     required
                     name='skor-gis'
@@ -597,21 +600,20 @@ export default function PemeriksaanAwal(props) {
                     }}
                     className='outline outline-1 outline-userBlack w-30 m-3 text-sm font-m'
                   >
-                    <option value=''>Skor GIS</option>
+                    <option value=''></option>
                     <option value='0'>0</option>
                     <option value='1'>1</option>
                     <option value='2'>2</option>
                     <option value='3'>3</option>
                   </select>
-                  <span className='text-user6'>*</span>
                 </div>
               </article>
               <article className=' border border-userBlack pl-3 p-2 rounded-md'>
                 <h4 className='font-bold flex flex-row pl-5'>
                   Status Gigi Desidus<span className='text-user6'>*</span>
                 </h4>
-                <div className='grid grid-cols-2'>
-                  <div className='flex items-center flex-row pl-5'>
+                <div className='grid gap-1'>
+                  <div className='flex items-center justify-center'>
                     <input
                       type='checkbox'
                       name='ada-desidus'
@@ -646,7 +648,7 @@ export default function PemeriksaanAwal(props) {
                   <div
                     className={`${
                       !props.adaDesidus && 'hidden'
-                    } grid grid-cols-2 gap-2`}
+                    } grid grid-cols-2`}
                   >
                     <div className='flex flex-row items-center pl-5'>
                       <p className='text-sm font-m lowercase'>d: </p>
@@ -718,9 +720,7 @@ export default function PemeriksaanAwal(props) {
                     </div>
                     <div className='flex flex-row items-center pl-5'>
                       <p className='text-sm font-m'>SM: </p>
-                      <span className='text-user6'>*</span>
                       <input
-                        required
                         min='0'
                         max='20'
                         type='number'
@@ -746,8 +746,8 @@ export default function PemeriksaanAwal(props) {
                 <h4 className='font-bold flex flex-row pl-5'>
                   Status Gigi Kekal<span className='text-user6'>*</span>
                 </h4>
-                <div className='grid grid-cols-2'>
-                  <div className='flex items-center flex-row pl-5'>
+                <div className='grid grid-cols-1'>
+                  <div className='flex items-center justify-center'>
                     <input
                       type='checkbox'
                       name='ada-kekal'

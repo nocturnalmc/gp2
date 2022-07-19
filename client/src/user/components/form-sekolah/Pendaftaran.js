@@ -1,4 +1,12 @@
+import { useEffect } from 'react';
+
 export default function Pendaftaran(props) {
+  useEffect(() => {
+    if (props.adaTiadaPemeriksaanPendaftaran === 'tiada-pemeriksaan') {
+      props.setBaruUlanganKedatanganPendaftaran('');
+    }
+  }, [props.adaTiadaPemeriksaanPendaftaran]);
+
   return (
     <>
       <div className='p-2'>
@@ -8,7 +16,7 @@ export default function Pendaftaran(props) {
           </span>
           <p className='text-user6 text-left'>* required</p>
           <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mt-3 mb-3 w-full col-span-2'>
-            <article className='grid grid-cols-2 gap-2 border border-userBlack pl-3 p-2 rounded-md'>
+            <article className='grid grid-cols-2 gap-2 auto-rows-min border border-userBlack pl-3 p-2 rounded-md'>
               <h4 className='font-bold flex flex-row pl-5 col-span-2'>
                 Penyampaian Perkhidmatan Sekolah
               </h4>
@@ -78,58 +86,64 @@ export default function Pendaftaran(props) {
               <h4 className='flex flex-row items-center pl-5 font-bold col-span-2'>
                 Kedatangan<span className='text-user6'>*</span>
               </h4>
-              <div className='grid grid-rows-2 col-span-2 lg:col-span-1'>
-                <div className='flex items-center flex-row pl-5 '>
-                  <input
-                    required
-                    type='radio'
-                    name='kedatangan'
-                    id='baru-kedatangan-pendaftaran'
-                    value='baru-kedatangan-pendaftaran'
-                    checked={
-                      props.baruUlanganKedatanganPendaftaran ===
-                      'baru-kedatangan-pendaftaran'
-                        ? true
-                        : false
-                    }
-                    onChange={(e) => {
-                      props.setBaruUlanganKedatanganPendaftaran(e.target.value);
-                    }}
-                    className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
-                  />
-                  <label
-                    htmlFor='baru-kedatangan-pendaftaran'
-                    className='m-2 text-sm font-m'
-                  >
-                    Baru
-                  </label>
+              {props.adaTiadaPemeriksaanPendaftaran !== 'tiada-pemeriksaan' && (
+                <div className='grid grid-rows-2 col-span-2 lg:col-span-1'>
+                  <div className='flex items-center flex-row pl-5 '>
+                    <input
+                      required
+                      type='radio'
+                      name='kedatangan'
+                      id='baru-kedatangan-pendaftaran'
+                      value='baru-kedatangan-pendaftaran'
+                      checked={
+                        props.baruUlanganKedatanganPendaftaran ===
+                        'baru-kedatangan-pendaftaran'
+                          ? true
+                          : false
+                      }
+                      onChange={(e) => {
+                        props.setBaruUlanganKedatanganPendaftaran(
+                          e.target.value
+                        );
+                      }}
+                      className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
+                    />
+                    <label
+                      htmlFor='baru-kedatangan-pendaftaran'
+                      className='m-2 text-sm font-m'
+                    >
+                      Baru
+                    </label>
+                  </div>
+                  <div className='flex items-center flex-row pl-5'>
+                    <input
+                      required
+                      type='radio'
+                      name='kedatangan'
+                      id='ulangan-kedatangan-pendaftaran'
+                      value='ulangan-kedatangan-pendaftaran'
+                      checked={
+                        props.baruUlanganKedatanganPendaftaran ===
+                        'ulangan-kedatangan-pendaftaran'
+                          ? true
+                          : false
+                      }
+                      onChange={(e) => {
+                        props.setBaruUlanganKedatanganPendaftaran(
+                          e.target.value
+                        );
+                      }}
+                      className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
+                    />
+                    <label
+                      htmlFor='ulangan-kedatangan-pendaftaran'
+                      className='m-2 text-sm font-m'
+                    >
+                      Ulangan
+                    </label>
+                  </div>
                 </div>
-                <div className='flex items-center flex-row pl-5'>
-                  <input
-                    required
-                    type='radio'
-                    name='kedatangan'
-                    id='ulangan-kedatangan-pendaftaran'
-                    value='ulangan-kedatangan-pendaftaran'
-                    checked={
-                      props.baruUlanganKedatanganPendaftaran ===
-                      'ulangan-kedatangan-pendaftaran'
-                        ? true
-                        : false
-                    }
-                    onChange={(e) => {
-                      props.setBaruUlanganKedatanganPendaftaran(e.target.value);
-                    }}
-                    className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
-                  />
-                  <label
-                    htmlFor='ulangan-kedatangan-pendaftaran'
-                    className='m-2 text-sm font-m'
-                  >
-                    Ulangan
-                  </label>
-                </div>
-              </div>
+              )}
               <div className='grid grid-rows-2'>
                 <div className='flex items-center flex-row pl-5'>
                   <input

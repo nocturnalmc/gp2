@@ -589,17 +589,13 @@ const SekolahSchema = new mongoose.Schema({
     type: String,
     default: '',
   },
-  adaQ: {
-    type: Boolean,
-    default: false,
+  adaTiadaQ: {
+    type: String,
+    default: '',
   },
-  tiadaQ: {
-    type: Boolean,
-    default: false,
-  },
-  rujukG: {
-    type: Boolean,
-    default: false,
+  rujukGuruKaunseling: {
+    type: String,
+    default: '',
   },
   tarikhQ: {
     type: String,
