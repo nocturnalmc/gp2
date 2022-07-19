@@ -611,6 +611,21 @@ export default function PemeriksaanAwal(props) {
                   Status Gigi Desidus<span className='text-user6'>*</span>
                 </h4>
                 <div className='grid grid-cols-2'>
+                  <div className='flex items-center flex-row pl-5'>
+                    <input
+                      type='checkbox'
+                      name='ada-desidus'
+                      id='ada-desidus'
+                      checked={props.adaDesidus}
+                      onChange={() => {
+                        props.setAdaDesidus(!props.adaDesidus);
+                      }}
+                      className='w-4 h-4 text-red-600 bg-gray-100 rounded border-gray-300 focus:ring-red-500 focus:ring-2 '
+                    />
+                    <label htmlFor='ada-desidus' className='m-2 text-sm font-m'>
+                      ada gigi desidus
+                    </label>
+                  </div>
                   {/* <div className='flex items-center flex-row pl-5 col-span-2'>
                     <span
                       className='outline outline-1 outline-userBlack w-10 m-3 text-sm font-m bg-user1 text-userWhite hover:cursor-pointer'
@@ -628,7 +643,11 @@ export default function PemeriksaanAwal(props) {
                         : 'Klik butang jika ada gigi desidus'}
                     </p>
                   </div> */}
-                  <div className='grid grid-cols-2 gap-2'>
+                  <div
+                    className={`${
+                      !props.adaDesidus && 'hidden'
+                    } grid grid-cols-2 gap-2`}
+                  >
                     <div className='flex flex-row items-center pl-5'>
                       <p className='text-sm font-m lowercase'>d: </p>
                       <span className='text-user6'>*</span>
@@ -697,12 +716,29 @@ export default function PemeriksaanAwal(props) {
                         className='outline outline-1 outline-userBlack w-10 m-3 text-sm font-m'
                       />
                     </div>
+                    <div className='flex flex-row items-center pl-5'>
+                      <p className='text-sm font-m'>SM: </p>
+                      <span className='text-user6'>*</span>
+                      <input
+                        required
+                        min='0'
+                        max='20'
+                        type='number'
+                        name='sm-ada-status-gigi-desidus'
+                        id='sm-ada-status-gigi-desidus'
+                        value={props.smAdaGigiDesidus}
+                        onChange={(e) => {
+                          props.setSmAdaGigiDesidus(e.target.value);
+                        }}
+                        className='outline outline-1 outline-userBlack w-10 m-3 text-sm font-m'
+                      />
+                    </div>
                   </div>
                 </div>
                 {props.sumDMFXDesidus > 20 && (
                   <p className='text-user6 font-semibold'>
-                    jumlah <span className='lowercase'>dmfx</span> tidak boleh
-                    melebihi 20
+                    jumlah <span className='lowercase'>dmfx</span> dan SM tidak
+                    boleh melebihi 20
                   </p>
                 )}
               </article>
@@ -711,6 +747,21 @@ export default function PemeriksaanAwal(props) {
                   Status Gigi Kekal<span className='text-user6'>*</span>
                 </h4>
                 <div className='grid grid-cols-2'>
+                  <div className='flex items-center flex-row pl-5'>
+                    <input
+                      type='checkbox'
+                      name='ada-kekal'
+                      id='ada-kekal'
+                      checked={props.adaKekal}
+                      onChange={() => {
+                        props.setAdaKekal(!props.adaKekal);
+                      }}
+                      className='w-4 h-4 text-red-600 bg-gray-100 rounded border-gray-300 focus:ring-red-500 focus:ring-2 '
+                    />
+                    <label htmlFor='ada-kekal' className='m-2 text-sm font-m'>
+                      ada gigi kekal
+                    </label>
+                  </div>
                   {/* <div className='flex items-center flex-row pl-5 col-span-2'>
                     <span
                       className='outline outline-1 outline-userBlack w-10 m-3 text-sm font-m bg-user1 text-userWhite hover:cursor-pointer'
@@ -728,7 +779,11 @@ export default function PemeriksaanAwal(props) {
                         : 'Klik butang jika ada gigi kekal'}
                     </p>
                   </div> */}
-                  <div className='grid grid-cols-2 gap-2'>
+                  <div
+                    className={`${
+                      !props.adaKekal && 'hidden'
+                    } grid grid-cols-2 gap-2`}
+                  >
                     <div className='flex flex-row items-center  pl-5'>
                       <p className='text-sm font-m '>D: </p>
                       <span className='text-user6'>*</span>
@@ -851,49 +906,6 @@ export default function PemeriksaanAwal(props) {
                       <option value='7'>7</option>
                       <option value='8'>8</option>
                     </select>
-                  </div>
-                  <div className='grid grid-cols-3 gap-1'>
-                    {/* depend on faktor risiko tukar warna */}
-                    <p
-                      className={`${
-                        props.jumlahFaktorRisiko < 3 &&
-                        props.dAdaGigiKekal === 0 &&
-                        props.dAdaGigiDesidus === 0
-                          ? 'bg-user7'
-                          : null
-                      } outline outline-1 outline-userBlack w-30 m-1 text-sm font-m`}
-                    >
-                      {/* pls change props.umur to jumlah resiko karies */}
-                      Rendah
-                    </p>
-                    <p
-                      className={`${
-                        (props.jumlahFaktorRisiko >= 3 &&
-                          props.dAdaGigiKekal === 0 &&
-                          props.dAdaGigiDesidus === 0) ||
-                        (props.jumlahFaktorRisiko <= 2 &&
-                          props.eAdaGigiKekal >= 1) ||
-                        (props.jumlahFaktorRisiko === 0 &&
-                          props.dAdaGigiKekal >= 1 &&
-                          props.dAdaGigiDesidus >= 1)
-                          ? 'bg-user8'
-                          : null
-                      } outline outline-1 outline-userBlack w-30 m-1 text-sm font-m`}
-                    >
-                      {/* pls change props.umur to jumlah resiko karies */}
-                      Sederhana
-                    </p>
-                    <p
-                      className={`${
-                        props.jumlahFaktorRisiko >= 3 &&
-                        props.eAdaGigiKekal >= 1
-                          ? 'bg-user9'
-                          : null
-                      } outline outline-1 outline-userBlack w-30 m-1 text-sm font-m`}
-                    >
-                      {/* pls change props.umur to jumlah resiko karies */}
-                      Tinggi
-                    </p>
                   </div>
                 </div>
               </article>

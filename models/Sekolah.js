@@ -163,6 +163,10 @@ const SekolahSchema = new mongoose.Schema({
     type: String,
     default: '',
   },
+  adaDesidus: {
+    type: Boolean,
+    default: false,
+  },
   dAdaGigiDesidus: {
     type: Number,
     min: 0,
@@ -182,6 +186,15 @@ const SekolahSchema = new mongoose.Schema({
     type: Number,
     min: 0,
     default: 0,
+  },
+  smAdaGigiDesidus: {
+    type: Number,
+    min: 0,
+    default: 0,
+  },
+  adaKekal: {
+    type: Boolean,
+    default: false,
   },
   dAdaGigiKekal: {
     type: Number,
