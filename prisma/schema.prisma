@@ -1,0 +1,178 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Pesakit {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  createdByNegeri String @db.VarChar(255)
+  createdByDaerah String @db.VarChar(255)
+  createdByKp String @db.VarChar(255)
+  createdByUsername String @db.VarChar(255)
+  statusRawatan String 
+  nama String
+  jantina String
+  umur Int
+  namaSekolah String
+  kelas String
+  ic String
+  tarikhLahir DateTime
+  warganegara String
+  bangsa String
+  darjah Int
+  tingkatan Int
+  statikBergerak String
+  kpBergerak Boolean @default(false)
+  plateNo String
+  baruUlanganKedatanganPendaftaran String
+  engganKedatanganPendaftaran Boolean @default(false)
+  tidakHadirKedatanganPendaftaran Boolean @default(false)
+  adaTiadaPemeriksaanPendaftaran String
+  tinggiRendahRisikoSekolahPendaftaran String
+  // pemeriksaan awal div 1 --------------------------------------------------
+  adaCleftLip Boolean @default(false)
+  rujukCleftLip Boolean @default(false)
+  yaTidakSediaAdaStatusDenture String
+  separaPenuhAtasSediaAdaDenture String
+  separaPenuhBawahSediaAdaDenture String
+  yaTidakPerluStatusDenture String
+  separaPenuhAtasPerluDenture String
+  separaPenuhBawahPerluDenture String
+  toothSurfaceLossTrauma Boolean @default(false)
+  kecederaanGigiAnteriorTrauma Boolean @default(false)
+  tisuLembutTrauma Boolean @default(false)
+  tisuKerasTrauma Boolean @default(false)
+  // pemeriksaan awal div 2
+  kebersihanMulutOralHygiene String
+  skorBpeOralHygiene String
+  saringanKanserMulutOralHygiene Boolean @default(false)
+  skorGisMulutOralHygiene String
+  dAdaGigiDesidus Int @default(0)
+  mAdaGigiDesidus Int @default(0)
+  fAdaGigiDesidus Int @default(0)
+  xAdaGigiDesidus Int @default(0)
+  dAdaGigiKekal Int @default(0)
+  mAdaGigiKekal Int @default(0)
+  fAdaGigiKekal Int @default(0)
+  eAdaGigiKekal Int @default(0)
+  xAdaGigiKekal Int @default(0)
+  jumlahFaktorRisiko Int @default(0)
+  // pemeriksaan awal div 3
+  gicBilanganFsDibuat3TahunLepas Int @default(0)
+  resinBilanganFsDibuat3TahunLepas Int @default(0)
+  lainLainBilanganFsDibuat3TahunLepas Int @default(0)
+  dBilanganFsDibuat3TahunLepasTerjadi Int @default(0)
+  mBilanganFsDibuat3TahunLepasTerjadi Int @default(0)
+  fBilanganFsDibuat3TahunLepasTerjadi Int @default(0)
+  eBilanganFsDibuat3TahunLepasTerjadi Int @default(0)
+  xBilanganFsDibuat3TahunLepasTerjadi Int @default(0)
+  classID Int @default(0)
+  classIID Int @default(0)
+  classIF Int @default(0)
+  classIIF Int @default(0)
+  // perlu dibuat --------------------------------------------------
+  baruJumlahGigiKekalPerluFs Int @default(0)
+  semulaJumlahGigiKekalPerluFs Int @default(0)
+  jumlahGigiFsGagal Int @default(0)
+  baruJumlahGigiKekalPerluFv Int @default(0)
+  semulaJumlahGigiKekalPerluFv Int @default(0)
+  baruJumlahGigiKekalPerluPrrJenis1 Int @default(0)
+  semulaJumlahGigiKekalPerluPrrJenis1 Int @default(0)
+  yaTidakSilverDiamineFluoridePerluSapuan String
+  baruGDAnteriorSewarnaJumlahTampalanDiperlukan Int @default(0)
+  semulaGDAnteriorSewarnaJumlahTampalanDiperlukan Int @default(0)
+  baruGKAnteriorSewarnaJumlahTampalanDiperlukan Int @default(0)
+  semulaGKAnteriorSewarnaJumlahTampalanDiperlukan Int @default(0)
+  baruGDPosteriorSewarnaJumlahTampalanDiperlukan Int @default(0)
+  semulaGDPosteriorSewarnaJumlahTampalanDiperlukan Int @default(0)
+  baruGKPosteriorSewarnaJumlahTampalanDiperlukan Int @default(0)
+  semulaGKPosteriorSewarnaJumlahTampalanDiperlukan Int @default(0)
+  baruGDPosteriorAmalgamJumlahTampalanDiperlukan Int @default(0)
+  semulaGDPosteriorAmalgamJumlahTampalanDiperlukan Int @default(0)
+  baruGKPosteriorAmalgamJumlahTampalanDiperlukan Int @default(0)
+  semulaGKPosteriorAmalgamJumlahTampalanDiperlukan Int @default(0)
+  rawatanYangDilakukan Rawatan[]
+}
+
+model Rawatan {
+  // penyata akhir 1 --------------------------------------------------
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  pesakit Pesakit? @relation(fields: [idPesakit], references: [id])
+  idPesakit Int
+  baruJumlahGigiKekalDibuatFs Int @default(0)
+  semulaJumlahGigiKekalDibuatFs Int @default(0)
+  baruJumlahGigiKekalDiberiFv Int @default(0)
+  semulaJumlahGigiKekalDiberiFv Int @default(0)
+  baruJumlahGigiKekalDiberiPrrJenis1 Int @default(0)
+  semulaJumlahGigiKekalDiberiPrrJenis1 Int @default(0)
+  baruJumlahGigiYangDiberiSdf Int @default(0)
+  semulaJumlahGigiYangDiberiSdf Int @default(0)
+  gdBaruAnteriorSewarnaJumlahTampalanDibuat Int @default(0)
+  gdSemulaAnteriorSewarnaJumlahTampalanDibuat Int @default(0)
+  gkBaruAnteriorSewarnaJumlahTampalanDibuat Int @default(0)
+  gkSemulaAnteriorSewarnaJumlahTampalanDibuat Int @default(0)
+  gdBaruPosteriorSewarnaJumlahTampalanDibuat Int @default(0)
+  gdSemulaPosteriorSewarnaJumlahTampalanDibuat Int @default(0)
+  gkBaruPosteriorSewarnaJumlahTampalanDibuat Int @default(0)
+  gkSemulaPosteriorSewarnaJumlahTampalanDibuat Int @default(0)
+  gdBaruPosteriorAmalgamJumlahTampalanDibuat Int @default(0)
+  gdSemulaPosteriorAmalgamJumlahTampalanDibuat Int @default(0)
+  gkBaruPosteriorAmalgamJumlahTampalanDibuat Int @default(0)
+  gkSemulaPosteriorAmalgamJumlahTampalanDibuat Int @default(0)
+  // penyata akhir 2 --------------------------------------------------
+  cabutDesidusPenyataAkhir2 Int @default(0)
+  cabutKekalPenyataAkhir2 Int @default(0)
+  jumlahTampalanSementaraPenyataAkhir2 Int @default(0)
+  pulpotomiPenyataAkhir2 Int @default(0)
+  endodontikPenyataAkhir2 Int @default(0)
+  absesPenyataAkhir2 Int @default(0)
+  penskaleranPenyataAkhir2 Int @default(0)
+  kesSelesaiPenyataAkhir2 Boolean @default(false)
+  kesSelesaiIcdasPenyataAkhir2 Boolean @default(false)
+  rujukPenyataAkhir2 Boolean @default(false)
+  ceramahPromosiPenyataAkhir2 String
+  lmgPromosiPenyataAkhir2 String
+  yaTidakMelaksanakanAktivitiBeginPromosiPenyataAkhir2 String
+  plakGigiNasihatPergigianIndividuPromosiPenyataAkhir2 Boolean @default(false)
+  dietPemakananNasihatPergigianIndividuPromosiPenyataAkhir2 Boolean @default(false)
+  penjagaanKesihatanMulutNasihatPergigianIndividuPromosiPenyataAkhir2 Boolean @default(false)
+  kanserMulutNasihatPergigianIndividuPromosiPenyataAkhir2 Boolean @default(false)
+  // kotak --------------------------------------------------
+  statusM String
+  jenisR String
+  tarikh1 String
+  tarikh2 String
+  tarikh3 String
+  tarikh4 String
+  adaQ Boolean @default(false)
+  tiadaQ Boolean @default(false)
+  rujukG Boolean @default(false)
+  tarikhQ String
+  statusSelepas6Bulan String
+}
+
+// model Profile {
+//   id     Int     @id @default(autoincrement())
+//   bio    String?
+//   user   User    @relation(fields: [userId], references: [id])
+//   userId Int     @unique
+// }
+
+// model User {
+//   id      Int      @id @default(autoincrement())
+//   email   String   @unique
+//   name    String?
+//   posts   Post[]
+//   profile Profile?
+// }

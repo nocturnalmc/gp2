@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/Nocturnalmc/gp2#readme",
   "dependencies": {
+    "@prisma/client": "^4.1.0",
     "async": "^3.2.3",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.0",
@@ -41,6 +42,7 @@
   },
   "devDependencies": {
     "concurrently": "^7.1.0",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "prisma": "^4.0.0"
   }
 }
