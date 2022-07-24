@@ -229,7 +229,10 @@ const queryPersonSekolah = async (req, res) => {
     queryObject.kelas = kelas;
   }
 
-  const sekolahResultQuery = await Sekolah.find(queryObject);
+  const sekolahResultQuery = await Sekolah.find(queryObject)
+    .populate('pemeriksaanSekolah')
+    .populate('rawatanSekolah')
+    .populate('kotakSekolah');
 
   res.status(200).json({ sekolahResultQuery });
 };

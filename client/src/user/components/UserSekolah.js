@@ -72,15 +72,15 @@ function UserSekolah() {
           setAllPersonSekolahs([]);
         }
         setIsLoading(false);
-        allPersonSekolahs.map((singlePersonSekolah) => {
-          if (
-            singlePersonSekolah.pemeriksaanSekolah &&
-            singlePersonSekolah.pemeriksaanSekolah.createdByUsername
-          ) {
-            console.log(
-              singlePersonSekolah.pemeriksaanSekolah.createdByUsername
-            );
-          }
+        allPersonSekolahs.map((singlePersonSekolah, index, arr) => {
+          // if (singlePersonSekolah.pemeriksaanSekolah) {
+          //   arr.pemeriksaanSekolah.map((singlePersonSekolah2, index2, arr2) => {
+          //     if (index2 + 1 === arr2.length) {
+          //       console.log(singlePersonSekolah2);
+          //     }
+          //   });
+          // }
+          console.log(arr[arr.length - 1]);
         });
       } catch (error) {
         console.log(error);
