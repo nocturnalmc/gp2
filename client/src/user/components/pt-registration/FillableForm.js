@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
+import { Spinner } from 'react-awesome-spinners';
 
 import { useGlobalUserAppContext } from '../../context/userAppContext';
 
@@ -9,6 +10,7 @@ export default function FillableForm({
   createdByKp,
   createdByDaerah,
   createdByNegeri,
+  jenisFasiliti,
   dateToday,
   refetch,
   toast,
@@ -25,6 +27,7 @@ export default function FillableForm({
   const [alamat, setAlamat] = useState('');
   const [waktuSampai, setWaktuSampai] = useState('');
   const [kategoriPesakit, setKategoriPesakit] = useState('');
+  const [statusPesara, setStatusPesara] = useState('');
   const [kumpulanEtnik, setKumpulanEtnik] = useState('');
   const [rujukDaripada, setRujukDaripada] = useState('');
 
@@ -48,8 +51,10 @@ export default function FillableForm({
         alamat: alamat,
         waktuSampai: waktuSampai,
         kategoriPesakit: kategoriPesakit,
+        statusPesara: statusPesara,
         kumpulanEtnik: kumpulanEtnik,
         rujukDaripada: rujukDaripada,
+        jenisFasiliti: jenisFasiliti,
       },
     })
       .then(() => {
@@ -82,14 +87,22 @@ export default function FillableForm({
     });
   };
 
-  if (loading) return <p>Submitting...</p>;
+  if (loading)
+    return (
+      <p>
+        <Spinner />
+      </p>
+    );
   if (error) return <p>Error :(</p>;
 
   if (showForm) {
     return (
       <>
         <form onSubmit={handleSubmit}>
-          <h1 className='bg-user3 font-bold text-2xl'>pendaftaran</h1>
+          <h1 className='bg-kaunter3 font-bold text-2xl'>pendaftaran</h1>
+          <p className='font-semibold text-user6 text-left mt-3 ml-3'>
+            Fasiliti: {jenisFasiliti}
+          </p>
           <p className='font-semibold text-user6 text-left mt-3 ml-3'>
             * required
           </p>
@@ -106,6 +119,19 @@ export default function FillableForm({
                 type='date'
                 name='tarikhKedatangan'
                 className='outline outline-1 outline-userBlack'
+              />
+            </div>
+            <div className='flex m-2 ml-auto'>
+              <p className='mr-3 font-semibold'>
+                waktu sampai:{' '}
+                <span className='font-semibold text-user6'>*</span>
+              </p>
+              <input
+                required
+                onChange={(e) => setWaktuSampai(e.target.value)}
+                type='time'
+                name='waktuSampai'
+                className='outline outline-1 outline-kaunterBlack'
               />
             </div>
             <div className='flex m-2'>
@@ -201,19 +227,6 @@ export default function FillableForm({
             </div>
             <div className='flex m-2'>
               <p className='mr-3 font-semibold'>
-                waktu sampai:{' '}
-                <span className='font-semibold text-user6'>*</span>
-              </p>
-              <input
-                required
-                onChange={(e) => setWaktuSampai(e.target.value)}
-                type='time'
-                name='waktuSampai'
-                className='outline outline-1 outline-userBlack'
-              />
-            </div>
-            <div className='flex m-2'>
-              <p className='mr-3 font-semibold'>
                 kategori pesakit:{' '}
                 <span className='font-semibold text-user6'>*</span>
               </p>
@@ -232,6 +245,28 @@ export default function FillableForm({
                 <option value='hamil'>Ibu mengandung</option>
                 <option value='dewasa'>Dewasa</option>
                 <option value='warga-tua'>Warga tua</option>
+              </select>
+            </div>
+            <div
+              className={`${
+                kategoriPesakit === 'warga-tua' ? 'visible' : 'hidden'
+              } flex m-2`}
+            >
+              <p className='mr-3 font-semibold'>
+                status pesara:{' '}
+                <span className='font-semibold text-user6'>*</span>
+              </p>
+              <select
+                required
+                name='statusPesara'
+                id='statusPesara'
+                onChange={(e) => setStatusPesara(e.target.value)}
+              >
+                <option selected disabled>
+                  Sila pilih..
+                </option>
+                <option value='kerajaan'>kerajaan</option>
+                <option value='atm'>ATM</option>
               </select>
             </div>
             <div className='flex m-2'>
@@ -274,23 +309,32 @@ export default function FillableForm({
             </div>
             <div className='flex m-2'>
               <p className='mr-3 font-semibold'>rujuk daripada: </p>
-              <input
-                onChange={(e) => setRujukDaripada(e.target.value)}
-                type='text'
+              <select
+                required
                 name='rujukDaripada'
-                className='appearance-none leading-7 px-3 py-1 ring-2 focus:ring-2 focus:ring-user1 focus:outline-none rounded-md shadow-md'
-              />
+                id='rujukDaripada'
+                onChange={(e) => setRujukDaripada(e.target.value)}
+                className='mr-3'
+              >
+                <option value=''>Sila pilih..</option>
+                <option value='dalaman'>Dalaman</option>
+                <option value='kp'>Klinik Pergigian</option>
+                <option value='kk'>Klinik Kesihatan</option>
+                <option value='hospital'>Hospital</option>
+                <option value='swasta'>Swasta</option>
+                <option value='lain2'>Lain-lain</option>
+              </select>
             </div>
           </div>
           <span
             onClick={() => setShowForm(false)}
-            className='m-2 p-2 capitalize bg-user3 hover:bg-user1 hover:text-userWhite hover:cursor-pointer transition-all'
+            className='m-2 p-2 uppercase rounded bg-kaunter3 hover:bg-kaunter1 hover:text-userWhite hover:cursor-pointer shadow-md transition-all'
           >
             kembali
           </span>
           <button
             type='submit'
-            className='m-2 p-2 capitalize bg-user3 hover:bg-user1 hover:text-userWhite transition-all'
+            className='m-2 p-2 uppercase rounded bg-kaunter3 hover:bg-kaunter1 hover:text-userWhite hover:cursor-pointer shadow-md transition-all'
           >
             daftar
           </button>

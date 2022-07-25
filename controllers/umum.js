@@ -41,7 +41,7 @@ const updatePersonUmum = async (req, res) => {
 const queryPersonUmum = async (req, res) => {
   const {
     user: { kp },
-    query: { nama, tarikhKedatangan },
+    query: { nama, tarikhKedatangan, jenisFasiliti },
   } = req;
   const queryObject = {};
   queryObject.createdByKp = kp;
@@ -52,6 +52,10 @@ const queryPersonUmum = async (req, res) => {
 
   if (tarikhKedatangan) {
     queryObject.tarikhKedatangan = tarikhKedatangan;
+  }
+
+  if (jenisFasiliti) {
+    queryObject.jenisFasiliti = jenisFasiliti;
   }
 
   const umumResultQuery = await Umum.find(queryObject);

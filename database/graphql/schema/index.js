@@ -18,7 +18,9 @@ module.exports = buildSchema(`
     waktuSampai: String,
     kategoriPesakit: String,
     kumpulanEtnik: String,
+    statusPesara: String,
     rujukDaripada: String,
+    jenisFasiliti: String,
     createdAt: String
   }
   type Operator {
@@ -62,8 +64,10 @@ module.exports = buildSchema(`
     alamat: String,
     waktuSampai: String,
     kategoriPesakit: String,
+    statusPesara: String,
     kumpulanEtnik: String,
     rujukDaripada: String,
+    jenisFasiliti: String,
   }
   input OperatorType {
     nama: String
@@ -95,8 +99,10 @@ module.exports = buildSchema(`
     alamat: String,
     waktuSampai: String,
     kategoriPesakit: String,
+    statusPesara: String,
     kumpulanEtnik: String,
     rujukDaripada: String,
+    jenisFasiliti: String,
   }
   input UpdateFasiliti{
     _id: String,
@@ -124,7 +130,7 @@ module.exports = buildSchema(`
     fasiliti(_id: String!): Fasiliti!
     fasilitis: [Fasiliti]
     fasilitisByType(jenisFasiliti: String!, daerah: String!): [Fasiliti]
-    listPatientByTarikhKedatangan(tarikhKedatangan: String!): [Patient!]
+    listPatientByTarikhKedatangan(tarikhKedatangan: String!, jenisFasiliti: String!): [Patient]
     facOrPeg(_id: String!): facOrPeg
   }
   type Mutation {

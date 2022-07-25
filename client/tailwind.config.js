@@ -21,6 +21,13 @@ module.exports = {
       admin6: '#0f0f0f', // hitam custom
       adminWhite: 'white',
       adminBlack: 'black',
+      kaunter1: '#e05200', // oren gelap
+      kaunter2: '#fd8b49', // oren
+      kaunter3: '#ffbf99', // oren pucat
+      kaunter4: '#3e6c70', // turqoise?????
+      kaunter5: '#2f5653', // turqoise gelap?????
+      kaunterWhite: 'white',
+      kaunterBlack: 'black',
     },
     extend: {},
   },

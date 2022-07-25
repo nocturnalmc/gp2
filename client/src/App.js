@@ -2,8 +2,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // kaunter import ----------------------------------------
 import KaunterLogin from './user/pages/KaunterLogin';
+import KaunterAfterLogin from './user/pages/KaunterAfterLogin';
 import KaunterProtectedRoute from './user/pages/KaunterProtectedRoute';
-import Kaunter from './user/pages/Kaunter';
 
 // user import ------------------------------------------
 import { UserAppProvider } from './user/context/userAppContext';
@@ -33,7 +33,7 @@ function App() {
               path='/kaunter/daftar/*'
               element={
                 <KaunterProtectedRoute>
-                  <Kaunter />
+                  <KaunterAfterLogin />
                 </KaunterProtectedRoute>
               }
             />

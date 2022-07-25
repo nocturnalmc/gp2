@@ -67,6 +67,10 @@ const UmumSchema = new mongoose.Schema(
       type: String,
       // required: [true, 'Please provide kumpulan etnik'],
     },
+    statusPesara: {
+      type: String,
+      default: 'bukan-pesara',
+    },
     rujukDaripada: {
       type: String,
       // required: [true, 'Please provide rujuk dari'],

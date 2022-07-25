@@ -10,6 +10,7 @@ function UserUmum() {
   const [isLoading, setIsLoading] = useState(true);
   const [nama, setNama] = useState('');
   const [tarikhKedatangan, setTarikhKedatangan] = useState(dateToday);
+  const [jenisFasiliti, setJenisFasiliti] = useState('klinik');
   const [queryResult, setQueryResult] = useState([]);
   const [pilih, setPilih] = useState('');
   const [resultPilih, setResultPilih] = useState([]);
@@ -19,7 +20,7 @@ function UserUmum() {
       try {
         setIsLoading(true);
         const { data } = await axios.get(
-          `/api/v1/query/umum?nama=${nama}&tarikhKedatangan=${tarikhKedatangan}`,
+          `/api/v1/query/umum?nama=${nama}&tarikhKedatangan=${tarikhKedatangan}&jenisFasiliti=${jenisFasiliti}`,
           { headers: { Authorization: `Bearer ${userToken}` } }
         );
         setQueryResult(data.umumResultQuery);
@@ -29,7 +30,7 @@ function UserUmum() {
       }
     };
     query();
-  }, [nama, tarikhKedatangan]);
+  }, [nama, tarikhKedatangan, jenisFasiliti]);
 
   useEffect(() => {
     const resultFilter = queryResult.filter((singlePersonUmum) => {
@@ -69,6 +70,29 @@ function UserUmum() {
             id='tarikh-kedatangan'
             className='outline outline-1 outline-user1'
           />
+          <label className='ml-80 mr-3' htmlFor='jenis-fasiliti'>
+            pilih jenis fasiliti:
+          </label>
+          <select
+            name='jenis-fasiliti'
+            id='jenis-fasiliti'
+            value={jenisFasiliti}
+            onChange={(e) => {
+              setJenisFasiliti(e.target.value);
+            }}
+          >
+            <option value='klinik'>Klinik</option>
+            <option value='kkkd'>KK / KD</option>
+            <option value='tastad'>Taska / Tadika</option>
+            <option value='ipt'>IPTA / IPTS</option>
+            <option value='orang-asli'>Orang asli</option>
+            <option value='ppr'>PPR</option>
+            <option value='iwe'>Institusi warga emas</option>
+            <option value='oku'>Institusi OKU</option>
+            <option value='ngangkat'>Kampung angkat</option>
+            <option value='komlain'>Projek komuniti lain</option>
+            <option value='kelantan'>RTC (Kelantan sahaja)</option>
+          </select>
         </form>
         <section className='my-5 p-1 outline outline-1 outline-user1'>
           <h2 className='text-xl font-semibold flex flex-row pl-12 p-2'>
@@ -79,6 +103,9 @@ function UserUmum() {
               <th className='outline outline-1 outline-userBlack'>BIL</th>
               <th className='outline outline-1 outline-userBlack w-3/6'>
                 NAMA PESAKIT
+              </th>
+              <th className='outline outline-1 outline-userBlack'>
+                JENIS FASILITI
               </th>
               <th className='outline outline-1 outline-userBlack'>
                 KAD PENGENALAN
@@ -105,6 +132,13 @@ function UserUmum() {
                       } outline outline-1 outline-userBlack`}
                     >
                       {singlePersonUmum.nama}
+                    </td>
+                    <td
+                      className={`${
+                        pilih === singlePersonUmum._id && 'bg-user4'
+                      } outline outline-1 outline-userBlack`}
+                    >
+                      {singlePersonUmum.jenisFasiliti}
                     </td>
                     <td
                       className={`${

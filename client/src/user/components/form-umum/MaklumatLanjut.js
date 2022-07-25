@@ -17,7 +17,7 @@ function MaklumatLanjut(props) {
                 name='kedatangan'
                 id='baru-kedatangan'
                 value='baru-kedatangan'
-                checked={props.kedatangan == 'baru-kedatangan' ? true : false}
+                checked={props.kedatangan === 'baru-kedatangan' ? true : false}
                 onChange={(e) => {
                   props.setKedatangan(e.target.value);
                 }}
@@ -35,7 +35,7 @@ function MaklumatLanjut(props) {
                 id='ulangan-kedatangan'
                 value='ulangan-kedatangan'
                 checked={
-                  props.kedatangan == 'ulangan-kedatangan' ? true : false
+                  props.kedatangan === 'ulangan-kedatangan' ? true : false
                 }
                 onChange={(e) => {
                   props.setKedatangan(e.target.value);
@@ -48,12 +48,23 @@ function MaklumatLanjut(props) {
               >
                 ulangan
               </label>
+              <br />
+              <div>
+                <input
+                  type='date'
+                  required
+                  className='outline outline-1 outline-userBlack m-2 text-sm font-m'
+                  onChange={(e) => {
+                    props.setTarikhKedatangan = e.target.value;
+                  }}
+                />
+              </div>
             </div>
           </article>
           <div className='row-span-4 border border-userBlack pl-3 p-2 rounded-md'>
             <article className='grid grid-cols-2 border border-userBlack pl-3 p-2 rounded-md'>
               <div>
-                <p className='font-semibold'>fasiliti taska / tadika</p>
+                <p className='font-semibold'>fasiliti taska / tadika </p>
                 <select
                   name='fasiliti-taska-tadika'
                   id='fasiliti-taska-tadika'
@@ -78,10 +89,12 @@ function MaklumatLanjut(props) {
                   }}
                 >
                   <option value=''>Pilih</option>
-                  <option value='wuuttttt?'>
-                    Taska & Tadika Ada Pilihan Kerajaan & Swasta??
-                  </option>
+                  <option value='taska'>KEMAS </option>
+                  <option value='tadika'>Perpaduan </option>
+                  <option value='taska'>Lain-lain</option>
+                  <option value='tadika'>Swasta</option>
                 </select>
+                <br />
                 <input
                   type='checkbox'
                   id='kelas-toddler'
@@ -94,7 +107,7 @@ function MaklumatLanjut(props) {
                   className='w-4 h-4 text-red-600 bg-gray-100 rounded border-gray-300 focus:ring-red-500'
                 />
                 <label htmlFor='kelas-toddler' className='ml-2 text-sm font-m'>
-                  kelas toddler
+                  Kelas toddler
                 </label>
               </div>
             </article>
@@ -145,7 +158,7 @@ function MaklumatLanjut(props) {
                     id='baru-kedatangan-taska-tadika'
                     value='baru-kedatangan-taska-tadika'
                     checked={
-                      props.kedatanganTaskaTadika ==
+                      props.kedatanganTaskaTadika ===
                       'baru-kedatangan-taska-tadika'
                         ? true
                         : false
@@ -170,7 +183,7 @@ function MaklumatLanjut(props) {
                     id='ulangan-kedatangan-taska-tadika'
                     value='ulangan-kedatangan-taska-tadika'
                     checked={
-                      props.kedatanganTaskaTadika ==
+                      props.kedatanganTaskaTadika ===
                       'ulangan-kedatangan-taska-tadika'
                         ? true
                         : false
@@ -241,7 +254,7 @@ function MaklumatLanjut(props) {
                     id='ada-pemeriksaan-taska-tadika'
                     value='ada-pemeriksaan-taska-tadika'
                     checked={
-                      props.pemeriksaanTaskaTadika ==
+                      props.pemeriksaanTaskaTadika ===
                       'ada-pemeriksaan-taska-tadika'
                         ? true
                         : false
@@ -265,7 +278,7 @@ function MaklumatLanjut(props) {
                     id='tiada-pemeriksaan-taska-tadika'
                     value='tiada-pemeriksaan-taska-tadika'
                     checked={
-                      props.pemeriksaanTaskaTadika ==
+                      props.pemeriksaanTaskaTadika ===
                       'tiada-pemeriksaan-taska-tadika'
                         ? true
                         : false
@@ -285,7 +298,7 @@ function MaklumatLanjut(props) {
               </div>
             </article>
           </div>
-          <article className='grid grid-cols-2 border border-userBlack pl-3 p-2 rounded-md'>
+          {/* <article className='grid grid-cols-2 border border-userBlack pl-3 p-2 rounded-md'>
             <div>
               <p className='font-semibold'>ibu mengandung</p>
             </div>
@@ -298,7 +311,7 @@ function MaklumatLanjut(props) {
                   id='ya-ibu-mengandung'
                   value='ya-ibu-mengandung'
                   checked={
-                    props.yaTidakIbuMengandung == 'ya-ibu-mengandung'
+                    props.yaTidakIbuMengandung === 'ya-ibu-mengandung'
                       ? true
                       : false
                   }
@@ -322,7 +335,7 @@ function MaklumatLanjut(props) {
                   id='tidak-ibu-mengandung'
                   value='tidak-ibu-mengandung'
                   checked={
-                    props.yaTidakIbuMengandung == 'tidak-ibu-mengandung'
+                    props.yaTidakIbuMengandung === 'tidak-ibu-mengandung'
                       ? true
                       : false
                   }
@@ -346,7 +359,7 @@ function MaklumatLanjut(props) {
                   id='baru-ibu-mengandung'
                   value='baru-ibu-mengandung'
                   checked={
-                    props.baruUlanganIbuMengandung == 'baru-ibu-mengandung'
+                    props.baruUlanganIbuMengandung === 'baru-ibu-mengandung'
                       ? true
                       : false
                   }
@@ -370,7 +383,7 @@ function MaklumatLanjut(props) {
                   id='ulangan-ibu-mengandung'
                   value='ulangan-ibu-mengandung'
                   checked={
-                    props.baruUlanganIbuMengandung == 'ulangan-ibu-mengandung'
+                    props.baruUlanganIbuMengandung === 'ulangan-ibu-mengandung'
                       ? true
                       : false
                   }
@@ -387,7 +400,7 @@ function MaklumatLanjut(props) {
                 </label>
               </div>
             </div>
-          </article>
+          </article> */}
           <article className='grid justify-center border border-userBlack pl-3 p-2 rounded-md'>
             <div className='flex'>
               <div className='flex items-center flex-row pl-5 '>
@@ -401,7 +414,7 @@ function MaklumatLanjut(props) {
                   id='baru-kedatangan-kepp'
                   value='baru-kedatangan-kepp'
                   checked={
-                    props.kedatanganKepp == 'baru-kedatangan-kepp'
+                    props.kedatanganKepp === 'baru-kedatangan-kepp'
                       ? true
                       : false
                   }
@@ -425,7 +438,7 @@ function MaklumatLanjut(props) {
                   id='ulangan-kedatangan-kepp'
                   value='ulangan-kedatangan-kepp'
                   checked={
-                    props.kedatanganKepp == 'ulangan-kedatangan-kepp'
+                    props.kedatanganKepp === 'ulangan-kedatangan-kepp'
                       ? true
                       : false
                   }
@@ -442,7 +455,13 @@ function MaklumatLanjut(props) {
                 </label>
               </div>
             </div>
-            <div className='flex items-center flex-row pl-5 '>
+            <div
+              className={`${
+                props.kedatanganKepp === 'baru-kedatangan-kepp'
+                  ? 'visible'
+                  : 'hidden'
+              } flex items-center flex-row pl-5`}
+            >
               <label htmlFor='tarikh-rujukan' className='m-2 text-sm font-m'>
                 tarikh rujukan
               </label>
@@ -457,7 +476,34 @@ function MaklumatLanjut(props) {
                 className='outline outline-1 outline-userBlack m-2 text-sm font-m'
               />
             </div>
-            <div className='flex items-center flex-row pl-5 '>
+            <div
+              className={`${
+                props.kedatanganKepp === 'ulangan-kedatangan-kepp'
+                  ? 'visible'
+                  : 'hidden'
+              } flex items-center flex-row pl-5`}
+            >
+              <label htmlFor='tarikh-rujukan' className='m-2 text-sm font-m'>
+                tarikh perundingan pertama
+              </label>
+              <input
+                type='date'
+                name='tarikh-rujukan-kepp'
+                id='tarikh-rujukan-kepp'
+                value={props.tarikhRundinganPertama}
+                onChange={(e) => {
+                  props.setTarikhRundinganPertama(e.target.value);
+                }}
+                className='outline outline-1 outline-userBlack m-2 text-sm font-m'
+              />
+            </div>
+            <div
+              className={`${
+                props.kedatanganKepp === 'ulangan-kedatangan-kepp'
+                  ? 'visible'
+                  : 'hidden'
+              } flex items-center flex-row pl-5`}
+            >
               <label
                 htmlFor='tarikh-mula-rawatan'
                 className='m-2 text-sm font-m'
@@ -760,6 +806,56 @@ function MaklumatLanjut(props) {
                     giatmara
                   </label>
                 </div>
+                <div className='flex items-center flex-row pl-5 '>
+                  <input
+                    required
+                    type='radio'
+                    name='institusi-pengajian-tinggi-kolej'
+                    id='ipta-institusi-pengajian-tinggi-kolej'
+                    value='ipta-institusi-pengajian-tinggi-kolej'
+                    checked={
+                      props.institusiPengajianTinggiKolej ===
+                      'ipta-institusi-pengajian-tinggi-kolej'
+                        ? true
+                        : false
+                    }
+                    onChange={(e) => {
+                      props.setInstitusiPengajianTinggiKolej(e.target.value);
+                    }}
+                    className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
+                  />
+                  <label
+                    htmlFor='ipta-institusi-pengajian-tinggi-kolej'
+                    className='m-2 text-sm font-m'
+                  >
+                    IPTA
+                  </label>
+                </div>
+                <div className='flex items-center flex-row pl-5 '>
+                  <input
+                    required
+                    type='radio'
+                    name='institusi-pengajian-tinggi-kolej'
+                    id='ipts-institusi-pengajian-tinggi-kolej'
+                    value='ipts-institusi-pengajian-tinggi-kolej'
+                    checked={
+                      props.institusiPengajianTinggiKolej ===
+                      'ipts-institusi-pengajian-tinggi-kolej'
+                        ? true
+                        : false
+                    }
+                    onChange={(e) => {
+                      props.setInstitusiPengajianTinggiKolej(e.target.value);
+                    }}
+                    className='w-4 h-4 inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500'
+                  />
+                  <label
+                    htmlFor='ipts-institusi-pengajian-tinggi-kolej'
+                    className='m-2 text-sm font-m'
+                  >
+                    IPTS
+                  </label>
+                </div>
               </div>
               <div className='grid justify-start'>
                 <div className='flex items-center flex-row pl-5 '>
@@ -833,6 +929,38 @@ function MaklumatLanjut(props) {
                     value={props.giatmaraInstitusiPengajianTinggiKolej}
                     onChange={(e) => {
                       props.setGiatmaraInstitusiPengajianTinggiKolej(
+                        e.target.value
+                      );
+                    }}
+                    className='ml-5'
+                  >
+                    <option value=''>Label</option>
+                    <option value='apa??'>Apa?</option>
+                  </select>
+                </div>
+                <div className='flex items-center flex-row pl-5 '>
+                  <select
+                    name='ipta-institusi-pengajian-tinggi-kolej'
+                    id='ipta-institusi-pengajian-tinggi-kolej'
+                    value={props.iptaInstitusiPengajianTinggiKolej}
+                    onChange={(e) => {
+                      props.setIptaInstitusiPengajianTinggiKolej(
+                        e.target.value
+                      );
+                    }}
+                    className='ml-5'
+                  >
+                    <option value=''>Label</option>
+                    <option value='apa??'>Apa?</option>
+                  </select>
+                </div>
+                <div className='flex items-center flex-row pl-5 '>
+                  <select
+                    name='ipts-institusi-pengajian-tinggi-kolej'
+                    id='ipts-institusi-pengajian-tinggi-kolej'
+                    value={props.iptsInstitusiPengajianTinggiKolej}
+                    onChange={(e) => {
+                      props.setIptsInstitusiPengajianTinggiKolej(
                         e.target.value
                       );
                     }}

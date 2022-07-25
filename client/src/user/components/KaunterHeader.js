@@ -1,6 +1,6 @@
-function UserHeader() {
+function KaunterHeader() {
   return (
-    <div className='absolute top-0 left-0 right-0 flex items-center h-28 bg-user2 text-userWhite font-sans capitalize justify-center'>
+    <div className='absolute top-0 left-0 right-0 flex items-center h-28 bg-kaunter1 text-userWhite font-sans capitalize justify-center'>
       <div className='grid grid-rows-[50px_10px_10px] gap-1 text-center'>
         <img
           className='w-full h-full'
@@ -14,9 +14,10 @@ function UserHeader() {
       </div>
       <div className='grid grid-rows-2 text-2xl font-bold pl-10 text-center'>
         <h1 className='row-span-2'>sistem gi-Ret 2.0</h1>
+        <h1>KAUNTER</h1>
       </div>
     </div>
   );
 }
 
-export default UserHeader;
+export default KaunterHeader;

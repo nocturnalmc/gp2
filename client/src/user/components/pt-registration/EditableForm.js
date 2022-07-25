@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
+import { Spinner } from 'react-awesome-spinners';
 
 import { useGlobalUserAppContext } from '../../context/userAppContext';
 
@@ -28,11 +29,12 @@ export default function EditableForm({
   const [editKumpulanEtnik, setKumpulanEtnik] = useState('');
   const [editRujukDaripada, setRujukDaripada] = useState('');
 
-  const { data } = useQuery(GET_PATIENT, {
+  const { data, loading } = useQuery(GET_PATIENT, {
     variables: { id: editId },
   });
 
-  const [UpdatePatient, { editError }] = useMutation(UPDATE_PATIENT);
+  const [UpdatePatient, { editLoading, editError }] =
+    useMutation(UPDATE_PATIENT);
 
   const handleEdit = (e) => {
     e.preventDefault();
@@ -96,11 +98,19 @@ export default function EditableForm({
     }
   }, [data]);
 
+  if (editLoading || loading) {
+    return (
+      <p>
+        <Spinner />
+      </p>
+    );
+  }
+
   if (editForm) {
     return (
       <>
         <form onSubmit={handleEdit}>
-          <h1 className='bg-user3 font-bold text-2xl'>pendaftaran</h1>
+          <h1 className='bg-kaunter3 font-bold text-2xl'>pendaftaran</h1>
           <p className='font-semibold text-user6 text-left mt-3 ml-3'>
             * required
           </p>
@@ -116,7 +126,7 @@ export default function EditableForm({
                 value={editTarikhKedatangan}
                 type='date'
                 name='tarikhKedatangan'
-                className='outline outline-1 outline-userBlack'
+                className='outline outline-1 outline-kaunterBlack'
               />
             </div>
             <div className='flex m-2'>
@@ -185,7 +195,7 @@ export default function EditableForm({
                 type='number'
                 name='umur'
                 value={editUmur}
-                className='outline outline-1 outline-userBlack w-16 text-sm font-m'
+                className='outline outline-1 outline-kaunterBlack w-16 text-sm font-m'
               />
             </div>
             <div className='flex m-2'>
@@ -228,7 +238,7 @@ export default function EditableForm({
                 type='time'
                 name='waktuSampai'
                 value={editWaktuSampai}
-                className='outline outline-1 outline-userBlack'
+                className='outline outline-1 outline-kaunterBlack'
               />
             </div>
             <div className='flex m-2'>
@@ -295,24 +305,33 @@ export default function EditableForm({
             </div>
             <div className='flex m-2'>
               <p className='mr-3 font-semibold'>rujuk daripada: </p>
-              <input
-                onChange={(e) => setRujukDaripada(e.target.value)}
-                type='text'
+              <select
+                required
                 name='rujukDaripada'
+                id='rujukDaripada'
                 value={editRujukDaripada}
-                className='appearance-none leading-7 px-3 py-1 ring-2 focus:ring-2 focus:ring-user1 focus:outline-none rounded-md shadow-md'
-              />
+                onChange={(e) => setRujukDaripada(e.target.value)}
+                className='mr-3'
+              >
+                <option value=''>Sila pilih..</option>
+                <option value='dalaman'>Dalaman</option>
+                <option value='kp'>Klinik Pergigian</option>
+                <option value='kk'>Klinik Kesihatan</option>
+                <option value='hospital'>Hospital</option>
+                <option value='swasta'>Swasta</option>
+                <option value='lain2'>Lain-lain</option>
+              </select>
             </div>
           </div>
           <span
-            className='m-2 p-2 capitalize bg-user3 hover:bg-user1 hover:text-userWhite hover:cursor-pointer transition-all'
+            className='m-2 p-2 uppercase rounded bg-kaunter3 hover:bg-kaunter1 hover:text-userWhite hover:cursor-pointer shadow-md transition-all'
             onClick={() => setEditForm(false)}
           >
             kembali
           </span>
           <button
             type='submit'
-            className='m-2 p-2 capitalize bg-user3 hover:bg-user1 hover:text-userWhite transition-all'
+            className='m-2 p-2 uppercase rounded bg-kaunter3 hover:bg-kaunter1 hover:text-userWhite hover:cursor-pointer shadow-md transition-all'
           >
             Submit
           </button>
