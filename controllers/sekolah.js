@@ -1,13 +1,35 @@
 const Sekolah = require('../models/Sekolah');
+const Pemeriksaansekolah = require('../models/Pemeriksaansekolah');
+const Rawatansekolah = require('../models/Rawatansekolah');
+const Kotaksekolah = require('../models/Kotaksekolah');
+const Fasiliti = require('../models/Fasiliti');
 
-const getAllPersonSekolahs = async (req, res) => {
+// GET /
+const getAllPersonSekolahsVanilla = async (req, res) => {
+  const { kp } = req.user;
+  const fasilitiSekolahs = await Fasiliti.find({
+    handler: kp,
+    jenisFasiliti: { $in: ['sekolah-rendah', 'sekolah-menengah'] },
+  });
+
+  const namaSekolahs = fasilitiSekolahs.reduce(
+    (arrNamaSekolahs, singleFasilitiSekolah) => {
+      if (!arrNamaSekolahs.includes(singleFasilitiSekolah.nama)) {
+        arrNamaSekolahs.push(singleFasilitiSekolah.nama);
+      }
+      return arrNamaSekolahs.filter((valid) => valid);
+    },
+    ['']
+  );
+
   const allPersonSekolahs = await Sekolah.find({
-    createdByKp: req.user.kp,
+    namaSekolah: { $in: [...namaSekolahs] },
   });
   res.status(200).json({ allPersonSekolahs });
 };
 
-const getSinglePersonSekolah = async (req, res) => {
+// GET /:personSekolahId
+const getSinglePersonSekolahVanilla = async (req, res) => {
   const {
     params: { id: personSekolahId },
   } = req;
@@ -23,61 +45,164 @@ const getSinglePersonSekolah = async (req, res) => {
   res.status(200).json({ singlePersonSekolah });
 };
 
-// this function might not be used since we already has ERKM
-const createPersonSekolah = async (req, res) => {
-  // associate negeri, daerah & kp to each person sekolah
-  req.body.createdByNegeri = req.user.negeri;
-  req.body.createdByDaerah = req.user.daerah;
-  req.body.createdByKp = req.user.kp;
+// GET /populate
+const getAllPersonSekolahsWithPopulate = async (req, res) => {
+  const { kp } = req.user;
+  const fasilitiSekolahs = await Fasiliti.find({
+    handler: kp,
+    jenisFasiliti: { $in: ['sekolah-rendah', 'sekolah-menengah'] },
+  });
 
+  const namaSekolahs = fasilitiSekolahs.reduce(
+    (arrNamaSekolahs, singleFasilitiSekolah) => {
+      if (!arrNamaSekolahs.includes(singleFasilitiSekolah.nama)) {
+        arrNamaSekolahs.push(singleFasilitiSekolah.nama);
+      }
+      return arrNamaSekolahs.filter((valid) => valid);
+    },
+    ['']
+  );
+
+  const allPersonSekolahs = await Sekolah.find({
+    namaSekolah: { $in: [...namaSekolahs] },
+  })
+    .populate('pemeriksaanSekolah')
+    .populate('rawatanSekolah')
+    .populate('kotakSekolah');
+
+  res.status(200).json({ allPersonSekolahs });
+};
+
+// GET /populate/:personSekolahId
+const getSinglePersonSekolahWithPopulate = async (req, res) => {
+  const personSekolahWithPopulate = await Sekolah.findOne({
+    _id: req.params.personSekolahId,
+  })
+    .populate('pemeriksaanSekolah')
+    .populate('rawatanSekolah')
+    .populate('kotakSekolah');
+
+  res.status(201).json({ personSekolahWithPopulate });
+};
+
+// POST /
+// will use for ERKM
+const createPersonSekolah = async (req, res) => {
   const personSekolah = await Sekolah.create(req.body);
+
   res.status(201).json({ personSekolah });
 };
 
-const updatePersonSekolah = async (req, res) => {
-  const {
-    params: { id: personSekolahId },
-  } = req;
-
-  // associate negeri, daerah & kp to each person sekolah for every update
+// set statusRawatan to 'belum selesai' when creating pemeriksaan
+// POST /pemeriksaan/:personSekolahId
+const createPemeriksaanWithSetPersonSekolah = async (req, res) => {
+  // associate negeri, daerah, kp to each person sekolah when creating pemeriksaan
   req.body.createdByNegeri = req.user.negeri;
   req.body.createdByDaerah = req.user.daerah;
   req.body.createdByKp = req.user.kp;
 
-  const updatedSinglePersonSekolah = await Sekolah.findOneAndUpdate(
-    { _id: personSekolahId },
-    req.body,
-    { new: true, runValidators: true }
+  const pemeriksaanSekolah = await Pemeriksaansekolah.create(req.body);
+
+  // masukkan pemeriksaan ID dalam personSekolah
+  const personSekolah = await Sekolah.findOneAndUpdate(
+    { _id: req.params.personSekolahId },
+    {
+      $set: {
+        pemeriksaanSekolah: pemeriksaanSekolah._id,
+        statusRawatan: 'belum selesai',
+      },
+    },
+    { new: true }
   );
 
-  if (!updatedSinglePersonSekolah) {
-    return res
-      .status(404)
-      .json({ msg: `No person with id ${personSekolahId}` });
-  }
-
-  res.status(200).json({ updatedSinglePersonSekolah });
+  res.status(201).json({ personSekolah });
 };
 
-// this function might not be used since we already has ERKM and a person must persist and cannot be deleted
-const deletePersonSekolah = async (req, res) => {
-  const {
-    user: { kp },
-    params: { id: personSekolahId },
-  } = req;
+// POST /rawatan/:personSekolahId
+const createRawatanWithPushPersonSekolah = async (req, res) => {
+  // associate negeri, daerah & kp to each person sekolah when creating rawatan
+  req.body.createdByNegeri = req.user.negeri;
+  req.body.createdByDaerah = req.user.daerah;
+  req.body.createdByKp = req.user.kp;
 
-  const deletedSinglePersonSekolah = await Sekolah.findOneAndRemove({
-    _id: personSekolahId,
-    createdByKp: kp,
-  });
+  const rawatanSekolah = await Rawatansekolah.create(req.body);
 
-  if (!deletedSinglePersonSekolah) {
+  // masukkan rawatan ID dalam personSekolah
+  const personSekolah = await Sekolah.findOneAndUpdate(
+    { _id: req.params.personSekolahId },
+    {
+      $push: { rawatanSekolah: rawatanSekolah._id },
+      $set: { statusRawatan: req.body.statusRawatan },
+    },
+    { new: true }
+  );
+
+  res.status(201).json({ personSekolah });
+};
+
+// kotak tak handle statusRawatan
+// POST /kotak/:personSekolahId
+const createKotakWithSetPersonSekolah = async (req, res) => {
+  // associate negeri, daerah, kp to each person sekolah when creating kotak
+  req.body.createdByNegeri = req.user.negeri;
+  req.body.createdByDaerah = req.user.daerah;
+  req.body.createdByKp = req.user.kp;
+
+  const kotakSekolah = await Kotaksekolah.create(req.body);
+
+  // masukkan kotak ID dalam personSekolah
+  const personSekolah = await Sekolah.findOneAndUpdate(
+    { _id: req.params.personSekolahId },
+    {
+      $set: {
+        kotakSekolah: kotakSekolah._id,
+      },
+    },
+    { new: true }
+  );
+
+  res.status(201).json({ personSekolah });
+};
+
+// reset statusRawatan to 'belum selesai'
+// PATCH /pemeriksaan/ubah/:pemeriksaanSekolahId?personSekolahId=
+const updatePemeriksaanSekolah = async (req, res) => {
+  const updatedSinglePemeriksaan = await Pemeriksaansekolah.findOneAndUpdate(
+    { _id: req.params.pemeriksaanSekolahId },
+    req.body,
+    { new: true }
+  );
+
+  if (!updatedSinglePemeriksaan) {
     return res
       .status(404)
-      .json({ msg: `No person with id ${personSekolahId}` });
+      .json({ msg: `No document with id ${req.params.pemeriksaanSekolahId}` });
   }
 
-  res.status(200).json({ msg: `Deleted person with id ${personSekolahId}` });
+  await Sekolah.findOneAndUpdate(
+    { _id: req.query.personSekolahId },
+    { $set: { statusRawatan: 'belum selesai' } }
+  );
+
+  res.status(200).json({ updatedSinglePemeriksaan });
+};
+
+// kotak tak handle status rawatan
+// PATCH /kotak/ubah/:kotakSekolahId
+const updateKotakSekolah = async (req, res) => {
+  const updatedSingleKotak = await Kotaksekolah.findOneAndUpdate(
+    { _id: req.params.kotakSekolahId },
+    req.body,
+    { new: true }
+  );
+
+  if (!updatedSingleKotak) {
+    return res
+      .status(404)
+      .json({ msg: `No document with id ${req.params.kotakSekolahId}` });
+  }
+
+  res.status(200).json({ updatedSingleKotak });
 };
 
 // query route
@@ -104,16 +229,24 @@ const queryPersonSekolah = async (req, res) => {
     queryObject.kelas = kelas;
   }
 
-  const sekolahResultQuery = await Sekolah.find(queryObject);
+  const sekolahResultQuery = await Sekolah.find(queryObject)
+    .populate('pemeriksaanSekolah')
+    .populate('rawatanSekolah')
+    .populate('kotakSekolah');
 
   res.status(200).json({ sekolahResultQuery });
 };
 
 module.exports = {
-  getAllPersonSekolahs,
-  getSinglePersonSekolah,
+  getAllPersonSekolahsVanilla,
+  getSinglePersonSekolahVanilla,
+  getAllPersonSekolahsWithPopulate,
+  getSinglePersonSekolahWithPopulate,
   createPersonSekolah,
-  updatePersonSekolah,
-  deletePersonSekolah,
+  createPemeriksaanWithSetPersonSekolah,
+  createRawatanWithPushPersonSekolah,
+  createKotakWithSetPersonSekolah,
+  updatePemeriksaanSekolah,
+  updateKotakSekolah,
   queryPersonSekolah,
 };

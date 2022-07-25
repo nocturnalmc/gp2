@@ -86,22 +86,28 @@ const Modal = ({
               <div className={styles.modalHeader}>
                 <h5 className={styles.heading}>TAMBAH KLINIK PERGIGIAN</h5>
               </div>
-              <button
+              <span
                 className={styles.closeBtn}
                 onClick={() => setShowAddModal(false)}
               >
                 <RiCloseLine style={{ marginBottom: '-3px' }} />
-              </button>
+              </span>
               <div className={styles.modalContent}>
                 <div className='admin-pegawai-handler-container'>
                   <div className='admin-pegawai-handler-input'>
-                    <p>Nama Klinik Pergigian</p>
+                    <p>
+                      Nama Klinik Pergigian{' '}
+                      <span className='font-semibold text-lg text-admin3'>
+                        *
+                      </span>
+                    </p>
                     <input
                       className='border-2'
                       type='text'
                       name='Nama'
                       id='nama'
                       onChange={(e) => (currentName.current = e.target.value)}
+                      required
                     />
                   </div>
                 </div>
@@ -113,7 +119,7 @@ const Modal = ({
                 <input type='checkbox' name='checkbox' value='UTC' />
                 UTC
                 <br />
-                <input type='checkbox' name='checkbox' value='Visiting' />
+                <input type='checkbox' name='checkbox' value='visiting' />
                 Visiting
               </div>
               <div className={styles.modalActions}>
@@ -121,12 +127,12 @@ const Modal = ({
                   <button className={styles.deleteBtn} type='submit'>
                     TAMBAH
                   </button>
-                  <button
+                  <span
                     className={styles.cancelBtn}
                     onClick={() => setShowAddModal(false)}
                   >
                     Cancel
-                  </button>
+                  </span>
                 </div>
               </div>
             </div>
@@ -150,17 +156,23 @@ const Modal = ({
               <div className={styles.modalHeader}>
                 <h5 className={styles.heading}>TAMBAH PEGAWAI</h5>
               </div>
-              <button
+              <span
                 className={styles.closeBtn}
                 onClick={() => setShowAddModal(false)}
               >
                 <RiCloseLine style={{ marginBottom: '-3px' }} />
-              </button>
+              </span>
               <div className={styles.modalContent}>
                 <div className='admin-pegawai-handler-container'>
                   <div className='admin-pegawai-handler-input'>
-                    <p>Nama Pegawai</p>
+                    <p>
+                      Nama Pegawai{' '}
+                      <span className='font-semibold text-lg text-user6'>
+                        *
+                      </span>
+                    </p>
                     <input
+                      required
                       className='border-2 uppercase'
                       placeholder='nama seperti di IC'
                       type='text'
@@ -169,8 +181,14 @@ const Modal = ({
                       onChange={(e) => (currentName.current = e.target.value)}
                     />
                     <br />
-                    <p>Gred</p>
+                    <p>
+                      Gred{' '}
+                      <span className='font-semibold text-lg text-user6'>
+                        *
+                      </span>
+                    </p>
                     <input
+                      required
                       className='border-2'
                       type='text'
                       name='Gred'
@@ -178,28 +196,35 @@ const Modal = ({
                       onChange={(e) => (currentGred.current = e.target.value)}
                     />
                     <br />
-                    <p>Klinik Bertugas</p>
+                    <p>
+                      Klinik Bertugas{' '}
+                      <span className='font-semibold text-lg text-user6'>
+                        *
+                      </span>
+                    </p>
                     <select
+                      required
                       className='border-2'
                       onChange={(e) => (currentKp.current = e.target.value)}
                     >
-                      <option selected disabled>
-                        Pilih Klinik
-                      </option>
+                      <option value=''>Pilih Klinik</option>
                       {klinikData.klinik.map((k, index) => (
                         <option value={k.nama}>{k.nama}</option>
                       ))}
                     </select>
-                    {/* {currKp && <h2 className="hidden">{currKp}</h2>} */}
                     <br />
-                    <p>Role</p>
+                    <p>
+                      Role{' '}
+                      <span className='font-semibold text-lg text-user6'>
+                        *
+                      </span>
+                    </p>
                     <select
+                      required
                       className='border-2'
                       onChange={(e) => (currentRole.current = e.target.value)}
                     >
-                      <option selected disabled>
-                        Pilih Role
-                      </option>
+                      <option value=''>Pilih Role</option>
                       <option value='admin'>Admin</option>
                       <option value='marhean'>Marhaen</option>
                     </select>
@@ -211,12 +236,12 @@ const Modal = ({
                   <button className={styles.deleteBtn} type='submit'>
                     TAMBAH
                   </button>
-                  <button
+                  <span
                     className={styles.cancelBtn}
                     onClick={() => setShowAddModal(false)(false)}
                   >
                     Cancel
-                  </button>
+                  </span>
                 </div>
               </div>
             </div>
@@ -240,17 +265,23 @@ const Modal = ({
               <div className={styles.modalHeader}>
                 <h5 className={styles.heading}>Tambah {jenisFacility}</h5>
               </div>
-              <button
+              <span
                 className={styles.closeBtn}
                 onClick={() => setShowAddModal(false)}
               >
                 <RiCloseLine style={{ marginBottom: '-3px' }} />
-              </button>
+              </span>
               <div className={styles.modalContent}>
                 <div className='admin-pegawai-handler-container'>
                   <div className='admin-pegawai-handler-input'>
-                    <p>Nama {jenisFacility}</p>
+                    <p>
+                      Nama {jenisFacility}{' '}
+                      <span className='font-semibold text-lg text-user6'>
+                        *
+                      </span>
+                    </p>
                     <input
+                      required
                       className='border-2'
                       type='text'
                       name='Nama'
@@ -258,14 +289,16 @@ const Modal = ({
                       onChange={(e) => (currentName.current = e.target.value)}
                     />
                   </div>
-                  <p>Klinik Bertugas</p>
+                  <p>
+                    Klinik Bertugas{' '}
+                    <span className='font-semibold text-lg text-user6'>*</span>
+                  </p>
                   <select
+                    required
                     className='border-2'
                     onChange={(e) => (currentKp.current = e.target.value)}
                   >
-                    <option selected disabled>
-                      Pilih Klinik
-                    </option>
+                    <option value=''>Pilih Klinik</option>
                     {klinikData.klinik.map((k, index) => (
                       <option value={k.nama}>{k.nama}</option>
                     ))}
@@ -277,12 +310,12 @@ const Modal = ({
                   <button className={styles.deleteBtn} type='submit'>
                     TAMBAH
                   </button>
-                  <button
+                  <span
                     className={styles.cancelBtn}
                     onClick={() => setShowAddModal(false)}
                   >
                     Cancel
-                  </button>
+                  </span>
                 </div>
               </div>
             </div>

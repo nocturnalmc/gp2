@@ -7,7 +7,6 @@ const adminSchema = new Schema({
   password: { type: String, required: true },
   daerah: { type: String, required: true },
   negeri: { type: String, required: true },
-  token: { type: String },
   tempKey: { type: String },
 });
 

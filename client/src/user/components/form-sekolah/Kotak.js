@@ -132,7 +132,7 @@ export default function Kotak(props) {
                 </h4>
                 <div className='flex items-center flex-row pl-5'>
                   <input
-                    required
+                    required={props.statusM == 'perokokSemasa' ? true : false}
                     type='radio'
                     name='ada-tiada-q'
                     id='ada-q'
@@ -149,7 +149,7 @@ export default function Kotak(props) {
                 </div>
                 <div className='flex items-center flex-row pl-5'>
                   <input
-                    required
+                    required={props.statusM == 'perokokSemasa' ? true : false}
                     type='radio'
                     name='ada-tiada-q'
                     id='tiada-q'
@@ -169,7 +169,7 @@ export default function Kotak(props) {
                 </p>
                 <div className='flex items-center justify-center'>
                   <input
-                    required
+                    required={props.statusM == 'perokokSemasa' ? true : false}
                     type='radio'
                     name='rujuk-guru-kaunseling'
                     id='ya-rujuk-guru-kaunseling'
@@ -191,7 +191,7 @@ export default function Kotak(props) {
                     Ya
                   </label>
                   <input
-                    required
+                    required={props.statusM == 'perokokSemasa' ? true : false}
                     type='radio'
                     name='rujuk-guru-kaunseling'
                     id='tidak-rujuk-guru-kaunseling'

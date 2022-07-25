@@ -10,6 +10,9 @@ import UserUmum from '../components/UserUmum';
 import UserFormUmumHeader from '../components/UserFormUmumHeader';
 
 import UserSekolah from '../components/UserSekolah';
+import UserFormSekolahPemeriksaan from '../components/UserFormSekolahPemeriksaan';
+import UserFormSekolahRawatan from '../components/UserFormSekolahRawatan';
+import UserFormSekolahKOTAK from '../components/UserFormSekolahKOTAK';
 import UserFormSekolahHeader from '../components/UserFormSekolahHeader';
 
 import UserGenerateIndividu from '../components/UserGenerateIndividu';
@@ -45,9 +48,21 @@ function UserAfterLogin() {
 
           <Route path='sekolah' element={<UserSekolah />} />
           <Route
+            path='sekolah/form-sekolah/pemeriksaan'
+            element={<UserFormSekolahPemeriksaan />}
+          />
+          <Route
+            path='sekolah/form-sekolah/rawatan'
+            element={<UserFormSekolahRawatan />}
+          />
+          <Route
+            path='sekolah/form-sekolah/kotak'
+            element={<UserFormSekolahKOTAK />}
+          />
+          {/* <Route
             path='form-sekolah/:personSekolahId'
             element={<UserFormSekolahHeader />}
-          />
+          /> */}
 
           <Route path='status-harian' element={<UserStatusHarian />} />
           <Route path='generate-individu' element={<UserGenerateIndividu />} />

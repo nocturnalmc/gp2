@@ -142,7 +142,6 @@ export default function AdminLoginForm() {
               <button
                 type='submit'
                 className='capitalize bg-admin3 text-adminWhite rounded-md shadow-xl p-2 hover:bg-admin1 transition-all'
-                // onClick={handleSubmit}
               >
                 log masuk
               </button>

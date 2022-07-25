@@ -80,63 +80,6 @@ const Modal = ({
     });
   };
 
-  function Facility() {
-    return (
-      <form onSubmit={handleSubmit}>
-        <div
-          className={styles.darkBG}
-          onClick={() => setShowEditModal(false)}
-        />
-        <div className={styles.centered}>
-          <div className={styles.modalEdit}>
-            <div className={styles.modalHeader}>
-              <h5 className={styles.heading}>MANAGE </h5>
-            </div>
-            <button
-              className={styles.closeBtn}
-              onClick={() => setShowEditModal(false)}
-            >
-              <RiCloseLine style={{ marginBottom: '-3px' }} />
-            </button>
-            <div className={styles.modalContent}>
-              <div className='admin-pegawai-handler-container'>
-                <div className='admin-pegawai-handler-input'>
-                  <p>Nama Fasiliti: {data.facOrPeg.nama} </p>
-                  <br />
-                  <p>Klinik Bertugas</p>
-                  <select
-                    className='border-2'
-                    onChange={(e) => (currentKp.current = e.target.value)}
-                  >
-                    <option selected disabled>
-                      Pilih Klinik Baru..
-                    </option>
-                    {klinikData.klinik.map((k, index) => (
-                      <option value={k.nama}>{k.nama}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div className={styles.modalActions}>
-              <div className={styles.actionsContainer}>
-                <button className={styles.deleteBtn} type='submit'>
-                  UBAH
-                </button>
-                <button
-                  className={styles.cancelBtn}
-                  onClick={() => setShowEditModal(false)}
-                >
-                  Cancel
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </form>
-    );
-  }
-
   function Pegawai() {
     return (
       <form onSubmit={handleSubmit}>
@@ -149,20 +92,24 @@ const Modal = ({
             <div className={styles.modalHeader}>
               <h5 className={styles.heading}>MANAGE PEGAWAI</h5>
             </div>
-            <button
+            <span
               className={styles.closeBtn}
               onClick={() => setShowEditModal(false)}
             >
               <RiCloseLine style={{ marginBottom: '-3px' }} />
-            </button>
+            </span>
             <div className={styles.modalContent}>
               <div className='admin-pegawai-handler-container'>
                 <div className='admin-pegawai-handler-input'>
                   <p>Nama Pegawai: {data.facOrPeg.nama}</p>
                   <br />
-                  <p>Gred</p>
+                  <p>
+                    Gred{' '}
+                    <span className='font-semibold text-lg text-admin3'>*</span>
+                  </p>
                   <input
-                    key='gred-input01'
+                    required
+                    key='gred-input'
                     className='border-2'
                     type='text'
                     onChange={(e) => {
@@ -170,31 +117,35 @@ const Modal = ({
                     }}
                   />
                   <br />
-                  <p>Klinik Bertugas</p>
+                  <p>
+                    Klinik Bertugas{' '}
+                    <span className='font-semibold text-lg text-admin3'>*</span>
+                  </p>
                   <select
+                    required
                     className='border-2'
                     onChange={(e) => {
                       currentKp.current = e.target.value;
                     }}
                   >
-                    <option selected disabled>
-                      Pilih Klinik
-                    </option>
+                    <option value=''>Pilih Klinik</option>
                     {klinikData.klinik.map((k, index) => (
                       <option value={k.nama}>{k.nama}</option>
                     ))}
                   </select>
                   <br />
-                  <p>Role</p>
+                  <p>
+                    Role{' '}
+                    <span className='font-semibold text-lg text-admin3'>*</span>
+                  </p>
                   <select
+                    required
                     className='border-2'
                     onChange={(e) => {
                       currentRole.current = e.target.value;
                     }}
                   >
-                    <option selected disabled>
-                      Pilih Role
-                    </option>
+                    <option value=''>Pilih Role</option>
                     <option>Admin</option>
                     <option>Marhaen</option>
                   </select>
@@ -206,12 +157,71 @@ const Modal = ({
                 <button className={styles.deleteBtn} type='submit'>
                   UBAH
                 </button>
-                <button
+                <span
                   className={styles.cancelBtn}
                   onClick={() => setShowEditModal(false)}
                 >
                   Cancel
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    );
+  }
+
+  function Facility() {
+    return (
+      <form onSubmit={handleSubmit}>
+        <div
+          className={styles.darkBG}
+          onClick={() => setShowEditModal(false)}
+        />
+        <div className={styles.centered}>
+          <div className={styles.modalEdit}>
+            <div className={styles.modalHeader}>
+              <h5 className={styles.heading}>MANAGE </h5>
+            </div>
+            <span
+              className={styles.closeBtn}
+              onClick={() => setShowEditModal(false)}
+            >
+              <RiCloseLine style={{ marginBottom: '-3px' }} />
+            </span>
+            <div className={styles.modalContent}>
+              <div className='admin-pegawai-handler-container'>
+                <div className='admin-pegawai-handler-input'>
+                  <p>Nama Fasiliti: {data.facOrPeg.nama} </p>
+                  <br />
+                  <p>
+                    Klinik Bertugas{' '}
+                    <span className='font-semibold text-lg text-admin3'>*</span>
+                  </p>
+                  <select
+                    required
+                    className='border-2'
+                    onChange={(e) => (currentKp.current = e.target.value)}
+                  >
+                    <option value=''>Pilih Klinik Baru..</option>
+                    {klinikData.klinik.map((k, index) => (
+                      <option value={k.nama}>{k.nama}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div className={styles.modalActions}>
+              <div className={styles.actionsContainer}>
+                <button className={styles.deleteBtn} type='submit'>
+                  UBAH
                 </button>
+                <span
+                  className={styles.cancelBtn}
+                  onClick={() => setShowEditModal(false)}
+                >
+                  Cancel
+                </span>
               </div>
             </div>
           </div>
@@ -254,8 +264,8 @@ const Modal = ({
 
   return (
     <>
-      {jenisFacility !== 'Pegawai' && <Facility />}
-      {jenisFacility === 'Pegawai' && <Pegawai />}
+      {jenisFacility !== 'pegawai' && <Facility />}
+      {jenisFacility === 'pegawai' && <Pegawai />}
     </>
   );
 };
