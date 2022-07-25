@@ -10,7 +10,8 @@
     "client": "cd client && npm start",
     "dev": "concurrently --kill-others-on-fail \" npm run server\" \" npm run client\"",
     "build-client": "cd client && npm run build",
-    "deploy": "nodemon server"
+    "deploy": "nodemon server",
+    "heroku-postbuild": "npm run install-client && npm run build-client"
   },
   "repository": {
     "type": "git",
@@ -42,5 +43,8 @@
   "devDependencies": {
     "concurrently": "^7.1.0",
     "nodemon": "^2.0.15"
+  },
+  "engine": {
+    "node": "16.x"
   }
 }
